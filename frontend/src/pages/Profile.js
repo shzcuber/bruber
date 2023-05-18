@@ -24,7 +24,7 @@ export default function Profile() {
 
           <Flex justify={'center'} h={'140px'}
             w={'full'}
-            backgroundColor="white" backgroundColor="#1B263B" >
+            backgroundColor="white" backgroundColor="black" >
             
           </Flex>
    
@@ -44,25 +44,25 @@ export default function Profile() {
         <Box p={8}>
           
           <Stack spacing={0} align={'center'} mb={5}>
-            <Heading color="black" fontSize={'3xl'} fontWeight={500} fontFamily={'body'}>
+            <Heading color="black" fontSize={'3xl'} fontWeight={500} fontFamily={'Uber Move Text'}>
               Bruber Man
             </Heading>
           </Stack>
 
           <Stack spacing={0} align={'center'} mb={5}>
-            <Heading color="black" fontSize={'3xl'} fontWeight={500} fontFamily={'body'}>
+            <Heading color="black" fontSize={'3xl'} fontWeight={500} fontFamily={'Uber Move Text'}>
               Email: bruberman@ucla.edu
             </Heading>
           </Stack>
 
           <Stack spacing={0} align={'center'} mb={5}>
-            <Heading color="black" fontSize={'3xl'} fontWeight={500} fontFamily={'body'}>
+            <Heading color="black" fontSize={'3xl'} fontWeight={500} fontFamily={'Uber Move Text'}>
               Phone: +1 (238) 238-2387
             </Heading>
           </Stack>
 
           <Stack spacing={0} align={'center'} mb={5}>
-            <Heading color="black" fontSize={'3xl'} fontWeight={500} fontFamily={'body'}>
+            <Heading color="black" fontSize={'3xl'} fontWeight={500} fontFamily={'Uber Move Text'}>
               Rating: ⭐️⭐️⭐️⭐️⭐️
             </Heading>
           </Stack>
