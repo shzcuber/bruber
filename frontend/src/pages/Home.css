@@ -1,3 +1,16 @@
-.home-heading {
+.home-container {
+    margin: 50px;
+}
 
+.home-heading {
+    font-size: 30px;
+}
+
+.home-heading-title {
+    margin: 0;
+}
+
+.home-heading-description {
+    margin: 5px 0;
+    font-size: 30px;
 }
