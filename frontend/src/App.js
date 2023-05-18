@@ -9,12 +9,15 @@ import Home from './pages/Home';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<Home/>}/>
-        <Route exact path="/rides" element={<Rides/>}/>
-      </Routes>
-    </Router>
+    <h1 className="hidden">
+      Hello world!
+    </h1>
+    // <Router>
+    //   <Routes>
+    //     <Route exact path="/" element={<Home/>}/>
+    //     <Route exact path="/rides" element={<Rides/>}/>
+    //   </Routes>
+    // </Router>
   );
 }
 
