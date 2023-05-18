@@ -1,21 +1,15 @@
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
-import Rides from './pages/Rides';
-import Home from './pages/Home';
+import * as React from "react";
+import { BrowserRouter as Router, Routes, Route, Outlet, Link } from "react-router-dom";
+import Home from './pages/Home'
+import Rides from './pages/Rides'
 
-function App() {
+export default function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Home/>}/>
-        <Route exact path="/rides" element={<Rides/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/rides" element={<Rides />} />
       </Routes>
     </Router>
   );
 }
-
-export default App;
