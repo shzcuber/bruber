@@ -1,16 +1,19 @@
 import {
     Avatar,
     Box,
-    SimpleGrid,
-    VStack,
-    Heading,
+    Button,
     Card,
-    CardHeader,
     CardBody,
     CardFooter,
-    Text,
+    CardHeader,
+    Flex,
+    Heading,
     ListItem,
+    SimpleGrid,
+    Spacer,
+    Text,
     UnorderedList,
+    VStack,
 } from "@chakra-ui/react";
 function RideCard(props) {
     /* props will have:
@@ -59,9 +62,15 @@ function RideCard(props) {
 function Rides() {
     return (
         <Box padding="40px">
-            <Heading as="h1" size="4xl">
-                Rides
-            </Heading>
+            <Flex align="center">
+                <Heading as="h1" size="4xl">
+                    Rides
+                </Heading>
+                <Spacer />
+                <Button margin="0px 35px" width="33%" height="50px">
+                    <Text fontSize="xl"> Create a new ride</Text>
+                </Button>
+            </Flex>
             <Heading as="h2" size="xl" margin="20px 0px">
                 {"LAX -> UCLA on June 15, 2029"}
             </Heading>
