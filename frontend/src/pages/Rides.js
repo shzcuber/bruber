@@ -11,9 +11,14 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  Container,
   Flex,
   Heading,
+  HStack,
+  Icon,
+  IconButton,
   ListItem,
+  Select,
   SimpleGrid,
   SlideFade,
   Spacer,
@@ -22,6 +27,9 @@ import {
   useControllableState,
   VStack,
 } from "@chakra-ui/react";
+
+import { AiOutlineSwap } from "react-icons/ai";
+import { FiMapPin } from "react-icons/fi";
 
 const sampleRideInfo = {
   driver: {
@@ -36,6 +44,8 @@ const sampleRideInfo = {
   capacity: 4,
   passengers: ["Barack Obama", "Donald Trump", "Drake"],
 };
+
+const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
 
 function RideCard(props) {
   /* props will have:
@@ -95,7 +105,7 @@ function RideCardGrid(props) {
       minChildWidth="350px"
       spacingX="40px"
       spacingY="20px"
-      margin="30px 35px"
+      margin="10px 35px"
     >
       {rideCardList}
     </SimpleGrid>
@@ -135,7 +145,7 @@ function RideCardAccordion(props) {
   ));
 
   return (
-    <Accordion allowMultiple margin="30px 0px">
+    <Accordion allowMultiple margin="10px 0px">
       {rideAccordionItems}
     </Accordion>
   );
@@ -152,7 +162,7 @@ function RidesDisplay(props) {
   return (
     <Box>
       <Button
-        margin="20px 35px"
+        margin="2px 20px"
         width="10%"
         height="25px"
         onClick={() => {
@@ -183,6 +193,68 @@ function RidesDisplay(props) {
     </Box>
   );
 }
+function JourneyInputter(props) {
+  /////Component for inputting start and destination/////
+  const optionList = props.locations.map((location, index) => (
+    <option value={location} key={index}>
+      {location}
+    </option>
+  ));
+  return (
+    <Flex align="center">
+      <Flex
+        align="center"
+        width="33%"
+        backgroundColor="gray.100"
+        paddingLeft="10px"
+        borderRadius="7px"
+      >
+        <Icon as={FiMapPin} boxSize={6} />
+        <Select
+          onChange={(event) =>
+            props.journey.setStart(event.currentTarget.value)
+          }
+          variant="unstyled"
+          value={props.journey.start}
+          marginLeft="20px"
+          height="40px"
+        >
+          {optionList}
+        </Select>
+      </Flex>
+      <IconButton
+        icon={<Icon as={AiOutlineSwap} />}
+        margin="25px"
+        onClick={() => {
+          props.journey.setDestination(props.journey.start);
+          props.journey.setStart(props.journey.destination);
+        }}
+      />
+      <Flex
+        align="center"
+        width="33%"
+        height="40px"
+        backgroundColor="gray.100"
+        paddingLeft="10px"
+        borderRadius="7px"
+      >
+        <Icon as={FiMapPin} boxSize={6} />
+        <Select
+          onChange={(event) =>
+            props.journey.setDestination(event.currentTarget.value)
+          }
+          variant="unstyled"
+          marginLeft="20px"
+          value={props.journey.destination}
+          height="40px"
+        >
+          {optionList}
+        </Select>
+      </Flex>
+    </Flex>
+  );
+}
+
 function Rides() {
   const rides = [
     sampleRideInfo,
@@ -193,6 +265,17 @@ function Rides() {
     sampleRideInfo,
   ];
 
+  const [start, setStart] = useControllableState({ defaultValue: "UCLA" });
+  const [destination, setDestination] = useControllableState({
+    defaultValue: "LAX",
+  });
+
+  const journey = {
+    start: start,
+    destination: destination,
+    setStart: setStart,
+    setDestination: setDestination,
+  };
   return (
     <Box padding="40px">
       <Flex align="center">
@@ -206,9 +289,10 @@ function Rides() {
       </Flex>
       <Flex align="end">
         <Heading as="h2" size="md" margin="20px 0px">
-          {"LAX -> UCLA on June 15, 2029"}
+          {start + " to " + destination + " on June 15, 2029"}
         </Heading>
       </Flex>
+      <JourneyInputter locations={sampleLocations} journey={journey} />
       <RidesDisplay rides={rides} />
     </Box>
   );
