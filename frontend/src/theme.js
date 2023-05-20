@@ -1,62 +1,51 @@
-import {
-  extendTheme,
-  defineStyleConfig,
-  createMultiStyleConfigHelpers,
-} from "@chakra-ui/react";
-import { cardAnatomy } from "@chakra-ui/anatomy";
+import { extendTheme } from "@chakra-ui/react";
 
-const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(cardAnatomy.keys);
-
-const baseStyle = definePartsStyle({
-  // define the part you're going to style
-  container: {
-    backgroundColor: "primary.500",
-  },
-  header: {
-    color: "text.onPrimary",
-  },
-  body: {
-    color: "text.onPrimary",
-  },
-  footer: {},
-});
-const cardTheme = defineMultiStyleConfig({ baseStyle });
-
-const buttonTheme = defineStyleConfig({
-  defaultProps: {
-    colorScheme: "primary",
-    color: "#text.onPrimary",
-    fontWeight: "bold",
-  },
-});
+import buttonTheme from "./components/Button";
+import cardTheme from "./components/Card";
+import boxTheme from "./components/Box";
 
 const theme = extendTheme({
   colors: {
     transparent: "transparent",
     primary: {
-      100: "#8aacec",
-      200: "#729be8",
-      300: "#5b8ae5",
-      400: "#437ae1",
+      100: "#ffffff",
+      150: "#ddefff",
+      200: "#cad9f7",
+      300: "#95b4ee",
+      400: "#618ee6",
       500: "#2c69dd",
-      600: "#215bcb",
-      700: "#1d50b2",
-      800: "#194598",
-      900: "14397f",
+      600: "#1c4dab",
+      700: "#123372",
+      800: "#091a39",
+      900: "#000000",
+    },
+    secondary: {
+      100: "#ffffff",
+      200: "#fdecba",
+      300: "#fbd975",
+      400: "#f8c631",
+      500: "#dba507",
+      600: "#a47c05",
+      700: "#6e5303",
+      800: "#372902",
+      900: "#000000",
     },
     text: {
       onPrimary: "#ffffff",
+      onSecondary: "#ffffff",
     },
   },
   components: {
     Button: buttonTheme,
-    Heading: {
-      baseStyle: {
-        color: "primary.500",
-      },
-    },
+    Box: boxTheme,
     Card: cardTheme,
+  },
+  styles: {
+    global: () => ({
+      body: {
+        bg: "primary.150", //change this for page background color
+      },
+    }),
   },
 });
 
