@@ -1,14 +1,27 @@
 import './Home.css';
+import {
+  Heading,
+  Box,
+  Text,
+  FormControl,
+} from "@chakra-ui/react";
 
 function Home() {
   return (
-    <div className='home-container'>
+    <Box mt="100px" ml="150px" className='home-container'>
         <div className="home-heading">
-            <h1 className='home-heading-title'>Bruber</h1>
-            <h2 className='home-heading-description'>Ridesharing for Bruins</h2>
+            <Heading as="h1" size="4xl">
+              Bruber
+            </Heading>
+            <Text>Ridesharing for Bruins</Text>
         </div>
-        <h3>Find other UCLA students and split the cost:</h3>
-    </div>
+
+        <Box>
+          Find other UCLA Students and Split the Cost
+          <FormControl>
+          </FormControl>
+        </Box>
+    </Box>
   );
 }
 
