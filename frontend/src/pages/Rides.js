@@ -29,7 +29,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { AiOutlineSwap, AiOutlineSearch } from "react-icons/ai";
+import {
+  AiOutlineSwap,
+  AiOutlineSearch,
+  AiOutlineUnorderedList,
+} from "react-icons/ai";
+import { BsGrid } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -163,17 +168,11 @@ function RidesDisplay(props) {
 
   return (
     <Box>
-      <Button
-        margin="2px 20px"
-        width="10%"
-        height="25px"
-        onClick={() => {
-          console.log("clicked!");
-          setViewAccordion(!viewAccordion);
-        }}
-      >
-        Change view
-      </Button>
+      <IconButton
+        icon={<AiOutlineUnorderedList />}
+        onClick={() => setViewAccordion(true)}
+      />
+      <IconButton icon={<BsGrid />} onClick={() => setViewAccordion(false)} />
       <SlideFade
         in={viewAccordion}
         direction="down"
