@@ -11,10 +11,8 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Container,
   Flex,
   Heading,
-  HStack,
   Icon,
   IconButton,
   ListItem,
@@ -30,6 +28,7 @@ import {
 
 import { AiOutlineSwap } from "react-icons/ai";
 import { FiMapPin } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const sampleRideInfo = {
   driver: {
@@ -283,9 +282,13 @@ function Rides() {
           Rides
         </Heading>
         <Spacer />
-        <Button margin="0px 35px" width="33%" height="50px">
-          <Text fontSize="xl"> Create a New Ride</Text>
-        </Button>
+        <Box margin="0px 35px" height="50px" width="33%">
+          <Link to="/create_ride">
+            <Button width="100%">
+              <Text fontSize="xl"> Create a New Ride</Text>
+            </Button>
+          </Link>
+        </Box>
       </Flex>
       <Flex align="end">
         <Heading as="h2" size="md" margin="20px 0px">
