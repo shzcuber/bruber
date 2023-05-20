@@ -15,6 +15,7 @@ import {
   Heading,
   ListItem,
   SimpleGrid,
+  SlideFade,
   Spacer,
   Text,
   UnorderedList,
@@ -133,17 +134,69 @@ function RideCardAccordion(props) {
     </AccordionItem>
   ));
 
-  return <Accordion allowMultiple>{rideAccordionItems}</Accordion>;
+  return (
+    <Accordion allowMultiple margin="30px 0px">
+      {rideAccordionItems}
+    </Accordion>
+  );
 }
-function Rides() {
-  const rides = [sampleRideInfo, sampleRideInfo, sampleRideInfo];
+function RidesDisplay(props) {
   const [viewAccordion, setViewAccordion] = useControllableState({
     defaultValue: true,
   });
+  const transitionProp = {
+    enter: { duration: 0.4 },
+    exit: { duration: 0 },
+  };
+
+  return (
+    <Box>
+      <Button
+        margin="20px 35px"
+        width="10%"
+        height="25px"
+        onClick={() => {
+          console.log("clicked!");
+          setViewAccordion(!viewAccordion);
+        }}
+      >
+        Change view
+      </Button>
+      <SlideFade
+        in={viewAccordion}
+        direction="down"
+        offsetY="20px"
+        unmountOnExit={true}
+        transition={transitionProp}
+      >
+        <RideCardAccordion rides={props.rides} />
+      </SlideFade>
+      <SlideFade
+        in={!viewAccordion}
+        direction="down"
+        offsetY="20px"
+        unmountOnExit={true}
+        transition={transitionProp}
+      >
+        <RideCardGrid rides={props.rides} />
+      </SlideFade>
+    </Box>
+  );
+}
+function Rides() {
+  const rides = [
+    sampleRideInfo,
+    sampleRideInfo,
+    sampleRideInfo,
+    sampleRideInfo,
+    sampleRideInfo,
+    sampleRideInfo,
+  ];
+
   return (
     <Box padding="40px">
       <Flex align="center">
-        <Heading as="h1" size="4xl">
+        <Heading as="h1" size="3xl">
           Rides
         </Heading>
         <Spacer />
@@ -152,27 +205,11 @@ function Rides() {
         </Button>
       </Flex>
       <Flex align="end">
-        <Heading as="h2" size="xl" margin="20px 0px">
+        <Heading as="h2" size="md" margin="20px 0px">
           {"LAX -> UCLA on June 15, 2029"}
         </Heading>
-        <Spacer />
-        <Button
-          margin="20px 35px"
-          width="10%"
-          height="20px"
-          onClick={() => {
-            console.log("clicked!");
-            setViewAccordion(!viewAccordion);
-          }}
-        >
-          Change view
-        </Button>
       </Flex>
-      {viewAccordion ? (
-        <RideCardAccordion rides={rides} />
-      ) : (
-        <RideCardGrid rides={rides} />
-      )}
+      <RidesDisplay rides={rides} />
     </Box>
   );
 }
