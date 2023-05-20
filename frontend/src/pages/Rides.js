@@ -11,10 +11,13 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  Container,
   Flex,
   Heading,
+  HStack,
   Icon,
   IconButton,
+  Input,
   ListItem,
   Select,
   SimpleGrid,
@@ -26,7 +29,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { AiOutlineSwap } from "react-icons/ai";
+import { AiOutlineSwap, AiOutlineSearch } from "react-icons/ai";
 import { FiMapPin } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -200,10 +203,10 @@ function JourneyInputter(props) {
     </option>
   ));
   return (
-    <Flex align="center">
+    <HStack align="center" spacing={6}>
       <Flex
         align="center"
-        width="33%"
+        width="25%"
         backgroundColor="gray.100"
         paddingLeft="10px"
         borderRadius="7px"
@@ -222,7 +225,7 @@ function JourneyInputter(props) {
         </Select>
       </Flex>
       <IconButton
-        icon={<Icon as={AiOutlineSwap} />}
+        icon={<AiOutlineSwap />}
         margin="25px"
         onClick={() => {
           props.journey.setDestination(props.journey.start);
@@ -231,7 +234,7 @@ function JourneyInputter(props) {
       />
       <Flex
         align="center"
-        width="33%"
+        width="25%"
         height="40px"
         backgroundColor="gray.100"
         paddingLeft="10px"
@@ -250,7 +253,30 @@ function JourneyInputter(props) {
           {optionList}
         </Select>
       </Flex>
-    </Flex>
+      <Flex
+        align="center"
+        width="25%"
+        height="40px"
+        backgroundColor="gray.100"
+        padding="10px"
+        borderRadius="7px"
+      >
+        <Input
+          type="datetime-local"
+          backgroundColor="gray.100"
+          variant="unstyled"
+          height="40px"
+          onChange={(event) => props.journey.setTime(event.currentTarget.value)}
+        />
+      </Flex>
+      <Button
+        width="20%"
+        backgroundColor="pink"
+        rightIcon={<AiOutlineSearch />}
+      >
+        Search
+      </Button>
+    </HStack>
   );
 }
 
@@ -268,12 +294,15 @@ function Rides() {
   const [destination, setDestination] = useControllableState({
     defaultValue: "LAX",
   });
+  const [time, setTime] = useControllableState({ defaultValue: "00" });
 
   const journey = {
     start: start,
     destination: destination,
+    time: time,
     setStart: setStart,
     setDestination: setDestination,
+    setTime: setTime,
   };
   return (
     <Box padding="40px">
@@ -292,10 +321,12 @@ function Rides() {
       </Flex>
       <Flex align="end">
         <Heading as="h2" size="md" margin="20px 0px">
-          {start + " to " + destination + " on June 15, 2029"}
+          {start + " to " + destination + ", departing on " + time}
         </Heading>
       </Flex>
-      <JourneyInputter locations={sampleLocations} journey={journey} />
+      <Box marginBottom="20px">
+        <JourneyInputter locations={sampleLocations} journey={journey} />
+      </Box>
       <RidesDisplay rides={rides} />
     </Box>
   );
