@@ -4,10 +4,14 @@ const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(cardAnatomy.keys);
 
 const variants = {
-  primary: definePartsStyle({
+  rideCard: definePartsStyle({
     container: {
       backgroundColor: "primary.500",
       color: "text.onPrimary",
+    },
+    body: {
+      backgroundColor: "primary.150",
+      color: "primary.500",
     },
   }),
   secondary: definePartsStyle({

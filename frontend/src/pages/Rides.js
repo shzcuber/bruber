@@ -65,8 +65,8 @@ function RideCard(props) {
   console.log(props);
   const peopleList = passengersToList(props.names, props.capacity);
   return (
-    <Card padding="30px" variant="primary">
-      <CardHeader height="70px">
+    <Card variant="rideCard">
+      <CardHeader>
         <Flex gap="4" align="center">
           <Avatar name={props.driver} />
           <Box>
@@ -123,9 +123,9 @@ function RideCardAccordion(props) {
   const rideAccordionItems = props.rides.map((ride, index) => (
     <AccordionItem
       key={index}
+      borderRadius="7px"
       background="primary.500"
       color="text.onPrimary"
-      borderRadius="7px"
     >
       <AccordionButton display="block">
         <Flex align="center">
@@ -142,7 +142,7 @@ function RideCardAccordion(props) {
           <AccordionIcon />
         </Flex>
       </AccordionButton>
-      <AccordionPanel>
+      <AccordionPanel background="primary.150" color="primary.500">
         <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
           {passengersToList(ride.passengers, ride.capacity)}
         </UnorderedList>
@@ -339,7 +339,11 @@ function Rides() {
       <Box marginBottom="20px">
         <JourneyInputter locations={sampleLocations} journey={journey} />
       </Box>
-      <Divider borderColor="secondary.500" />
+      <Divider
+        borderStyle="solid"
+        borderWidth="1px"
+        borderColor="secondary.500"
+      />
       <Box
         margin="30px 0px"
         backgroundColor="primary.100"
