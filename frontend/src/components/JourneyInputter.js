@@ -4,34 +4,13 @@ import {
 } from "react-icons/ai";
 import { FiMapPin } from "react-icons/fi";
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Avatar,
-  Box,
   Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Container,
   Flex,
-  Heading,
   HStack,
   Icon,
   IconButton,
   Input,
-  ListItem,
   Select,
-  SimpleGrid,
-  SlideFade,
-  Spacer,
-  Text,
-  UnorderedList,
-  useControllableState,
-  VStack,
 } from "@chakra-ui/react";
 export default function JourneyInputter(props) {
   /////Component for inputting start and destination/////
