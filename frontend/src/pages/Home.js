@@ -2,9 +2,10 @@ import {
   Heading,
   Box,
   Text,
-  FormControl,
-  FormLabel,
+  Flex,
   useControllableState,
+  Button,
+  Spacer,
 } from "@chakra-ui/react";
 import JourneyInputter from '../components/JourneyInputter';
 
@@ -40,6 +41,11 @@ function Home() {
               Find other UCLA Students and Split the Cost
             </Text>
             <JourneyInputter locations={sampleLocations} journey={journey} />
+            <Flex>
+              <Button w="45%" mt="15px">View all upcoming rides</Button>
+              <Spacer />
+              <Button w="45%" mt="15px">About Bruber</Button>
+            </Flex>
           </Box>
         </Box>
     </Box>
