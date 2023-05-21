@@ -1,4 +1,3 @@
-import './Home.css';
 import {
   Heading,
   Box,
@@ -27,17 +26,21 @@ function Home() {
   };
 
   return (
-    <Box mt="100px" ml="150px" className='home-container'>
-        <div className="home-heading">
+    <Box className='home-container'>
+        <Box mt="100px" ml="150px" className="home-heading">
             <Heading as="h1" size="4xl">
               Bruber
             </Heading>
-            <Text>Ridesharing for Bruins</Text>
-        </div>
+            <Text fontSize="3xl">Ridesharing for Bruins</Text>
+        </Box>
 
-        <Box>
-          Find other UCLA Students and Split the Cost
-          <JourneyInputter locations={sampleLocations} journey={journey} />
+        <Box backgroundColor="white" borderRadius="30px" p="25px" mt="25px" mx="150px">
+          <Box p="10px">
+            <Text mb="20px" fontSize='xl'>
+              Find other UCLA Students and Split the Cost
+            </Text>
+            <JourneyInputter locations={sampleLocations} journey={journey} />
+          </Box>
         </Box>
     </Box>
   );
