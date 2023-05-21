@@ -15,12 +15,8 @@ import {
   Divider,
   Flex,
   Heading,
-  HStack,
-  Icon,
   IconButton,
-  Input,
   ListItem,
-  Select,
   SimpleGrid,
   SlideFade,
   Spacer,
@@ -32,13 +28,8 @@ import {
 
 import JourneyInputter from "../components/JourneyInputter";
 
-import {
-  AiOutlineSwap,
-  AiOutlineSearch,
-  AiOutlineUnorderedList,
-} from "react-icons/ai";
+import { AiOutlineUnorderedList } from "react-icons/ai";
 import { BsGrid } from "react-icons/bs";
-import { FiMapPin } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const sampleRideInfo = {
