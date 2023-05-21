@@ -7,11 +7,12 @@ import {
   Avatar,
   Box,
   Button,
+  ButtonGroup,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Container,
+  Divider,
   Flex,
   Heading,
   HStack,
@@ -64,8 +65,8 @@ function RideCard(props) {
   console.log(props);
   const peopleList = passengersToList(props.names, props.capacity);
   return (
-    <Card padding="30px">
-      <CardHeader height="70px">
+    <Card variant="rideCard">
+      <CardHeader>
         <Flex gap="4" align="center">
           <Avatar name={props.driver} />
           <Box>
@@ -120,7 +121,12 @@ function RideCardGrid(props) {
 }
 function RideCardAccordion(props) {
   const rideAccordionItems = props.rides.map((ride, index) => (
-    <AccordionItem key={index}>
+    <AccordionItem
+      key={index}
+      borderRadius="7px"
+      background="primary.500"
+      color="text.onPrimary"
+    >
       <AccordionButton display="block">
         <Flex align="center">
           <Flex gap="4" align="center">
@@ -136,11 +142,11 @@ function RideCardAccordion(props) {
           <AccordionIcon />
         </Flex>
       </AccordionButton>
-      <AccordionPanel>
+      <AccordionPanel background="primary.150" color="primary.500">
         <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
           {passengersToList(ride.passengers, ride.capacity)}
         </UnorderedList>
-        <Text as="b" fontSize="2xl">
+        <Text as="b" fontSize="2xl" paddingLeft="15px">
           {ride.capacity -
             ride.passengers.length +
             "/" +
@@ -168,11 +174,18 @@ function RidesDisplay(props) {
 
   return (
     <Box>
-      <IconButton
-        icon={<AiOutlineUnorderedList />}
-        onClick={() => setViewAccordion(true)}
-      />
-      <IconButton icon={<BsGrid />} onClick={() => setViewAccordion(false)} />
+      <ButtonGroup isAttached>
+        <IconButton
+          icon={<AiOutlineUnorderedList />}
+          onClick={() => setViewAccordion(true)}
+          backgroundColor={viewAccordion ? "primary.600" : "primary.500"}
+        />
+        <IconButton
+          icon={<BsGrid />}
+          onClick={() => setViewAccordion(false)}
+          backgroundColor={!viewAccordion ? "primary.600" : "primary.500"}
+        />
+      </ButtonGroup>
       <SlideFade
         in={viewAccordion}
         direction="down"
@@ -270,8 +283,8 @@ function JourneyInputter(props) {
       </Flex>
       <Button
         width="20%"
-        backgroundColor="pink"
         rightIcon={<AiOutlineSearch />}
+        colorScheme="secondary"
       >
         Search
       </Button>
@@ -304,7 +317,7 @@ function Rides() {
     setTime: setTime,
   };
   return (
-    <Box padding="40px">
+    <Box padding="40px" backgroundColor="primary.150" color="primary.500">
       <Flex align="center">
         <Heading as="h1" size="3xl">
           Rides
@@ -326,7 +339,19 @@ function Rides() {
       <Box marginBottom="20px">
         <JourneyInputter locations={sampleLocations} journey={journey} />
       </Box>
-      <RidesDisplay rides={rides} />
+      <Divider
+        borderStyle="solid"
+        borderWidth="1px"
+        borderColor="secondary.500"
+      />
+      <Box
+        margin="30px 0px"
+        backgroundColor="primary.100"
+        padding="20px"
+        borderRadius="20px"
+      >
+        <RidesDisplay rides={rides} />
+      </Box>
     </Box>
   );
 }
