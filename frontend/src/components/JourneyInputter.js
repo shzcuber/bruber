@@ -1,7 +1,4 @@
-import {
-  AiOutlineSwap,
-  AiOutlineSearch,
-} from "react-icons/ai";
+import { AiOutlineSwap, AiOutlineSearch } from "react-icons/ai";
 import { FiMapPin } from "react-icons/fi";
 import {
   Button,
@@ -88,7 +85,7 @@ export default function JourneyInputter(props) {
       </Flex>
       <Button
         width="20%"
-        backgroundColor="pink"
+        colorScheme="secondary"
         rightIcon={<AiOutlineSearch />}
       >
         Search
