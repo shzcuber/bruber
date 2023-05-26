@@ -3,12 +3,14 @@ import { FiMapPin } from "react-icons/fi";
 import {
   Button,
   Flex,
-  HStack,
   Icon,
   IconButton,
   Input,
   Select,
+  Stack,
+  useBreakpointValue,
 } from "@chakra-ui/react";
+
 export default function JourneyInputter(props) {
   /////Component for inputting start and destination/////
   const optionList = props.locations.map((location, index) => (
@@ -16,11 +18,14 @@ export default function JourneyInputter(props) {
       {location}
     </option>
   ));
+
+  const isSmallScreen = useBreakpointValue({ base: true, lg: false });
+
   return (
-    <HStack align="center" spacing={6}>
+    <Stack direction={isSmallScreen ? "column" : "row"} align="center" spacing={6}>
       <Flex
         align="center"
-        width="25%"
+        width={isSmallScreen ? "100%" : "25%"}
         backgroundColor="gray.100"
         paddingLeft="10px"
         borderRadius="7px"
@@ -40,7 +45,7 @@ export default function JourneyInputter(props) {
       </Flex>
       <IconButton
         icon={<AiOutlineSwap />}
-        margin="25px"
+        margin={isSmallScreen ? "10px auto" : "25px"}
         onClick={() => {
           props.journey.setDestination(props.journey.start);
           props.journey.setStart(props.journey.destination);
@@ -48,7 +53,7 @@ export default function JourneyInputter(props) {
       />
       <Flex
         align="center"
-        width="25%"
+        width={isSmallScreen ? "100%" : "25%"}
         height="40px"
         backgroundColor="gray.100"
         paddingLeft="10px"
@@ -69,7 +74,7 @@ export default function JourneyInputter(props) {
       </Flex>
       <Flex
         align="center"
-        width="25%"
+        width={isSmallScreen ? "100%" : "25%"}
         height="40px"
         backgroundColor="gray.100"
         padding="10px"
@@ -84,12 +89,12 @@ export default function JourneyInputter(props) {
         />
       </Flex>
       <Button
-        width="20%"
+        width={isSmallScreen ? "100%" : "20%"}
         colorScheme="secondary"
         rightIcon={<AiOutlineSearch />}
       >
         Search
       </Button>
-    </HStack>
+    </Stack>
   );
 }

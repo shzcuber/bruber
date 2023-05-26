@@ -28,23 +28,25 @@ function Home() {
 
   return (
     <Box className='home-container'>
-        <Box mt="100px" ml="150px" className="home-heading">
+        <Box mt="5%" ml="5%" className="home-heading">
             <Heading as="h1" size="4xl">
               Bruber
             </Heading>
             <Text fontSize="3xl">Ridesharing for Bruins</Text>
         </Box>
 
-        <Box backgroundColor="white" borderRadius="30px" p="25px" mt="25px" mx="150px">
+        <Box backgroundColor="white" borderRadius="30px" p="25px" mt="25px" mx="5%">
           <Box p="10px">
             <Text mb="20px" fontSize='xl'>
               Find other UCLA Students and Split the Cost
             </Text>
             <JourneyInputter locations={sampleLocations} journey={journey} />
-            <Flex>
-              <Button w="45%" mt="15px">View all upcoming rides</Button>
+            <Flex mt="50px">
+              <Button w="45%">
+                <Text isTruncated>View all upcoming rides</Text>
+              </Button>
               <Spacer />
-              <Button w="45%" mt="15px">About Bruber</Button>
+              <Button w="45%">About Bruber</Button>
             </Flex>
           </Box>
         </Box>
