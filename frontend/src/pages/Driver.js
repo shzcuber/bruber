@@ -11,7 +11,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-export default function Profile() {
+export default function Driver() {
   return (
     <Center py={160}>
       <Box
