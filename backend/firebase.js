@@ -1,3 +1,7 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
+console.log(process.env)
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -5,7 +9,7 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "",
+  apiKey: process.env.SECRET_KEY,
   authDomain: "bruber-b655f.firebaseapp.com",
   projectId: "bruber-b655f",
   storageBucket: "bruber-b655f.appspot.com",
