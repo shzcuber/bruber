@@ -1,8 +1,15 @@
 import { Button, Input, Box, Card, CardHeader, CardBody, Heading, 
-    Stack, StackDivider, Flex } from "@chakra-ui/react";
+    Stack, StackDivider, Flex, Alert, AlertIcon, NumberInput, 
+    NumberInputField, NumberInputStepper, NumberIncrementStepper,
+    NumberDecrementStepper } 
+    from "@chakra-ui/react";
+
+import { useState } from 'react';
+
 
 function CreateRide() {
   return (
+    <div>
     <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
       <Card size="lg" borderRadius="20px">
         <CardHeader>
@@ -26,7 +33,13 @@ function CreateRide() {
               <Heading size='xs' marginBottom="2" textTransform='uppercase'>
                 Capacity
               </Heading>
-              <Input type="number" placeholder="Capacity" size="sm" />
+              <NumberInput defaultValue={1} min={1} size="sm">
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
             </Box>
             <Box>
               <Heading size='xs' marginBottom="2" textTransform='uppercase'>
@@ -34,7 +47,9 @@ function CreateRide() {
               </Heading>
               <Flex>
                 <Input type="datetime-local" size="sm" />
-                <Button type="submit" size="s" fontSize='sm' padding="2" marginLeft="2">
+                <Button type="submit" size="s" fontSize='sm' padding="2" 
+                marginLeft="2"
+                onSubmit={ handleButtonClick }>
                   Submit
                 </Button>
               </Flex>
@@ -43,6 +58,9 @@ function CreateRide() {
         </CardBody>
       </Card>
     </Box>
+  </div>
   );
+
+
 }
 export default CreateRide;
