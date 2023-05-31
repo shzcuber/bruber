@@ -22,7 +22,7 @@ app.get('/', async (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/create_ride', async (req, res) => {
+app.post('/create_ride', async (req, res) => {
   // fetch
   try {
     const testReference = doc(db, "locations", "test");
@@ -36,9 +36,12 @@ app.get('/create_ride', async (req, res) => {
       capacity: 1
     });
     console.log("Ride written with ID: ", docRef.id);
+    res.send(JSON.stringify({status:"success"}));
   } catch (e) {
     console.error("Error adding document: ", e);
+    res.send({"status": "error"});
   }
+
 });
 
 app.listen(port, () => {

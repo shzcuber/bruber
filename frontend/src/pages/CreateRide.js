@@ -83,6 +83,24 @@ function CreateRide() {
   );
 
 
+  function handleButtonClick() {
+    console.log("handleButtonClick() called in CreateRide.js");
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify({ title: "React POST Request Example" })
+    };
+    fetch("http://localhost:3000/create_ride", requestOptions)
+    .then(res => res.json()) // Convert json to js object
+    .then(data => {
+      console.log("Data received: " + data.status);
+      if (data === "Success")
+        // Display success msg (chang state)
 
+        setSubmitted("success");
+        console.log(submitted);
+    })
+    .catch(error => console.log("Error: " + error))
+  }
 }
 export default CreateRide;
