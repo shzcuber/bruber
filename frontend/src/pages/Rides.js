@@ -242,6 +242,7 @@ function Rides() {
   };
   function handleSearchClick() {
     console.log("Search Button Clicked");
+    console.log(time);
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
