@@ -5,12 +5,14 @@ import Rides from './pages/Rides'
 import Driver from "./pages/Driver";
 import CreateRide from './pages/CreateRide';
 import Profile from './pages/Profile';
+import LoginPage from "./pages/Login";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route exact path="/" element={<Home/>}/>
+        <Route exact path="/login" element={<LoginPage/>}/>
         <Route exact path="/rides" element={<Rides/>}/>
         <Route path="/driver" element={<Driver />} />
         <Route exact path="/create_ride" element={<CreateRide/>}/>
