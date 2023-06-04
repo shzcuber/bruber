@@ -1,25 +1,33 @@
 import express from 'express'
 import { collection, doc, addDoc, getFirestore } from "firebase/firestore"; 
 import { firebaseApp, firebaseConfig } from './firebase.js';
+import bodyParser from 'body-parser';
 
 const app = express()
 const db = getFirestore(firebaseApp);
 const port = 3000
 
+app.use(bodyParser.json())
+
+app.get('/', async (req, res) => {
+  res.status(201).send("ur mom");
+})
 
 // Executes when we get a get request to / url
-app.get('/', async (req, res) => {
-  // try {
-  //   const docRef = await addDoc(collection(db, "users"), {
-  //     first: "Ada",
-  //     last: "Lovelace",
-  //     born: 1816
-  //   });
-  //   console.log("Document written with ID: ", docRef.id);
-  // } catch (e) {
-  //   console.error("Error adding document: ", e);
-  // }
-  res.send('Hello World!')
+app.post('/create_user', async (req, res) => {
+  try {
+    const { firstName, lastName, email } = req.body;
+    const docRef = await addDoc(collection(db, "users"), {
+      firstName: firstName,
+      lastName: lastName,
+      email: email
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    // console.error("Error adding document: ", e);
+    res.status(400).send("Bad Request");
+  }
+  res.status(201).send("TEST");
 })
 
 app.post('/create_ride', async (req, res) => {
