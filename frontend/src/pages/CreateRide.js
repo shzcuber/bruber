@@ -5,13 +5,46 @@ import { Button, Input, Box, Card, CardHeader, CardBody, Heading,
     from "@chakra-ui/react";
 
 import { useState } from 'react';
+import { useForm } from 'react-hook-form'
 
 
 function CreateRide() {
   const [submitted, setSubmitted] = useState(false);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
+
+  function onSubmit(formData) {
+    console.log("handleButtonClick() called in CreateRide.js");
+    formData["driver"] = "driverID"
+    console.log(formData)
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(formData)
+      // body: JSON.stringify({ title: "React POST Request Example" })
+    };
+    fetch("http://localhost:3000/create_ride", requestOptions)
+    .then(res => res.json())  // Convert json to js object
+    .then(data => {
+      console.log("Data received: " + data.status);
+      if (data.status === "success") {
+        // Display success msg (change state)
+        setSubmitted("success");
+        console.log("setSubmitted: ", submitted);
+      }
+    })
+    .catch(error => {
+      console.log("Error: " + error);
+      setSubmitted("error");
+    })
+  }
+
   function displayAlert(status) {
-    console.log(status);
+    console.log("status", status);
     return (
       <Box>
         <Alert status={status}>
@@ -21,9 +54,9 @@ function CreateRide() {
       </Box>
     );
   }
-  if (submitted !== false) {  // REMOVE !
-    // else if error status="error"
-  }
+  // if (submitted !== false) {  // REMOVE !
+  //   // else if error status="error"
+  // }
   return (
     <Box>
       {
@@ -41,19 +74,20 @@ function CreateRide() {
                 <FormLabel size='xs' textTransform='uppercase'>
                   From:
                 </FormLabel>
-                <Input placeholder="City" size="sm" />
+                <Input placeholder="City" size="sm" name="from" {...register("from", {required: true})} />
               </Box>
               <Box>
-                <FormLabel size='xs' textTransform='uppercase'>
+                <FormLabel size='xs' textTransform='uppercase' >
                   To:
                 </FormLabel>
-                <Input placeholder="City" size="sm" />
+                <Input placeholder="City" size="sm" name="to" {...register("to", {required: true})} />
               </Box>
               <Box>
                 <FormLabel size='xs' textTransform='uppercase'>
                   Capacity
                 </FormLabel>
-                <NumberInput defaultValue={1} min={1} size="sm">
+                <NumberInput defaultValue={1} min={1} size="sm" name="capacity" type="number"
+                    {...register("capacity", {required: true})} >
                   <NumberInputField />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
@@ -66,10 +100,10 @@ function CreateRide() {
                   Leave Time:
                 </FormLabel>
                 <Flex>
-                  <Input type="datetime-local" size="sm" />
+                  <Input type="datetime-local" size="sm" name="datetime" {...register("datetime", {required: true})} />
                   <Button type="submit" size="s" fontSize='sm' padding="2"
                   marginLeft="2"
-                  onClick={ handleButtonClick }>
+                  onClick={ handleSubmit(onSubmit) }>
                     Submit
                   </Button>
                 </Flex>
@@ -81,26 +115,5 @@ function CreateRide() {
       </Box>
     </Box>
   );
-
-
-  function handleButtonClick() {
-    console.log("handleButtonClick() called in CreateRide.js");
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json"},
-      body: JSON.stringify({ title: "React POST Request Example" })
-    };
-    fetch("http://localhost:3000/create_ride", requestOptions)
-    .then(res => res.json()) // Convert json to js object
-    .then(data => {
-      console.log("Data received: " + data.status);
-      if (data === "Success")
-        // Display success msg (chang state)
-
-        setSubmitted("success");
-        console.log(submitted);
-    })
-    .catch(error => console.log("Error: " + error))
-  }
 }
 export default CreateRide;
