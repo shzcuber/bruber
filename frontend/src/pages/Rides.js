@@ -39,7 +39,7 @@ import {
 } from "react-icons/ai";
 import { BsGrid } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const sampleRideInfo = {
   driver: {
@@ -211,21 +211,26 @@ function RidesDisplay(props) {
 }
 
 function Rides() {
-  // const rides = [
-  //   sampleRideInfo,
-  //   sampleRideInfo,
-  //   sampleRideInfo,
-  //   sampleRideInfo,
-  //   sampleRideInfo,
-  //   sampleRideInfo,
-  // ];
+  const rides = [
+    sampleRideInfo,
+    sampleRideInfo,
+    sampleRideInfo,
+    sampleRideInfo,
+    sampleRideInfo,
+    sampleRideInfo,
+  ];
 
-  const [start, setStart] = useControllableState({ defaultValue: "UCLA" });
-  const [destination, setDestination] = useControllableState({
-    defaultValue: "LAX",
+  const [searchParams] = useSearchParams();
+  const [start, setStart] = useControllableState({
+    defaultValue: searchParams.get("start"),
   });
-  const [time, setTime] = useControllableState({ defaultValue: "00" });
-  const [rides, setRides] = useControllableState({ defaultValue: [] });
+  const [destination, setDestination] = useControllableState({
+    defaultValue: searchParams.get("destination"),
+  });
+  const [time, setTime] = useControllableState({
+    defaultValue: searchParams.get("time"),
+  });
+  //const [rides, setRides] = useControllableState({ defaultValue: [] });
 
   const journey = {
     start: start,

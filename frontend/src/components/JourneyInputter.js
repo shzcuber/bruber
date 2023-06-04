@@ -90,6 +90,7 @@ export default function JourneyInputter(props) {
           variant="unstyled"
           height="40px"
           onChange={(event) => props.journey.setTime(event.currentTarget.value)}
+          value={props.journey.time}
         />
       </Flex>
       <Button
