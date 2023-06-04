@@ -42,11 +42,7 @@ import { FiMapPin } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
 
 const sampleRideInfo = {
-  driver: {
-    name: "Joe Biden",
-    avatarSrc: "../../public/logo512.png",
-    rating: 4.5,
-  },
+  driverName: "Joe Biden",
   time: {
     start: 930,
     end: 1030,
@@ -104,7 +100,7 @@ function RideCardGrid(props) {
   const rideCardList = props.rides.map((ride, index) => (
     <RideCard
       key={index}
-      driver={ride.driver.name}
+      driver={ride.driverName}
       time={ride.time.start}
       capacity={ride.capacity}
       names={ride.passengers}
@@ -132,10 +128,10 @@ function RideCardAccordion(props) {
       <AccordionButton display="block">
         <Flex align="center">
           <Flex gap="4" align="center">
-            <Avatar name={ride.driver.name} />
+            <Avatar name={ride.driverName} />
             <Box textAlign="left">
               <Text as="b" fontSize="xl">
-                {ride.driver.name}
+                {ride.driverName}
               </Text>
               <Text fontSize="xl">Driver</Text>
             </Box>
@@ -240,6 +236,7 @@ function Rides() {
     setDestination: setDestination,
     setTime: setTime,
   };
+
   function handleSearchClick() {
     console.log("Search Button Clicked");
     console.log(time);
@@ -247,7 +244,28 @@ function Rides() {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
+    // fetch("http://localhost:3000/create_ride", requestOptions)
+    // .then(res => res.json()) // Convert json to js object
+    // .then(data => {
+    //   console.log("Data received: " + data.status);
+    //   if (data === "Success")
+    //     // Display success msg (chang state)
+
+    //     setSubmitted("success");
+    //     console.log(submitted);
+    // })
+    // .catch(error => console.log("Error: " + error))
   }
+
+  // Handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Access the form data
+    // console.log('Name:', name);
+    // console.log('Email:', email);
+    // You can perform further actions with the form data here
+  };
+
   return (
     <Box padding="40px" backgroundColor="primary.150" color="primary.500">
       <Flex align="center">
@@ -272,6 +290,7 @@ function Rides() {
         <JourneyInputter
           locations={sampleLocations}
           journey={journey}
+
           onSearchClick={handleSearchClick}
         />
       </Box>
