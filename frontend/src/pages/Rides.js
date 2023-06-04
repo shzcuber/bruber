@@ -98,7 +98,7 @@ function RideCardGrid(props) {
     <RideCard
       key={index}
       driver={ride.driverName}
-      time={ride.startTime}
+      time={parseTime(ride.startTime)}
       capacity={ride.capacity}
       names={ride.passengers}
     />
