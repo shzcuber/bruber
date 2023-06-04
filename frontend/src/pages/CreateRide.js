@@ -21,7 +21,7 @@ function CreateRide() {
       </Box>
     );
   }
-  if (submitted !== false) { // REMOVE !
+  if (submitted !== false) {  // REMOVE !
     // else if error status="error"
   }
   return (
