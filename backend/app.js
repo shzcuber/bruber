@@ -1,28 +1,50 @@
 import express from 'express'
 import cors from 'cors'
-import { collection, doc, addDoc, getFirestore } from "firebase/firestore"; 
+import { collection, doc, getDoc, addDoc, getFirestore } from "firebase/firestore"; 
 import { firebaseApp, firebaseConfig } from './firebase.js';
+import bodyParser from 'body-parser';
 
 const app = express()
 const db = getFirestore(firebaseApp);
 const port = 3000
 app.use(express.json())
 
+app.use(bodyParser.json())
+
+app.get('/', async (req, res) => {
+  res.status(201).send("ur mom");
+})
 app.use(cors())
 
+app.get('/user/:id', async (req, res) => {
+  const docRef = doc(db, "users", req.params.id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    res.status(200).send(JSON.stringify(docSnap.data()));
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+    res.status(400).send("No such page");
+  }
+})
+
 // Executes when we get a get request to / url
-app.get('/', async (req, res) => {
-  // try {
-  //   const docRef = await addDoc(collection(db, "users"), {
-  //     first: "Ada",
-  //     last: "Lovelace",
-  //     born: 1816
-  //   });
-  //   console.log("Document written with ID: ", docRef.id);
-  // } catch (e) {
-  //   console.error("Error adding document: ", e);
-  // }
-  res.send('Hello World!')
+app.post('/create_user', async (req, res) => {
+  try {
+    const { firstName, lastName, email } = req.body;
+    const docRef = await addDoc(collection(db, "users"), {
+      firstName: firstName,
+      lastName: lastName,
+      email: email
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    // console.error("Error adding document: ", e);
+    res.status(400).send("Bad Request");
+  }
+  res.status(201).send("TEST");
 })
 
 app.post('/create_ride', async (req, res) => {

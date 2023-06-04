@@ -6,10 +6,11 @@ import {
   useControllableState,
   Button,
   Spacer,
+  Link
 } from "@chakra-ui/react";
 import JourneyInputter from '../components/JourneyInputter';
 
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 
 function Home() {
@@ -44,7 +45,7 @@ function Home() {
             </Text>
             <JourneyInputter locations={sampleLocations} journey={journey} />
             <Flex mt="50px">
-              <Link to="/rides">
+              <Link as={RouterLink} to='/rides' w="45%">
                 <Button w="100%">
                   <Text isTruncated>View all upcoming rides</Text>
                 </Button>
