@@ -328,7 +328,7 @@ function parseTime(time) {
   const day = dayTime[0];
   const timeOfDay = dayTime[1];
   const hourMinutes = timeOfDay.split(":");
-  let hour = hourMinutes[0];
+  let hour = parseInt(hourMinutes[0]);
   const minutes = hourMinutes[1];
   let half = "AM"; //AM or PM
   if (hour > 12) {
