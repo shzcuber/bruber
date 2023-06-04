@@ -39,7 +39,7 @@ function Home() {
   };
 
   return (
-    <Box className="home-container">
+    <Box className="home-container" color="primary.500">
       <Box mt="5%" ml="5%" className="home-heading">
         <Heading as="h1" size="4xl">
           Bruber
