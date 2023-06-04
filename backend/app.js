@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { collection, doc, addDoc, getFirestore } from "firebase/firestore"; 
+import { collection, doc, getDoc, addDoc, getFirestore } from "firebase/firestore"; 
 import { firebaseApp, firebaseConfig } from './firebase.js';
 import bodyParser from 'body-parser';
 
@@ -14,6 +14,20 @@ app.get('/', async (req, res) => {
   res.status(201).send("ur mom");
 })
 app.use(cors())
+
+app.get('/user/:id', async (req, res) => {
+  const docRef = doc(db, "users", req.params.id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    res.status(200).send(JSON.stringify(docSnap.data()));
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+    res.status(400).send("No such page");
+  }
+})
 
 // Executes when we get a get request to / url
 app.post('/create_user', async (req, res) => {
