@@ -6,10 +6,17 @@ import {
   useControllableState,
   Button,
   Spacer,
+  Link
 } from "@chakra-ui/react";
-import JourneyInputter from "../components/JourneyInputter";
+import JourneyInputter from '../components/JourneyInputter';
 
-import { createSearchParams, Link, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+
+import { 
+  createSearchParams, 
+  // Link, 
+  useNavigate 
+} from "react-router-dom";
 
 function Home() {
   const [start, setStart] = useControllableState({ defaultValue: "UCLA" });
@@ -47,34 +54,24 @@ function Home() {
         <Text fontSize="3xl">Ridesharing for Bruins</Text>
       </Box>
 
-      <Box
-        backgroundColor="white"
-        borderRadius="30px"
-        p="25px"
-        mt="25px"
-        mx="5%"
-      >
-        <Box p="10px">
-          <Text mb="20px" fontSize="xl">
-            Find other UCLA Students and Split the Cost
-          </Text>
-          <JourneyInputter
-            locations={sampleLocations}
-            journey={journey}
-            onSearchClick={openRides}
-          />
-          <Flex mt="50px">
-            <Link to="/rides">
-              <Button w="100%">
-                <Text isTruncated>View all upcoming rides</Text>
-              </Button>
-            </Link>
-            <Spacer />
-            <Button w="45%">About Bruber</Button>
-          </Flex>
+        <Box backgroundColor="white" borderRadius="30px" p="25px" mt="25px" mx="5%">
+          <Box p="10px">
+            <Text mb="20px" fontSize='xl'>
+              Find other UCLA Students and Split the Cost
+            </Text>
+            <JourneyInputter locations={sampleLocations} journey={journey} />
+            <Flex mt="50px">
+              <Link as={RouterLink} to='/rides' w="45%">
+                <Button w="100%">
+                  <Text isTruncated>View all upcoming rides</Text>
+                </Button>
+              </Link>
+              <Spacer />
+              <Button w="45%">About Bruber</Button>
+            </Flex>
+          </Box>
         </Box>
       </Box>
-    </Box>
   );
 }
 
