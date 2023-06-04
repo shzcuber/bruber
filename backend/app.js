@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { collection, doc, getDoc, addDoc, getFirestore } from "firebase/firestore"; 
+import { collection, doc, query, setDoc, addDoc, getFirestore, getDocs } from "firebase/firestore"; 
 import { firebaseApp, firebaseConfig } from './firebase.js';
 import bodyParser from 'body-parser';
 
@@ -14,6 +14,15 @@ app.get('/', async (req, res) => {
   res.status(201).send("ur mom");
 })
 app.use(cors())
+
+app.get('/get_rides', async (req, res) => {
+  const q = query(collection(db, "rides"));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    console.log(doc.data());
+  });
+  res.send("yay")
+})
 
 app.get('/user/:id', async (req, res) => {
   const docRef = doc(db, "users", req.params.id);
