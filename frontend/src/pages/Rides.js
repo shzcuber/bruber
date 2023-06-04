@@ -40,6 +40,7 @@ import {
 import { BsGrid } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
+import { useState } from "react";
 
 const sampleRideInfo = {
   driverName: "Joe Biden",
@@ -57,7 +58,7 @@ function RideCard(props) {
    * a list of names that are part of the carpool group,
    * a carpool capacity (will fill any vacancies with "empty")
    */
-  console.log(props);
+  // console.log(props);
   const peopleList = passengersToList(props.names, props.capacity);
   return (
     <Card variant="rideCard">
@@ -204,14 +205,7 @@ function RidesDisplay(props) {
 }
 
 function Rides() {
-  const rides = [
-    sampleRideInfo,
-    sampleRideInfo,
-    sampleRideInfo,
-    sampleRideInfo,
-    sampleRideInfo,
-    sampleRideInfo,
-  ];
+  const [rides, setRides] = useState([]);
 
   const [searchParams] = useSearchParams();
   const [start, setStart] = useControllableState({
@@ -240,17 +234,19 @@ function Rides() {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    // fetch("http://localhost:3000/create_ride", requestOptions)
-    // .then(res => res.json()) // Convert json to js object
-    // .then(data => {
-    //   console.log("Data received: " + data.status);
-    //   if (data === "Success")
-    //     // Display success msg (chang state)
+    fetch("http://localhost:3000/get_rides", requestOptions)
+    .then(res => res.json()) // Convert json to js object
+    .then(data => {
+      console.log("data: ",data)
+      console.log("Data received: " + JSON.stringify(data));
+      setRides(data)
+      // if (data === "Success")
+        // Display success msg (chang state)
 
-    //     setSubmitted("success");
-    //     console.log(submitted);
-    // })
-    // .catch(error => console.log("Error: " + error))
+        // setSubmitted("success");
+        // console.log(submitted);
+    })
+    .catch(error => console.log("Error: " + error))
   }
 
   // Handle form submission

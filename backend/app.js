@@ -18,10 +18,13 @@ app.use(cors())
 app.get('/get_rides', async (req, res) => {
   const q = query(collection(db, "rides"));
   const querySnapshot = await getDocs(q);
+
+  let rides = [];
   querySnapshot.forEach((doc) => {
-    console.log(doc.data());
+    rides.push(doc.data());
+    // console.log(doc.data());
   });
-  res.send("yay")
+  res.send(rides)
 })
 
 app.get('/user/:id', async (req, res) => {
