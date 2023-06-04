@@ -211,20 +211,21 @@ function RidesDisplay(props) {
 }
 
 function Rides() {
-  const rides = [
-    sampleRideInfo,
-    sampleRideInfo,
-    sampleRideInfo,
-    sampleRideInfo,
-    sampleRideInfo,
-    sampleRideInfo,
-  ];
+  // const rides = [
+  //   sampleRideInfo,
+  //   sampleRideInfo,
+  //   sampleRideInfo,
+  //   sampleRideInfo,
+  //   sampleRideInfo,
+  //   sampleRideInfo,
+  // ];
 
   const [start, setStart] = useControllableState({ defaultValue: "UCLA" });
   const [destination, setDestination] = useControllableState({
     defaultValue: "LAX",
   });
   const [time, setTime] = useControllableState({ defaultValue: "00" });
+  const [rides, setRides] = useControllableState({ defaultValue: [] });
 
   const journey = {
     start: start,
@@ -234,6 +235,13 @@ function Rides() {
     setDestination: setDestination,
     setTime: setTime,
   };
+  function handleSearchClick() {
+    console.log("Search Button Clicked");
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+  }
   return (
     <Box padding="40px" backgroundColor="primary.150" color="primary.500">
       <Flex align="center">
@@ -255,7 +263,11 @@ function Rides() {
         </Heading>
       </Flex>
       <Box marginBottom="20px">
-        <JourneyInputter locations={sampleLocations} journey={journey} />
+        <JourneyInputter
+          locations={sampleLocations}
+          journey={journey}
+          onSearchClick={handleSearchClick}
+        />
       </Box>
       <Divider
         borderStyle="solid"

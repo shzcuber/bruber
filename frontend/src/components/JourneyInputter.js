@@ -22,7 +22,11 @@ export default function JourneyInputter(props) {
   const isSmallScreen = useBreakpointValue({ base: true, lg: false });
 
   return (
-    <Stack direction={isSmallScreen ? "column" : "row"} align="center" spacing={6}>
+    <Stack
+      direction={isSmallScreen ? "column" : "row"}
+      align="center"
+      spacing={6}
+    >
       <Flex
         align="center"
         width={isSmallScreen ? "100%" : "25%"}
@@ -92,6 +96,7 @@ export default function JourneyInputter(props) {
         width={isSmallScreen ? "100%" : "20%"}
         colorScheme="secondary"
         rightIcon={<AiOutlineSearch />}
+        onClick={props.onSearchClick}
       >
         Search
       </Button>
