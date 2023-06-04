@@ -235,18 +235,18 @@ function Rides() {
       headers: { "Content-Type": "application/json" },
     };
     fetch("http://localhost:3000/get_rides", requestOptions)
-    .then(res => res.json()) // Convert json to js object
-    .then(data => {
-      console.log("data: ",data)
-      console.log("Data received: " + JSON.stringify(data));
-      setRides(data)
-      // if (data === "Success")
+      .then((res) => res.json()) // Convert json to js object
+      .then((data) => {
+        console.log("data: ", data);
+        console.log("Data received: " + JSON.stringify(data));
+        setRides(data);
+        // if (data === "Success")
         // Display success msg (chang state)
 
         // setSubmitted("success");
         // console.log(submitted);
-    })
-    .catch(error => console.log("Error: " + error))
+      })
+      .catch((error) => console.log("Error: " + error));
   }
 
   // Handle form submission
@@ -275,14 +275,13 @@ function Rides() {
       </Flex>
       <Flex align="end">
         <Heading as="h2" size="md" margin="20px 0px">
-          {start + " to " + destination + ", departing on " + time}
+          {start + " to " + destination + ", departing on " + parseTime(time)}
         </Heading>
       </Flex>
       <Box marginBottom="20px">
         <JourneyInputter
           locations={sampleLocations}
           journey={journey}
-
           onSearchClick={handleSearchClick}
         />
       </Box>
