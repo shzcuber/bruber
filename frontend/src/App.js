@@ -1,20 +1,28 @@
 import * as React from "react";
-import { BrowserRouter as Router, Routes, Route, Outlet, Link } from "react-router-dom";
-import Home from './pages/Home'
-import Rides from './pages/Rides'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+  Link,
+} from "react-router-dom";
+import Home from "./pages/Home";
+import Rides from "./pages/Rides";
 import Driver from "./pages/Driver";
-import CreateRide from './pages/CreateRide';
-import Profile from './pages/Profile';
+import CreateRide from "./pages/CreateRide";
+import Profile from "./pages/Profile";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Home/>}/>
-        <Route exact path="/rides" element={<Rides/>}/>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/landing" element={<Landing />} />
+        <Route exact path="/rides" element={<Rides />} />
         <Route path="/driver" element={<Driver />} />
-        <Route exact path="/create_ride" element={<CreateRide/>}/>
-        <Route exact path="/profile" element={<Profile/>}/>
+        <Route exact path="/create_ride" element={<CreateRide />} />
+        <Route exact path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
