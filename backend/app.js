@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import { collection, doc, addDoc, getFirestore } from "firebase/firestore"; 
 import { firebaseApp, firebaseConfig } from './firebase.js';
 
@@ -6,6 +7,7 @@ const app = express()
 const db = getFirestore(firebaseApp);
 const port = 3000
 
+app.use(cors())
 
 // Executes when we get a get request to / url
 app.get('/', async (req, res) => {
@@ -26,8 +28,9 @@ app.post('/create_ride', async (req, res) => {
   // fetch
   try {
     const testReference = doc(db, "locations", "test");
+    // const userReference = doc(db, "user")
     const docRef = await addDoc(collection(db, "rides"), {
-      rideId: 1, // May delete?
+      rideId: 1,  // May delete?
       from: "test",  // reference to location
       to: testReference,
       driver: "test",
@@ -36,6 +39,7 @@ app.post('/create_ride', async (req, res) => {
       capacity: 1
     });
     console.log("Ride written with ID: ", docRef.id);
+    console.log("req ", req.title)
     res.send(JSON.stringify({status:"success"}));
   } catch (e) {
     console.error("Error adding document: ", e);
