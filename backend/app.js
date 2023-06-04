@@ -1,6 +1,7 @@
 import express from 'express'
 import { collection, doc, addDoc, getFirestore } from "firebase/firestore"; 
 import { firebaseApp, firebaseConfig } from './firebase.js';
+import "firebase/auth"
 
 const app = express()
 const db = getFirestore(firebaseApp);
