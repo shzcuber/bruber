@@ -6,6 +6,7 @@ import { firebaseApp, firebaseConfig } from './firebase.js';
 const app = express()
 const db = getFirestore(firebaseApp);
 const port = 3000
+app.use(express.json())
 
 app.use(cors())
 
@@ -27,20 +28,23 @@ app.get('/', async (req, res) => {
 app.post('/create_ride', async (req, res) => {
   // fetch
   try {
-    const testReference = doc(db, "locations", "test");
-    // const userReference = doc(db, "user")
+    // console.log("res ", res.json())
+    console.log(req.body)
+    const driverReference = doc(db, "users", req.body.driver);
+    const fromReference = doc(db, "locations", req.body.from);
+    const toReference = doc(db, "locations", req.body.to);
+    
     const docRef = await addDoc(collection(db, "rides"), {
       rideId: 1,  // May delete?
-      from: "test",  // reference to location
-      to: testReference,
-      driver: "test",
-      passengers: "test", // list of references
-      leaveTime: 1,
-      capacity: 1
+      from: fromReference,  // reference to location
+      to: toReference,
+      driver: driverReference,
+      passengers: [],  // list of references
+      leaveTime: req.body.datetime,
+      capacity: req.body.capacity
     });
     console.log("Ride written with ID: ", docRef.id);
-    console.log("req ", req.title)
-    res.send(JSON.stringify({status:"success"}));
+    res.send(JSON.stringify({"status":"success"}));
   } catch (e) {
     console.error("Error adding document: ", e);
     res.send({"status": "error"});
