@@ -19,7 +19,8 @@ function CreateRide() {
 
   function onSubmit(formData) {
     console.log("handleButtonClick() called in CreateRide.js");
-    formData["driver"] = "driverID"
+    // CHANGE LATER ONCE WE HAVE AUTH
+    formData["driverID"] = "05l2b4OVVOM97RT5ZaDt"
     console.log(formData)
     const requestOptions = {
       method: "POST",
@@ -27,6 +28,7 @@ function CreateRide() {
       body: JSON.stringify(formData)
       // body: JSON.stringify({ title: "React POST Request Example" })
     };
+
     fetch("http://localhost:3000/create_ride", requestOptions)
     .then(res => res.json())  // Convert json to js object
     .then(data => {
@@ -87,7 +89,8 @@ function CreateRide() {
                   Capacity
                 </FormLabel>
                 <NumberInput defaultValue={1} min={1} size="sm" name="capacity" type="number"
-                    {...register("capacity", {required: true})} >
+                    {...register("capacity", {required: true})} 
+                    >
                   <NumberInputField />
                   <NumberInputStepper>
                     <NumberIncrementStepper />

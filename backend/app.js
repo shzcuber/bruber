@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { collection, doc, query, setDoc, addDoc, getFirestore, getDocs } from "firebase/firestore"; 
+import { collection, doc, query, setDoc, addDoc, getFirestore, getDocs, getDoc } from "firebase/firestore"; 
 import { firebaseApp, firebaseConfig } from './firebase.js';
 import bodyParser from 'body-parser';
 
@@ -64,17 +64,27 @@ app.post("/create_ride", async (req, res) => {
   try {
     // console.log("res ", res.json())
     console.log(req.body)
-    const driverReference = doc(db, "users", req.body.driver);
+    const driverReference = doc(db, "users", req.body.driverID);
     const fromReference = doc(db, "locations", req.body.from);
     const toReference = doc(db, "locations", req.body.to);
+
+    const driver = await getDoc(driverReference);
+    if(driver.exists())
+    {
+      console.log("Document Data: ", driver.data())
+    } else{
+      console.log("")
+    }
     
     const docRef = await addDoc(collection(db, "rides"), {
-      rideId: 1,  // May delete?
+      // rideId: 1,  // May delete?
       from: fromReference,  // reference to location
       to: toReference,
-      driver: driverReference,
+      driverID: driverReference,
+      driverFirstName: driver.data().first,
+      driverLastName: driver.data().last,
       passengers: [],  // list of references
-      leaveTime: req.body.datetime,
+      startTime: req.body.datetime,
       capacity: req.body.capacity
     });
     console.log("Ride written with ID: ", docRef.id);

@@ -98,7 +98,7 @@ function RideCardGrid(props) {
   const rideCardList = props.rides.map((ride, index) => (
     <RideCard
       key={index}
-      driver={ride.driverName}
+      driver={ride.driverFirstName + " " + ride.driverLastName}
       time={parseTime(ride.startTime)}
       capacity={ride.capacity}
       names={ride.passengers}
@@ -126,10 +126,10 @@ function RideCardAccordion(props) {
       <AccordionButton display="block">
         <Flex align="center">
           <Flex gap="4" align="center">
-            <Avatar name={ride.driverName} />
+            <Avatar name={ride.driverFirstName + " " + ride.driverLastName} />
             <Box textAlign="left">
               <Text as="b" fontSize="xl">
-                {ride.driverName}
+                {ride.driverFirstName + " " + ride.driverLastName}
               </Text>
               <Text fontSize="xl">Driver</Text>
             </Box>
@@ -240,11 +240,6 @@ function Rides() {
         console.log("data: ", data);
         console.log("Data received: " + JSON.stringify(data));
         setRides(data);
-        // if (data === "Success")
-        // Display success msg (chang state)
-
-        // setSubmitted("success");
-        // console.log(submitted);
       })
       .catch((error) => console.log("Error: " + error));
   }
