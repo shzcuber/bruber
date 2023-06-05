@@ -78,11 +78,12 @@ app.post('/ride_signup', async (req, res) => {
 // Executes when we get a get request to / url
 app.post('/create_user', async (req, res) => {
   try {
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, phoneNumber } = req.body;
     const docRef = await addDoc(collection(db, "users"), {
       firstName: firstName,
       lastName: lastName,
-      email: email
+      email: email,
+      phoneNumber: phoneNumber,
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
