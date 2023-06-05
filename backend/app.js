@@ -22,8 +22,7 @@ app.get('/get_rides', async (req, res) => {
 
   let rides = [];
   querySnapshot.forEach((doc) => {
-    rides.push(doc.data());
-    // console.log(doc.data());
+    rides.push({...doc.data(), id: doc.id});
   });
   res.send(rides)
 })
