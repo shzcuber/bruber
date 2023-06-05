@@ -1,10 +1,12 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
 import RideSignupModal from "./RideSignupModal";
+import { useNavigate } from 'react-router-dom';
 
 const PLACEHOLDER_USER_ID = 'wOnGp3wuTOxjie6XR55f'
 
 export default function RideSignupButton(props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const navigate = useNavigate()
     const onClick = () => {
         const requestOptions = {
             method: "POST",
@@ -13,9 +15,10 @@ export default function RideSignupButton(props) {
         };
 
         fetch("http://localhost:3000/ride_signup", requestOptions)
-            .then(res => res.json())  // Convert json to js object
             .then(data => {
-                // console.log("Data received: " + data.status);
+                console.log("I AM SIGNED UP")
+                navigate('/profile')
+                console.log("navigated")
             })
             .catch(error => {
                 console.log("Error: " + error);
