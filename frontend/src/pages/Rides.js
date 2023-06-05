@@ -32,6 +32,8 @@ import {
 
 import JourneyInputter from "../components/JourneyInputter";
 
+import RideSignupButton from '../components/RideSignupButton'
+
 import {
   AiOutlineSwap,
   AiOutlineSearch,
@@ -94,6 +96,7 @@ function RideCard(props) {
               props.capacity +
               " Spots Available"}
           </Text>
+          <RideSignupButton />
         </VStack>
       </CardBody>
       <CardFooter></CardFooter>
@@ -160,6 +163,9 @@ function RideCardAccordion(props) {
             ride.capacity +
             " Spots Available"}
         </Text>
+        <Box>
+          <RideSignupButton />
+        </Box>
       </AccordionPanel>
     </AccordionItem>
   ));
