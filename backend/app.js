@@ -45,9 +45,13 @@ app.post('/ride_signup', async (req, res) => {
   try {
     const { rideId, userId } = req.body;
     const ridesRef = doc(db, 'rides', rideId)
+    const usersRef = doc(db, 'users', userId)
 
     const ride = await getDoc(ridesRef);
+    const user = await getDoc(usersRef);
+
     let rideData = ride.data();
+    let userData = user.data();
 
     if(rideData.capacity == rideData['passengers'].length)
     {
@@ -55,7 +59,7 @@ app.post('/ride_signup', async (req, res) => {
     }
     else
     {
-      rideData['passengers'].push(userId)
+      rideData['passengers'].push(userData)
       await setDoc(ridesRef, rideData)
       res.status(201).send("success");
     }
@@ -78,7 +82,6 @@ app.post('/create_user', async (req, res) => {
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
-    // console.error("Error adding document: ", e);
     res.status(400).send("Bad Request");
   }
   res.status(201).send("TEST");

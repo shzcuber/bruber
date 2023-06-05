@@ -320,10 +320,10 @@ export default Rides;
 //utility
 function passengersToList(passengers, capacity) {
   let emptyList = Array(capacity - passengers.length).fill("Empty");
-  const peopleList = [...passengers, ...emptyList].map((name, index) => {
+  const peopleList = [...passengers, ...emptyList].map((passenger, index) => {
     return (
       <ListItem key={index} paddingLeft="15px">
-        <Text fontSize="2xl">{name}</Text>
+        <Text fontSize="2xl">{passenger.first ? passenger.first + " " + passenger.last : "Empty"}</Text>
       </ListItem>
     );
   });
