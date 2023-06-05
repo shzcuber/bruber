@@ -78,6 +78,12 @@ function RideCard(props) {
           <Text as="b" fontSize="3xl">
             {props.time}
           </Text>
+          <Text as="b" fontSize="xl">
+            From: {props.from}
+          </Text>
+          <Text as="b" fontSize="xl">
+            To: {props.to}
+          </Text>
           <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
             {peopleList}
           </UnorderedList>
@@ -100,6 +106,8 @@ function RideCardGrid(props) {
       key={index}
       driver={ride.driverFirstName + " " + ride.driverLastName}
       time={parseTime(ride.startTime)}
+      from={ride.from}
+      to={ride.to}
       capacity={ride.capacity}
       names={ride.passengers}
     />
@@ -139,6 +147,9 @@ function RideCardAccordion(props) {
         </Flex>
       </AccordionButton>
       <AccordionPanel background="primary.150" color="primary.500">
+        <Text p="10px" fontWeight="bold" fontSize="xl">{parseTime(ride.startTime)}</Text>
+        <Text p="10px" fontWeight="bold" fontSize="xl">From: {ride.from}</Text>
+        <Text p="10px" fontWeight="bold" fontSize="xl">To: {ride.to}</Text>
         <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
           {passengersToList(ride.passengers, ride.capacity)}
         </UnorderedList>
