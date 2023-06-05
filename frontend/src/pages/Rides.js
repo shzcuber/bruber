@@ -96,7 +96,7 @@ function RideCard(props) {
               props.capacity +
               " Spots Available"}
           </Text>
-          <RideSignupButton />
+          <RideSignupButton rideId={props.rideId} />
         </VStack>
       </CardBody>
       <CardFooter></CardFooter>
@@ -113,6 +113,7 @@ function RideCardGrid(props) {
       to={ride.to}
       capacity={ride.capacity}
       names={ride.passengers}
+      rideId={ride.id}
     />
   ));
   return (
@@ -164,7 +165,7 @@ function RideCardAccordion(props) {
             " Spots Available"}
         </Text>
         <Box>
-          <RideSignupButton />
+          <RideSignupButton rideId={ride.id}/>
         </Box>
       </AccordionPanel>
     </AccordionItem>
