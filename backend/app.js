@@ -41,6 +41,32 @@ app.get('/user/:id', async (req, res) => {
   }
 })
 
+app.post('/ride_signup', async (req, res) => {
+  try {
+    const { rideId, userId } = req.body;
+    const ridesRef = doc(db, 'rides', rideId)
+
+    const ride = await getDoc(ridesRef);
+    let rideData = ride.data();
+
+    if(rideData.capacity == rideData['passengers'].length)
+    {
+      res.status(400).send("Passenger capacity reached")
+    }
+    else
+    {
+      rideData['passengers'].push(userId)
+      await setDoc(ridesRef, rideData)
+      res.status(201).send("success");
+    }
+
+  } catch (e) {
+    // console.error("Error adding document: ", e);
+    res.status(400).send("Bad Request");
+    console.error(e)
+  }
+})
+
 // Executes when we get a get request to / url
 app.post('/create_user', async (req, res) => {
   try {
