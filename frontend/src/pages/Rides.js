@@ -30,6 +30,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
+import RideCardGrid from "../components/RideCardGrid";
+
 import JourneyInputter from "../components/JourneyInputter";
 
 import RideSignupButton from '../components/RideSignupButton'
@@ -46,6 +48,7 @@ import { useState } from "react";
 import RideCard from "../components/RideCard";
 
 import { passengersToList  } from "../utilities";
+import { parseTime } from "../utilities";
 
 const sampleRideInfo = {
   driverName: "Joe Biden",
@@ -56,30 +59,6 @@ const sampleRideInfo = {
 
 const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
 
-function RideCardGrid(props) {
-  const rideCardList = props.rides.map((ride, index) => (
-    <RideCard
-      key={index}
-      driver={ride.driverFirstName + " " + ride.driverLastName}
-      time={parseTime(ride.startTime)}
-      from={ride.from}
-      to={ride.to}
-      capacity={ride.capacity}
-      names={ride.passengers}
-      rideId={ride.id}
-    />
-  ));
-  return (
-    <SimpleGrid
-      minChildWidth="350px"
-      spacingX="40px"
-      spacingY="20px"
-      margin="10px 35px"
-    >
-      {rideCardList}
-    </SimpleGrid>
-  );
-}
 function RideCardAccordion(props) {
   const rideAccordionItems = props.rides.map((ride, index) => (
     <AccordionItem
@@ -270,47 +249,3 @@ function Rides() {
 
 export default Rides;
 
-
-function parseTime(time) {
-  const monthNames = [
-    "",
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const timeArray = time.split("-");
-  const dayTime = timeArray[2].split("T");
-  const day = dayTime[0];
-  const timeOfDay = dayTime[1];
-  const hourMinutes = timeOfDay.split(":");
-  let hour = parseInt(hourMinutes[0]);
-  const minutes = hourMinutes[1];
-  let half = "AM"; //AM or PM
-  if (hour > 12) {
-    hour -= 12;
-    half = "PM";
-  }
-  if (hour === 0) hour = 12;
-  return (
-    monthNames[parseInt(timeArray[1])] +
-    " " +
-    day +
-    ", " +
-    timeArray[0] +
-    " at " +
-    hour +
-    ":" +
-    minutes +
-    " " +
-    half
-  );
-}
