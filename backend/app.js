@@ -22,8 +22,7 @@ app.get('/get_rides', async (req, res) => {
 
   let rides = [];
   querySnapshot.forEach((doc) => {
-    rides.push(doc.data());
-    // console.log(doc.data());
+    rides.push({...doc.data(), id: doc.id});
   });
   res.send(rides)
 })
@@ -42,18 +41,59 @@ app.get('/user/:id', async (req, res) => {
   }
 })
 
+app.post('/ride_signup', async (req, res) => {
+  try {
+    const { rideId, userId } = req.body;
+    const ridesRef = doc(db, 'rides', rideId)
+    const usersRef = doc(db, 'users', userId)
+
+    const ride = await getDoc(ridesRef);
+    const user = await getDoc(usersRef);
+
+    let rideData = ride.data();
+    let userData = user.data();
+
+    if(rideData.capacity == rideData['passengers'].length)
+    {
+      res.status(400).send("Passenger capacity reached")
+    }
+    else if(rideData.passengers.map(passenger => passenger.userId).includes(userId))
+    {
+      res.status(400).send("You can't sign up for a ride twice")
+    }
+    else
+    {
+      rideData['passengers'].push({...userData, userId})
+      const newRide = {'rideData': JSON.stringify(rideData), rideId};
+      if(userData['rides']) 
+        userData['rides'].push(newRide);
+      else 
+        userData['rides'] = [newRide];
+
+      await setDoc(ridesRef, rideData)
+      await setDoc(usersRef, userData)
+      res.status(201).send("success");
+    }
+
+  } catch (e) {
+    // console.error("Error adding document: ", e);
+    res.status(400).send("Bad Request");
+    console.error(e)
+  }
+})
+
 // Executes when we get a get request to / url
 app.post('/create_user', async (req, res) => {
   try {
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, phoneNumber } = req.body;
     const docRef = await addDoc(collection(db, "users"), {
       firstName: firstName,
       lastName: lastName,
-      email: email
+      email: email,
+      phoneNumber: phoneNumber,
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
-    // console.error("Error adding document: ", e);
     res.status(400).send("Bad Request");
   }
   res.status(201).send("TEST");

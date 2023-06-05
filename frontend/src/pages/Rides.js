@@ -30,7 +30,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
+import RideCardGrid from "../components/RideCardGrid";
+
 import JourneyInputter from "../components/JourneyInputter";
+
+import RideSignupButton from '../components/RideSignupButton'
 
 import {
   AiOutlineSwap,
@@ -41,6 +45,10 @@ import { BsGrid } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import RideCard from "../components/RideCard";
+
+import { passengersToList  } from "../utilities";
+import { parseTime } from "../utilities";
 
 const sampleRideInfo = {
   driverName: "Joe Biden",
@@ -51,78 +59,6 @@ const sampleRideInfo = {
 
 const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
 
-function RideCard(props) {
-  /* props will have:
-   * a driver,
-   * a time,
-   * a list of names that are part of the carpool group,
-   * a carpool capacity (will fill any vacancies with "empty")
-   */
-  // console.log(props);
-  const peopleList = passengersToList(props.names, props.capacity);
-  return (
-    <Card variant="rideCard">
-      <CardHeader>
-        <Flex gap="4" align="center">
-          <Avatar name={props.driver} />
-          <Box>
-            <Text as="b" fontSize="xl">
-              {props.driver}
-            </Text>
-            <Text fontSize="xl">Driver</Text>
-          </Box>
-        </Flex>
-      </CardHeader>
-      <CardBody>
-        <VStack spacing={4} align="left">
-          <Text as="b" fontSize="3xl">
-            {props.time}
-          </Text>
-          <Text as="b" fontSize="xl">
-            From: {props.from}
-          </Text>
-          <Text as="b" fontSize="xl">
-            To: {props.to}
-          </Text>
-          <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
-            {peopleList}
-          </UnorderedList>
-          <Text as="b" fontSize="2xl">
-            {props.capacity -
-              props.names.length +
-              "/" +
-              props.capacity +
-              " Spots Available"}
-          </Text>
-        </VStack>
-      </CardBody>
-      <CardFooter></CardFooter>
-    </Card>
-  );
-}
-function RideCardGrid(props) {
-  const rideCardList = props.rides.map((ride, index) => (
-    <RideCard
-      key={index}
-      driver={ride.driverFirstName + " " + ride.driverLastName}
-      time={parseTime(ride.startTime)}
-      from={ride.from}
-      to={ride.to}
-      capacity={ride.capacity}
-      names={ride.passengers}
-    />
-  ));
-  return (
-    <SimpleGrid
-      minChildWidth="350px"
-      spacingX="40px"
-      spacingY="20px"
-      margin="10px 35px"
-    >
-      {rideCardList}
-    </SimpleGrid>
-  );
-}
 function RideCardAccordion(props) {
   const rideAccordionItems = props.rides.map((ride, index) => (
     <AccordionItem
@@ -160,6 +96,9 @@ function RideCardAccordion(props) {
             ride.capacity +
             " Spots Available"}
         </Text>
+        <Box>
+          <RideSignupButton rideId={ride.id}/>
+        </Box>
       </AccordionPanel>
     </AccordionItem>
   ));
@@ -310,59 +249,3 @@ function Rides() {
 
 export default Rides;
 
-//utility
-function passengersToList(passengers, capacity) {
-  let emptyList = Array(capacity - passengers.length).fill("Empty");
-  const peopleList = [...passengers, ...emptyList].map((name, index) => {
-    return (
-      <ListItem key={index} paddingLeft="15px">
-        <Text fontSize="2xl">{name}</Text>
-      </ListItem>
-    );
-  });
-  return peopleList;
-}
-
-function parseTime(time) {
-  const monthNames = [
-    "",
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const timeArray = time.split("-");
-  const dayTime = timeArray[2].split("T");
-  const day = dayTime[0];
-  const timeOfDay = dayTime[1];
-  const hourMinutes = timeOfDay.split(":");
-  let hour = parseInt(hourMinutes[0]);
-  const minutes = hourMinutes[1];
-  let half = "AM"; //AM or PM
-  if (hour > 12) {
-    hour -= 12;
-    half = "PM";
-  }
-  if (hour === 0) hour = 12;
-  return (
-    monthNames[parseInt(timeArray[1])] +
-    " " +
-    day +
-    ", " +
-    timeArray[0] +
-    " at " +
-    hour +
-    ":" +
-    minutes +
-    " " +
-    half
-  );
-}

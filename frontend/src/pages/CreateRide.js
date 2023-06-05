@@ -32,7 +32,7 @@ function CreateRide() {
     fetch("http://localhost:3000/create_ride", requestOptions)
     .then(res => res.json())  // Convert json to js object
     .then(data => {
-      console.log("Data received: " + data.status);
+      // console.log("Data received: " + data.status);
       if (data.status === "success") {
         // Display success msg (change state)
         setSubmitted("success");
