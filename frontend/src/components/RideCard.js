@@ -57,7 +57,7 @@ export default function RideCard(props) {
               props.capacity +
               " Spots Available"}
           </Text>
-          <RideSignupButton rideId={props.rideId} />
+          {!props.hideSignupButton && <RideSignupButton rideId={props.rideId} />}
         </VStack>
       </CardBody>
       <CardFooter></CardFooter>

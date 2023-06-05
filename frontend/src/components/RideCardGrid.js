@@ -13,6 +13,7 @@ export default function RideCardGrid(props) {
       capacity={ride.capacity}
       names={ride.passengers}
       rideId={ride.id}
+      hideSignupButton={props.hideSignupButton}
     />
   ));
   return (

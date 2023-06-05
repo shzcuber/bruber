@@ -60,11 +60,14 @@ app.post('/ride_signup', async (req, res) => {
     else
     {
       rideData['passengers'].push({...userData, userId})
+      const newRide = {'rideData': JSON.stringify(rideData), rideId};
       if(userData['rides']) 
-        userData['rides'].push(rideId);
+        userData['rides'].push(newRide);
       else 
-        userData['rides'] = [rideId];
+        userData['rides'] = [newRide];
+
       await setDoc(ridesRef, rideData)
+      await setDoc(usersRef, userData)
       res.status(201).send("success");
     }
 

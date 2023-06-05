@@ -6,8 +6,10 @@ import {
   FormLabel,
   Button,
   Input,
+  Text,
   Stack,
 } from '@chakra-ui/react';
+import RideCardGrid from '../components/RideCardGrid';
 
 const PLACEHOLDER_USER_ID = 'wOnGp3wuTOxjie6XR55f'
 
@@ -21,15 +23,22 @@ function Profile()  {
     fetch(`http://localhost:3000/user/${PLACEHOLDER_USER_ID}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
-        console.log(data)
+        console.log(data.rides[0])
         setEmail(data.email);
         setPhoneNumber(data.phoneNumber);
         setName(data.firstName + " " + data.lastName);
+        let rides = []
+        data.rides.forEach(ride => 
+          // console.log('ride: ',JSON.parse(ride.rideData))
+          rides.push(JSON.parse(ride.rideData))
+        );
+        setRides(rides);
       })
       .catch((error) => console.log("Error: " + error));
   }, [])
 
   const [name, setName] = useState();
+  const [rides, setRides] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState('123-456-7890');
   const [email, setEmail] = useState('');
   const [isNicknameEditing, setIsNicknameEditing] = useState(false);
@@ -111,6 +120,10 @@ function Profile()  {
             </Stack>
           </FormControl>
         </Box>
+      </Box>
+      <Box backgroundColor="white" borderRadius="30px" p="25px" mt="50px" mx="5%">
+        <Text textAlign='center' fontWeight='b' fontSize='3xl'>Rides you signed up for: </Text>
+        {rides && <RideCardGrid hideSignupButton rides={rides} /> }
       </Box>
     </Box>
   );
