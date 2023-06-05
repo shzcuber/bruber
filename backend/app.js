@@ -59,7 +59,11 @@ app.post('/ride_signup', async (req, res) => {
     }
     else
     {
-      rideData['passengers'].push(userData)
+      rideData['passengers'].push({...userData, userId})
+      if(userData['rides']) 
+        userData['rides'].push(rideId);
+      else 
+        userData['rides'] = [rideId];
       await setDoc(ridesRef, rideData)
       res.status(201).send("success");
     }
