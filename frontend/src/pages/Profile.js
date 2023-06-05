@@ -23,7 +23,6 @@ function Profile()  {
     fetch(`http://localhost:3000/user/${PLACEHOLDER_USER_ID}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
-        console.log(data.rides[0])
         setEmail(data.email);
         setPhoneNumber(data.phoneNumber);
         setName(data.firstName + " " + data.lastName);

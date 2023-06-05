@@ -57,6 +57,10 @@ app.post('/ride_signup', async (req, res) => {
     {
       res.status(400).send("Passenger capacity reached")
     }
+    else if(rideData.passengers.map(passenger => passenger.userId).includes(userId))
+    {
+      res.status(400).send("You can't sign up for a ride twice")
+    }
     else
     {
       rideData['passengers'].push({...userData, userId})

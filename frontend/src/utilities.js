@@ -5,7 +5,7 @@ export function passengersToList(passengers, capacity) {
   const peopleList = [...passengers, ...emptyList].map((passenger, index) => {
     return (
       <ListItem key={index} paddingLeft="15px">
-        <Text fontSize="2xl">{passenger.first ? passenger.first + " " + passenger.last : "Empty"}</Text>
+        <Text fontSize="2xl">{passenger.firstName ? passenger.firstName + " " + passenger.lastName : "Empty"}</Text>
       </ListItem>
     );
   });
