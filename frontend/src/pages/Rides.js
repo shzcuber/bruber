@@ -43,6 +43,9 @@ import { BsGrid } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import RideCard from "../components/RideCard";
+
+import { passengersToList  } from "../utilities";
 
 const sampleRideInfo = {
   driverName: "Joe Biden",
@@ -53,56 +56,6 @@ const sampleRideInfo = {
 
 const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
 
-function RideCard(props) {
-  /* props will have:
-   * a driver,
-   * a time,
-   * a list of names that are part of the carpool group,
-   * a carpool capacity (will fill any vacancies with "empty")
-   */
-  // console.log(props);
-  const peopleList = passengersToList(props.names, props.capacity);
-  return (
-    <Card variant="rideCard">
-      <CardHeader>
-        <Flex gap="4" align="center">
-          <Avatar name={props.driver} />
-          <Box>
-            <Text as="b" fontSize="xl">
-              {props.driver}
-            </Text>
-            <Text fontSize="xl">Driver</Text>
-          </Box>
-        </Flex>
-      </CardHeader>
-      <CardBody>
-        <VStack spacing={4} align="left">
-          <Text as="b" fontSize="3xl">
-            {props.time}
-          </Text>
-          <Text as="b" fontSize="xl">
-            From: {props.from}
-          </Text>
-          <Text as="b" fontSize="xl">
-            To: {props.to}
-          </Text>
-          <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
-            {peopleList}
-          </UnorderedList>
-          <Text as="b" fontSize="2xl">
-            {props.capacity -
-              props.names.length +
-              "/" +
-              props.capacity +
-              " Spots Available"}
-          </Text>
-          <RideSignupButton rideId={props.rideId} />
-        </VStack>
-      </CardBody>
-      <CardFooter></CardFooter>
-    </Card>
-  );
-}
 function RideCardGrid(props) {
   const rideCardList = props.rides.map((ride, index) => (
     <RideCard
@@ -317,18 +270,6 @@ function Rides() {
 
 export default Rides;
 
-//utility
-function passengersToList(passengers, capacity) {
-  let emptyList = Array(capacity - passengers.length).fill("Empty");
-  const peopleList = [...passengers, ...emptyList].map((passenger, index) => {
-    return (
-      <ListItem key={index} paddingLeft="15px">
-        <Text fontSize="2xl">{passenger.first ? passenger.first + " " + passenger.last : "Empty"}</Text>
-      </ListItem>
-    );
-  });
-  return peopleList;
-}
 
 function parseTime(time) {
   const monthNames = [
