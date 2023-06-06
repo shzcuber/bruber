@@ -26,7 +26,7 @@ export default function RideSignupButton(props) {
     }
 
     return (<> 
-                <Button onClick={onClick}>Sign up</Button> 
+                <Button onClick={onOpen}>Sign up</Button> 
                 <RideSignupModal isOpen={isOpen} onClose={onClose}/>
             </>);
 }
