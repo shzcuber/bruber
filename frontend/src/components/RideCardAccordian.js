@@ -17,6 +17,8 @@ import { passengersToList } from "../utilities";
 import RideSignupButton from "./RideSignupButton";
 
 export default function RideCardAccordion(props) {
+  console.log(props.rides)
+
   const rideAccordionItems = props.rides.map((ride, index) => (
     <AccordionItem
       key={index}
@@ -68,7 +70,7 @@ export default function RideCardAccordion(props) {
               " Spots Available"}
           </Text>
           <Box margin="25px 15px">
-            <RideSignupButton authUser={props.authUser} rideId={ride.id} />
+            {!(ride.capacity-ride.passengers.length == 0) && <RideSignupButton authUser={props.authUser} rideId={ride.id} />}
           </Box>
         </Box>
       </AccordionPanel>
