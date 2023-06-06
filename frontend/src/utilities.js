@@ -5,14 +5,24 @@ export function passengersToList(passengers, capacity) {
   const peopleList = [...passengers, ...emptyList].map((passenger, index) => {
     return (
       <ListItem key={index} paddingLeft="15px">
-        <Text fontSize="2xl">{passenger.firstName ? passenger.firstName : "Empty"}</Text>
+        <Text fontSize="2xl">
+          {passenger.firstName ? passenger.firstName : "Empty"}
+        </Text>
       </ListItem>
     );
   });
   return peopleList;
 }
 
-export const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
+export const sampleLocations = [
+  "LAX",
+  "UCSD",
+  "UCI",
+  "UCR",
+  "UCB",
+  "UCSB",
+  "UCLA",
+];
 
 export function parseTime(time) {
   const monthNames = [
@@ -56,4 +66,16 @@ export function parseTime(time) {
     " " +
     half
   );
+}
+export function getCurrentTime() {
+  var today = new Date();
+  var date =
+    today.getFullYear() +
+    "-" +
+    String(today.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(today.getDate()).padStart(2, "0");
+  var time =
+    String(today.getHours()).padStart(2, "0") + ":" + today.getMinutes();
+  return date + "T" + time;
 }

@@ -9,7 +9,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import JourneyInputter from "../components/JourneyInputter";
-import { sampleLocations } from "../utilities";
+import { sampleLocations, getCurrentTime } from "../utilities";
 
 import { Link as RouterLink } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -90,17 +90,3 @@ function Home() {
 }
 
 export default Home;
-
-//utility
-function getCurrentTime() {
-  var today = new Date();
-  var date =
-    today.getFullYear() +
-    "-" +
-    String(today.getMonth() + 1).padStart(2, "0") +
-    "-" +
-    String(today.getDate()).padStart(2, "0");
-  var time =
-    String(today.getHours()).padStart(2, "0") + ":" + today.getMinutes();
-  return date + "T" + time;
-}
