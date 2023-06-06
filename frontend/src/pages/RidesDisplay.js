@@ -50,7 +50,7 @@ export default function RidesDisplay(props) {
         unmountOnExit={true}
         transition={transitionProp}
       >
-        <RideCardGrid rides={props.rides} />
+        <RideCardGrid authUser={props.authUser} rides={props.rides} />
       </SlideFade>
     </Box>
   );
