@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 import { useEffect, useState } from "react";
 import {signOut, getAuth, onAuthStateChanged } from "firebase/auth";
 import LoginPage from "./Login";
-import { BrowserRouter as Router, Routes, Route, Outlet, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet, Link, useNavigate } from "react-router-dom";
 import Home from './Home'
 import Rides from './Rides'
 import Driver from "./Driver";
@@ -29,16 +29,28 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 const AuthDetails = () => {
-    console.log(auth);
     const [authUser, setAuthUser] = useState(null);
 
     onAuthStateChanged(auth, user => {
         if(user){
             setAuthUser(user);
+            console.log(user)
+            const requestOptions = {
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify({'uid': user.uid, 'firstName': user.displayName, 'lastName': user.displayName, 'email': user.email, 'phoneNumber': user.phoneNumber})
+            };
+
+            fetch("http://localhost:3000/create_user", requestOptions)
+                .then(data => {
+                })
+                .catch(error => {
+                    console.log("Error: " + error);
+                })
         } else {
             setAuthUser(null);
         }
-    })
+            })
 
     return (
         <div>

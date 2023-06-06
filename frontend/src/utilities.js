@@ -6,9 +6,7 @@ export function passengersToList(passengers, capacity) {
     return (
       <ListItem key={index} paddingLeft="15px">
         <Text fontSize="2xl">
-          {passenger.firstName
-            ? passenger.firstName + " " + passenger.lastName
-            : "Empty"}
+          {passenger.firstName ? passenger.firstName : "Empty"}
         </Text>
       </ListItem>
     );

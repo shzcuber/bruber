@@ -7,9 +7,10 @@ import { Button, Input, Box, Card, CardHeader, CardBody, Heading,
 import { useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { sampleLocations } from "../utilities";
+import Navbar from "../components/Navbar";
 
 
-function CreateRide() {
+function CreateRide(props) {
   const [submitted, setSubmitted] = useState(false);
 
   const {
@@ -19,9 +20,10 @@ function CreateRide() {
   } = useForm();
 
   function onSubmit(formData) {
-    console.log("handleButtonClick() called in CreateRide.js");
+    // console.log("handleButtonClick() called in CreateRide.js");
     // CHANGE LATER ONCE WE HAVE AUTH
-    formData["driverID"] = "05l2b4OVVOM97RT5ZaDt"
+    formData["driverID"] = props.authUser.uid;
+    console.log(props.authUser.uid)
     console.log(formData)
     const requestOptions = {
       method: "POST",
@@ -62,6 +64,7 @@ function CreateRide() {
   // }
   return (
     <Box>
+      <Navbar />
       {
       submitted ? displayAlert(submitted) : <Box></Box>
       }

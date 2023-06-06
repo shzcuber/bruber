@@ -10,22 +10,23 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import RideCardGrid from '../components/RideCardGrid';
+import Navbar from '../components/Navbar';
 
 const PLACEHOLDER_USER_ID = 'wOnGp3wuTOxjie6XR55f'
 
-function Profile()  {
+function Profile(props)  {
   useEffect(() => {
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
 
-    fetch(`http://localhost:3000/user/${PLACEHOLDER_USER_ID}`, requestOptions)
+    fetch(`http://localhost:3000/user/${props.authUser.uid}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setEmail(data.email);
         setPhoneNumber(data.phoneNumber);
-        setName(data.firstName + " " + data.lastName);
+        setName(data.firstName);
         let rides = []
         data.rides.forEach(ride => 
           // console.log('ride: ',JSON.parse(ride.rideData))
@@ -62,6 +63,7 @@ function Profile()  {
 
   return (
     <Box className='home-container'>
+      <Navbar />
       <Box mt="5%" mx="5%" className="home-heading">
           <Heading as="h1" size="4xl">
             Profile

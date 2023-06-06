@@ -35,6 +35,9 @@ import RideCardGrid from "../components/RideCardGrid";
 import JourneyInputter from "../components/JourneyInputter";
 
 import RideSignupButton from "../components/RideSignupButton";
+import Navbar from "../components/Navbar";
+
+import { getAuth } from "firebase/auth";
 
 import {
   AiOutlineSwap,
@@ -44,7 +47,7 @@ import {
 import { BsGrid } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RideCard from "../components/RideCard";
 
 import { passengersToList, getCurrentTime } from "../utilities";
@@ -74,10 +77,10 @@ function RideCardAccordion(props) {
       >
         <Flex align="center">
           <Flex gap="4" align="center">
-            <Avatar name={ride.driverFirstName + " " + ride.driverLastName} />
+            <Avatar name={ride.driverFirstName} />
             <Box textAlign="left">
               <Text as="b" fontSize="xl">
-                {ride.driverFirstName + " " + ride.driverLastName}
+                {ride.driverFirstName}
               </Text>
               <Text fontSize="xl">Driver</Text>
             </Box>
@@ -112,7 +115,7 @@ function RideCardAccordion(props) {
               " Spots Available"}
           </Text>
           <Box margin="25px 15px">
-            <RideSignupButton rideId={ride.id} />
+            <RideSignupButton authUser={props.authUser} rideId={ride.id} />
           </Box>
         </Box>
       </AccordionPanel>
@@ -155,7 +158,7 @@ function RidesDisplay(props) {
         unmountOnExit={true}
         transition={transitionProp}
       >
-        <RideCardAccordion rides={props.rides} />
+        <RideCardAccordion authUser={props.authUser} rides={props.rides} />
       </SlideFade>
       <SlideFade
         in={!viewAccordion}
@@ -170,9 +173,8 @@ function RidesDisplay(props) {
   );
 }
 
-function Rides() {
+function Rides(props) {
   const [rides, setRides] = useState([]);
-
   const [searchParams] = useSearchParams();
   const [start, setStart] = useControllableState({
     defaultValue: searchParams.get("start")
@@ -189,6 +191,13 @@ function Rides() {
       ? searchParams.get("time")
       : getCurrentTime(),
   });
+
+  useEffect(() => {
+    if(searchParams)
+    {
+      getRides();
+    }
+  }, [searchParams])
   //const [rides, setRides] = useControllableState({ defaultValue: [] });
 
   const journey = {
@@ -200,8 +209,7 @@ function Rides() {
     setTime: setTime,
   };
 
-  function handleSearchClick(e) {
-    console.log("Search Button Clicked", journey);
+  function getRides(e) {
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -218,8 +226,6 @@ function Rides() {
     fetch(`http://localhost:3000/get_rides?${searchParameters}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
-        console.log("data: ", data);
-        console.log("Data received: " + JSON.stringify(data));
         setRides(data);
       })
       .catch((error) => console.log("Error: " + error));
@@ -235,44 +241,47 @@ function Rides() {
   };
 
   return (
-    <Box padding="40px" backgroundColor="primary.150" color="primary.500">
-      <Flex align="center">
-        <Heading as="h1" size="3xl">
-          Rides
-        </Heading>
-        <Spacer />
-        <Box margin="0px 35px" height="50px" width="33%">
-          <Link to="/create_ride">
-            <Button width="100%">
-              <Text fontSize="xl"> Create a New Ride</Text>
-            </Button>
-          </Link>
+    <Box>
+      <Navbar />
+      <Box padding="40px" backgroundColor="primary.150" color="primary.500">
+        <Flex align="center">
+          <Heading as="h1" size="3xl">
+            Rides
+          </Heading>
+          <Spacer />
+          <Box margin="0px 35px" height="50px" width="33%">
+            <Link to="/create_ride">
+              <Button width="100%">
+                <Text fontSize="xl"> Create a New Ride</Text>
+              </Button>
+            </Link>
+          </Box>
+        </Flex>
+        <Flex align="end">
+          <Heading as="h2" size="md" margin="20px 0px">
+            {start + " to " + destination + ", departing on " + parseTime(time)}
+          </Heading>
+        </Flex>
+        <Box marginBottom="20px">
+          <JourneyInputter
+            locations={sampleLocations}
+            journey={journey}
+            onSearchClick={getRides}
+          />
         </Box>
-      </Flex>
-      <Flex align="end">
-        <Heading as="h2" size="md" margin="20px 0px">
-          {start + " to " + destination + ", departing on " + parseTime(time)}
-        </Heading>
-      </Flex>
-      <Box marginBottom="20px">
-        <JourneyInputter
-          locations={sampleLocations}
-          journey={journey}
-          onSearchClick={handleSearchClick}
+        <Divider
+          borderStyle="solid"
+          borderWidth="1px"
+          borderColor="secondary.500"
         />
-      </Box>
-      <Divider
-        borderStyle="solid"
-        borderWidth="1px"
-        borderColor="secondary.500"
-      />
-      <Box
-        margin="30px 0px"
-        backgroundColor="primary.100"
-        padding="20px"
-        borderRadius="20px"
-      >
-        <RidesDisplay rides={rides} />
+        <Box
+          margin="30px 0px"
+          backgroundColor="primary.100"
+          padding="20px"
+          borderRadius="20px"
+        >
+          <RidesDisplay authUser={props.authUser} rides={rides} />
+        </Box>
       </Box>
     </Box>
   );

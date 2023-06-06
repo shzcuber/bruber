@@ -8,25 +8,24 @@ export default function RideSignupButton(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const onClick = () => {
+        console.log("yo?", props.authUser)
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         rideId: props.rideId,
-        userId: PLACEHOLDER_USER_ID,
+        userId: props.authUser.uid,
       }),
     };
 
-    fetch("http://localhost:3000/ride_signup", requestOptions)
-      .then((data) => {
-        console.log("I AM SIGNED UP");
-        navigate("/profile");
-        console.log("navigated");
-      })
-      .catch((error) => {
-        console.log("Error: " + error);
-      });
-  };
+        fetch("http://localhost:3000/ride_signup", requestOptions)
+            .then(data => {
+                navigate('/profile')
+            })
+            .catch(error => {
+                console.log("Error: " + error);
+            })
+    }
 
   return (
     <>

@@ -91,18 +91,20 @@ app.post('/ride_signup', async (req, res) => {
 // Executes when we get a get request to / url
 app.post('/create_user', async (req, res) => {
   try {
-    const { firstName, lastName, email, phoneNumber } = req.body;
-    const docRef = await addDoc(collection(db, "users"), {
+    const { firstName, lastName, email, phoneNumber, uid } = req.body;
+    // console.log(uid)
+    await setDoc(doc(db, "users", uid), {
       firstName: firstName,
       lastName: lastName,
       email: email,
       phoneNumber: phoneNumber,
-    });
+    }, { merge: true });
+    res.status(201).send("TEST");
     // console.log("Document written with ID: ", docRef.id);
   } catch (e) {
+    console.log(e)
     res.status(400).send("Bad Request");
   }
-  res.status(201).send("TEST");
 })
 
 app.post("/create_ride", async (req, res) => {
@@ -127,8 +129,8 @@ app.post("/create_ride", async (req, res) => {
       from: req.body.from,  // reference to location
       to: req.body.to,
       driverID: driverReference,
-      driverFirstName: driver.data().first,
-      driverLastName: driver.data().last,
+      driverFirstName: driver.data().firstName,
+      driverLastName: driver.data().lastName,
       passengers: [],  // list of references
       startTime: req.body.datetime,
       capacity: req.body.capacity
