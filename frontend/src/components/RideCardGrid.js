@@ -3,12 +3,15 @@ import { SimpleGrid } from "@chakra-ui/react";
 import { parseTime } from "../utilities";
 
 export default function RideCardGrid(props) {
-  const rideCardList = props.rides.map((ride, index) => (
+  // console.log(props.rides[1].driverID)
+  const rideCardList = props.rides.map((ride, index) => {
+    return (
     <RideCard
       key={index}
       driver={ride.driverFirstName}
       time={parseTime(ride.startTime)}
       from={ride.from}
+      driverID={ride.driverID._key.path.segments[6]}
       to={ride.to}
       capacity={ride.capacity}
       names={ride.passengers}
@@ -17,7 +20,7 @@ export default function RideCardGrid(props) {
       authUser={props.authUser}
       displayRatingButton={props.displayRatingButton}
     />
-  ));
+  )});
   return (
     <SimpleGrid
       minChildWidth="350px"

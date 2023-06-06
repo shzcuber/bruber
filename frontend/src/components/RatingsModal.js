@@ -8,8 +8,22 @@ import {
   Button,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 export default function RatingsModal(props) {
+  useEffect(() => {
+    // const requestOptions = {
+    //   method: "GET",
+    //   headers: { "Content-Type": "application/json" },
+    // };
+
+    // fetch(`http://localhost:3000/user/${props.driverID}`, requestOptions)
+    //   .then((res) => res.json()) // Convert json to js object
+    //   .then((data) => {
+    //   })
+    //   .catch((error) => console.log("Error: " + error));
+  }, [])
+
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />

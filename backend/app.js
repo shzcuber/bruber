@@ -17,6 +17,24 @@ app.get('/', async (req, res) => {
 })
 app.use(cors())
 
+app.post('/add_rating', async (req, res) => {
+  const docRef = doc(db, "users", req.body.userId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) 
+    res.status(400).send("No such user");
+
+  let user = docSnap.data();
+  const prevRatingCount = user['ratingCount'] ? user['ratingCount'] : 0;
+  const prevRating= user['rating'] ? user['rating'] : 0;
+  user['rating'] = (prevRating * prevRatingCount + parseInt(req.body.rating)) / (prevRatingCount+1);
+  user['ratingCount'] = prevRatingCount+1;
+
+  console.log(user)
+  await setDoc(docRef, user)
+  res.status(200).send("success");
+})
+
 app.get('/get_rides', async (req, res) => {
   const q = query(collection(db, "rides"));
   const querySnapshot = await getDocs(q);
