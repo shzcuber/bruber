@@ -3,6 +3,7 @@ import cors from 'cors'
 import { collection, doc, query, setDoc, addDoc, getFirestore, getDocs, getDoc } from "firebase/firestore"; 
 import { firebaseApp, firebaseConfig } from './firebase.js';
 import bodyParser from 'body-parser';
+import "firebase/auth"
 
 const app = express();
 const db = getFirestore(firebaseApp);
