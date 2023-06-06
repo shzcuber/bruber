@@ -9,6 +9,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import JourneyInputter from "../components/JourneyInputter";
+import { sampleLocations } from "../utilities";
 
 import { Link as RouterLink } from "react-router-dom";
 
@@ -20,7 +21,6 @@ import {
 
 function Home() {
   const [start, setStart] = useControllableState({ defaultValue: "UCLA" });
-  const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
   const [destination, setDestination] = useControllableState({
     defaultValue: "LAX",
   });

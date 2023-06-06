@@ -1,11 +1,12 @@
 import { Button, Input, Box, Card, CardHeader, CardBody, Heading, 
     Stack, StackDivider, Flex, Alert, AlertIcon, NumberInput, 
     NumberInputField, NumberInputStepper, NumberIncrementStepper,
-    NumberDecrementStepper, FormControl, FormLabel }
+    NumberDecrementStepper, FormControl, FormLabel, Select }
     from "@chakra-ui/react";
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form'
+import { sampleLocations } from "../utilities";
 
 
 function CreateRide() {
@@ -70,33 +71,38 @@ function CreateRide() {
           <Heading size='md'>Create a New Ride</Heading>
         </CardHeader>
         <CardBody>
-          <Stack divider={<StackDivider />} spacing='4'>
+          <Stack divider={<StackDivider />} spacing='1'>
             <FormControl isRequired>
               <Box>
                 <FormLabel size='xs' textTransform='uppercase'>
                   From:
                 </FormLabel>
-                <Input placeholder="City" size="sm" name="from" {...register("from", {required: true})} />
+                <Select {...register("from", {required: true})}>
+                  {sampleLocations && sampleLocations.map(location => 
+                    <option>{location}</option>
+                    )}
+                </Select>
               </Box>
               <Box>
                 <FormLabel size='xs' textTransform='uppercase' >
                   To:
                 </FormLabel>
-                <Input placeholder="City" size="sm" name="to" {...register("to", {required: true})} />
+                <Select {...register("to", {required: true})}>
+                  {sampleLocations && sampleLocations.map(location => 
+                    <option>{location}</option>
+                    )}
+                </Select>
               </Box>
               <Box>
                 <FormLabel size='xs' textTransform='uppercase'>
                   Capacity
                 </FormLabel>
-                <NumberInput defaultValue={1} min={1} size="sm" name="capacity" type="number"
-                    {...register("capacity", {required: true})} 
-                    >
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
+                <Select {...register("capacity", {required: true})}>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </Select>
               </Box>
               <Box>
                 <FormLabel size='xs' marginBottom="2" textTransform='uppercase'>

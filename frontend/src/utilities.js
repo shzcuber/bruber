@@ -12,6 +12,8 @@ export function passengersToList(passengers, capacity) {
   return peopleList;
 }
 
+export const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
+
 export function parseTime(time) {
   const monthNames = [
     "",
