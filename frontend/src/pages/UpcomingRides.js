@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react"
+import { Text, Box } from "@chakra-ui/react"
 import Navbar from "../components/Navbar"
 import RidesDisplay from "./RidesDisplay"
 import { useEffect, useState } from "react"
@@ -27,13 +27,15 @@ export default function UpcomingRides(props)
     }, [])
     return (<Box>
                 <Navbar />
+                <Box margin='30px'>
+                    <Text fontWeight='bold' m='40px 0' fontSize='5xl'>All Upcoming Rides</Text>
                     <Box
-                    margin="30px 30px"
                     backgroundColor="primary.100"
                     padding="20px"
                     borderRadius="20px"
                     >
                         <RidesDisplay authUser={props.authUser} rides={rides} />
                     </Box>
+                </Box>
             </Box>)
 }
