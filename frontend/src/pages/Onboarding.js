@@ -15,9 +15,9 @@ const PLACEHOLDER_USER_ID = 'wOnGp3wuTOxjie6XR55f'
 
 
 function Onboarding(props)  {
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('test');
+  const [name, setName] = useState(props.authUser.displayName || '');
+  const [phoneNumber, setPhoneNumber] = useState(props.authUser.phoneNumber  || '');
+  const [email, setEmail] = useState(props.authUser.email || '');
   const [isNameValid, setIsNameValid] = useState(false);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
 

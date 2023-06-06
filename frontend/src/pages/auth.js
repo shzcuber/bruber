@@ -58,19 +58,25 @@ const AuthDetails = () => {
     return (
         <div>
             <h1>{authUser && authUser.emailVerified ? (
-            <Router>
-            <Routes>
-                <Route exact path="/" element={<Home authUser={authUser} />}/>
-                <Route exact path="/login" element={<LoginPage authUser={authUser} />}/>
-                <Route exact path="/onboarding" element={<Onboarding authUser={authUser} />}/>
-                <Route exact path="/navbar" element={<Navbar authUser={authUser}/>}/>
-                <Route exact path="/rides" element={<Rides authUser={authUser}/>}/>
-                <Route path="/driver" element={<Driver authUser={authUser}/>} />
-                <Route exact path="/create_ride" element={<CreateRide authUser={authUser}/>}/>
-                <Route exact path="/profile" element={<Profile authUser={authUser}/>}/>
-                <Route exact path="/upcoming_rides" element={<UpcomingRides authUser={authUser}/>}/>
-            </Routes>
-            </Router>
+                authUser.displayName && authUser.phoneNumber ? (
+                <Router>
+                <Routes>
+                    <Route exact path="/" element={<Home authUser={authUser} />}/>
+                    <Route exact path="/login" element={<LoginPage authUser={authUser} />}/>
+                    <Route exact path="/onboarding" element={<Onboarding authUser={authUser} />}/>
+                    <Route exact path="/navbar" element={<Navbar authUser={authUser}/>}/>
+                    <Route exact path="/rides" element={<Rides authUser={authUser}/>}/>
+                    <Route path="/driver" element={<Driver authUser={authUser}/>} />
+                    <Route exact path="/create_ride" element={<CreateRide authUser={authUser}/>}/>
+                    <Route exact path="/profile" element={<Profile authUser={authUser}/>}/>
+                    <Route exact path="/upcoming_rides" element={<UpcomingRides authUser={authUser}/>}/>
+                </Routes>
+                </Router>
+                ) : (
+                    <Router>
+                        <Onboarding authUser={authUser} />
+                    </Router>
+                )
             ) : (
             <Router>
             <Routes>
