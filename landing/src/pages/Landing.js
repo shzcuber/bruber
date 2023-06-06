@@ -8,7 +8,15 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import "./Landing.css";
+import { useNavigate } from "react-router-dom";
+
 export default function Landing() {
+
+  const handleClick = () => {
+    window.location.href = 'https://virajchhajed.com';
+  };
+
+
   return (
     <Box width="100hh" height="100vh" className="landing-background">
       <Container maxW="container.xxl">
@@ -23,7 +31,7 @@ export default function Landing() {
                 Find fellow Bruins who share your trip
               </Text>
 
-              <Button mt={8} colorScheme="secondary" minW="300px">
+              <Button  onClick={handleClick} mt={8} colorScheme="secondary" minW="300px">
                 Start your journey →
               </Button>
             </Container>
