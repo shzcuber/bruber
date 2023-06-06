@@ -10,8 +10,10 @@ import {
 } from '@chakra-ui/react'
 import { FiMenu } from 'react-icons/fi'
 import { userSignOut } from "../pages/auth"
+import { useNavigate } from 'react-router'
 
  const Navbar = () => {
+  const navigate = useNavigate();
   const isDesktop = useBreakpointValue({ base: false, lg: true })
   return (
     <Box as="section" m='0' p='0'>
@@ -21,9 +23,8 @@ import { userSignOut } from "../pages/auth"
             {isDesktop ? (
               <Flex justify="space-between" flex="1">
                 <ButtonGroup variant="link" spacing="8">
-                  {['Rides', 'Profile'].map((item) => (
-                    <Button key={item}>{item}</Button>
-                  ))}
+                  <Button onClick={() => navigate('/')}>Home</Button>
+                  <Button onClick={() => navigate('/profile')}>Profile</Button>
                 </ButtonGroup>
                 <HStack spacing="3">
                   <Button onClick={userSignOut} bg={"white"} variant="ghost">Log Out</Button>
