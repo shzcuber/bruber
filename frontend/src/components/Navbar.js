@@ -25,6 +25,7 @@ import { useNavigate } from 'react-router'
                 <ButtonGroup variant="link" spacing="8">
                   <Button onClick={() => navigate('/')}>Home</Button>
                   <Button onClick={() => navigate('/profile')}>Profile</Button>
+                  <Button onClick={() => navigate('/rides')}>Rides</Button>
                 </ButtonGroup>
                 <HStack spacing="3">
                   <Button onClick={userSignOut} bg={"white"} variant="ghost">Log Out</Button>
