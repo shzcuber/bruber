@@ -120,18 +120,25 @@ app.post("/create_ride", async (req, res) => {
     } else{
       console.log("")
     }
-    // Int(capacity)
+    // Ensure capacity was an int
+    let capacityInt = parseInt(req.body.capacity);
+    console.log("parseInt:", capacityInt);
+    if (isNaN(capacityInt)) {
+      console.log("Error: Capacity was not an int", req.body.capacity);
+      res.send({ status: "error" });
+      return
+    }
     
     const docRef = await addDoc(collection(db, "rides"), {
       // rideId: 1,  // May delete?
-      from: fromReference,  // reference to location
+      from: fromReference,
       to: toReference,
       driverID: driverReference,
       driverFirstName: driver.data().firstName,
       driverLastName: driver.data().lastName,
       passengers: [],  // list of references
       startTime: req.body.datetime,
-      capacity: req.body.capacity
+      capacity: capacityInt
     });
     console.log("Ride written with ID: ", docRef.id);
     res.send(JSON.stringify({"status":"success"}));
