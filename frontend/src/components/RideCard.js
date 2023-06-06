@@ -61,7 +61,7 @@ export default function RideCard(props) {
         </VStack>
       </CardBody>
       <CardFooter>
-        {!props.hideSignupButton && <RideSignupButton rideId={props.rideId} />}
+        {!props.hideSignupButton && <RideSignupButton authUser={props.authUser} rideId={props.rideId} />}
       </CardFooter>
     </Card>
   );
