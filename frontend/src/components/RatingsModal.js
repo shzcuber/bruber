@@ -16,12 +16,12 @@ export default function RatingsModal(props) {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: {driverID: props.driverID, rating}
+      body: JSON.stringify({userId: props.driverID, rating})
     };
 
     fetch(`http://localhost:3000/add_rating`, requestOptions)
-      .then((res) => res.json()) // Convert json to js object
       .then((data) => {
+        window.location.reload();
       })
       .catch((error) => console.log("Error: " + error));
   }
@@ -45,7 +45,7 @@ export default function RatingsModal(props) {
           <Button colorScheme="primary" mr={3} onClick={props.onClose}>
             Close
           </Button>
-          <Button onClick={props.onConfirm} variant="ghost">
+          <Button onClick={onConfirm} variant="ghost">
             Confirm
           </Button>
         </ModalFooter>
