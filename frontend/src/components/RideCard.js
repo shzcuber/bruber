@@ -78,12 +78,6 @@ export default function RideCard(props) {
             Rate Driver
           </Button>
         )}
-        <RatingsModal isOpen={isOpen} onClose={onClose} />
-        {props.displayRatingButton && (
-          <Button onClick={onOpen} colorScheme="secondary">
-            Rate Driver
-          </Button>
-        )}
         <RatingsModal
           driverID={props.driverID}
           isOpen={isOpen}
