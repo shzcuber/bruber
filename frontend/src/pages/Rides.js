@@ -46,7 +46,7 @@ import {
 import { BsGrid } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RideCard from "../components/RideCard";
 
 import { passengersToList } from "../utilities";
@@ -174,7 +174,6 @@ function RidesDisplay(props) {
 
 function Rides(props) {
   const [rides, setRides] = useState([]);
-
   const [searchParams] = useSearchParams();
   const [start, setStart] = useControllableState({
     defaultValue: searchParams.get("start"),
@@ -185,6 +184,13 @@ function Rides(props) {
   const [time, setTime] = useControllableState({
     defaultValue: searchParams.get("time"),
   });
+
+  useEffect(() => {
+    if(searchParams)
+    {
+      getRides();
+    }
+  }, [searchParams])
   //const [rides, setRides] = useControllableState({ defaultValue: [] });
 
   const journey = {
@@ -196,8 +202,7 @@ function Rides(props) {
     setTime: setTime,
   };
 
-  function handleSearchClick(e) {
-    console.log("Search Button Clicked", journey);
+  function getRides(e) {
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -214,9 +219,6 @@ function Rides(props) {
     fetch(`http://localhost:3000/get_rides?${searchParameters}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
-        console.log("data: ", data);
-        console.log("Data received: " + JSON.stringify(data));
-        console.log(props.authUser)
         setRides(data);
       })
       .catch((error) => console.log("Error: " + error));
@@ -255,7 +257,7 @@ function Rides(props) {
         <JourneyInputter
           locations={sampleLocations}
           journey={journey}
-          onSearchClick={handleSearchClick}
+          onSearchClick={getRides}
         />
       </Box>
       <Divider
