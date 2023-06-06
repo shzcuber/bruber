@@ -5,6 +5,7 @@ import { parseTime } from "../utilities";
 export default function RideCardGrid(props) {
   // console.log(props.rides[1].driverID)
   const rideCardList = props.rides.map((ride, index) => {
+    console.log(ride)
     return (
     <RideCard
       key={index}

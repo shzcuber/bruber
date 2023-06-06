@@ -18,21 +18,26 @@ app.get('/', async (req, res) => {
 app.use(cors())
 
 app.post('/add_rating', async (req, res) => {
-  const docRef = doc(db, "users", req.body.userId);
-  const docSnap = await getDoc(docRef);
+  console.log(req.body)
+  // const ridesDocRef = doc(db, "rides", req.body.rideId);
+  // const ridesDoc = await getDoc(ridesDocRef);
+  // rides['rating'] = req.body.rating;
+  // const userRef = rides.driverID;
+  // const docSnap = await getDoc(userRef);
 
-  if (!docSnap.exists()) 
-    res.status(400).send("No such user");
+  // if (!docSnap.exists()) 
+  //   res.status(400).send("No such user");
 
-  let user = docSnap.data();
-  const prevRatingCount = user['ratingCount'] ? user['ratingCount'] : 0;
-  const prevRating= user['rating'] ? user['rating'] : 0;
-  user['rating'] = (prevRating * prevRatingCount + parseInt(req.body.rating)) / (prevRatingCount+1);
-  user['ratingCount'] = prevRatingCount+1;
+  // let user = docSnap.data();
+  // const prevRatingCount = user['ratingCount'] ? user['ratingCount'] : 0;
+  // const prevRating= user['rating'] ? user['rating'] : 0;
+  // user['rating'] = (prevRating * prevRatingCount + parseInt(req.body.rating)) / (prevRatingCount+1);
+  // user['ratingCount'] = prevRatingCount+1;
 
-  console.log(user)
-  await setDoc(docRef, user)
-  res.status(200).send("success");
+  // await setDoc(docRef, user)
+  // await setDoc(ridesDoc, rides)
+
+  // res.status(200).send("success");
 })
 
 app.get('/get_rides', async (req, res) => {
@@ -153,6 +158,7 @@ app.post("/create_ride", async (req, res) => {
       capacity: req.body.capacity
     });
     console.log("Ride written with ID: ", docRef.id);
+    await setDoc(docRef, {id: docRef.id}, {merge: true})
     res.send(JSON.stringify({"status":"success"}));
   } catch (e) {
     console.error("Error adding document: ", e);
