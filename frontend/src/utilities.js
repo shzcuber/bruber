@@ -57,3 +57,16 @@ export function parseTime(time) {
     half
   );
 }
+
+export function getCurrentTime() {
+  var today = new Date();
+  var date =
+    today.getFullYear() +
+    "-" +
+    String(today.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(today.getDate()).padStart(2, "0");
+  var time =
+    String(today.getHours()).padStart(2, "0") + ":" + today.getMinutes();
+  return date + "T" + time;
+}

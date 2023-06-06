@@ -37,6 +37,8 @@ import JourneyInputter from "../components/JourneyInputter";
 import RideSignupButton from "../components/RideSignupButton";
 import Navbar from "../components/Navbar";
 import RideCardAccordion from "../components/RideCardAccordian";
+import RidesDisplay from "./RidesDisplay";
+import { getCurrentTime } from "../utilities";
 
 import { getAuth } from "firebase/auth";
 
@@ -64,62 +66,23 @@ const sampleRideInfo = {
 
 const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
 
-function RidesDisplay(props) {
-  const [viewAccordion, setViewAccordion] = useControllableState({
-    defaultValue: true,
-  });
-  const transitionProp = {
-    enter: { duration: 0.4 },
-    exit: { duration: 0 },
-  };
-
-  return (
-    <Box>
-      <ButtonGroup isAttached>
-        <IconButton
-          icon={<AiOutlineUnorderedList />}
-          onClick={() => setViewAccordion(true)}
-          backgroundColor={viewAccordion ? "primary.600" : "primary.500"}
-        />
-        <IconButton
-          icon={<BsGrid />}
-          onClick={() => setViewAccordion(false)}
-          backgroundColor={!viewAccordion ? "primary.600" : "primary.500"}
-        />
-      </ButtonGroup>
-      <SlideFade
-        in={viewAccordion}
-        direction="down"
-        offsetY="20px"
-        unmountOnExit={true}
-        transition={transitionProp}
-      >
-        <RideCardAccordion authUser={props.authUser} rides={props.rides} />
-      </SlideFade>
-      <SlideFade
-        in={!viewAccordion}
-        direction="down"
-        offsetY="20px"
-        unmountOnExit={true}
-        transition={transitionProp}
-      >
-        <RideCardGrid rides={props.rides} />
-      </SlideFade>
-    </Box>
-  );
-}
-
 function Rides(props) {
   const [rides, setRides] = useState([]);
   const [searchParams] = useSearchParams();
   const [start, setStart] = useControllableState({
-    defaultValue: searchParams.get("start"),
+    defaultValue: searchParams.get("start")
+      ? searchParams.get("start")
+      : "UCLA",
   });
   const [destination, setDestination] = useControllableState({
-    defaultValue: searchParams.get("destination"),
+    defaultValue: searchParams.get("destination")
+      ? searchParams.get("destination")
+      : "LAX",
   });
   const [time, setTime] = useControllableState({
-    defaultValue: searchParams.get("time"),
+    defaultValue: searchParams.get("time")
+      ? searchParams.get("time")
+      : getCurrentTime(),
   });
 
   useEffect(() => {
@@ -145,13 +108,13 @@ function Rides(props) {
       headers: { "Content-Type": "application/json" },
     };
 
-    const data = { 
+    const data = {
       to: journey.destination,
       from: journey.start,
-      startTime: journey.time
-    }
+      startTime: journey.time,
+    };
 
-    const searchParameters = (new URLSearchParams(data)).toString()
+    const searchParameters = new URLSearchParams(data).toString();
 
     fetch(`http://localhost:3000/get_rides?${searchParameters}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
