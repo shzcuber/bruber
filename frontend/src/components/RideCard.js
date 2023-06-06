@@ -9,10 +9,15 @@ import {
   UnorderedList,
   CardFooter,
   Text,
+  Button,
+  useStatStyles,
 } from "@chakra-ui/react";
 import RideSignupButton from "./RideSignupButton";
+import { useDisclosure } from "@chakra-ui/react";
 
-import { passengersToList } from "../utilities";
+import RatingsModal from "./RatingsModal";
+import { passengersToList, getStarString } from "../utilities";
+import { useEffect, useState } from "react";
 
 export default function RideCard(props) {
   /* props will have:
@@ -22,19 +27,40 @@ export default function RideCard(props) {
    * a carpool capacity (will fill any vacancies with "empty")
    */
   // console.log(props);
+  useEffect(() => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    fetch(`http://localhost:3000/user/${props.driverID}`, requestOptions)
+      .then((res) => res.json()) // Convert json to js object
+      .then((data) => {
+        setRating(data.rating);
+      })
+      .catch((error) => console.log("Error: " + error));
+  }, [])
+  
+  const [rating, setRating] = useState();
   const peopleList = passengersToList(props.names, props.capacity);
-  const capacityReached = (props.capacity - props.names.length) == 0;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const capacityReached = props.capacity - props.names.length === 0;
   return (
     <Card variant="rideCard">
       <CardHeader>
-        <Flex gap="4" align="center">
-          <Avatar name={props.driver} />
-          <Box>
-            <Text as="b" fontSize="xl">
-              {props.driver}
-            </Text>
-            <Text fontSize="xl">Driver</Text>
-          </Box>
+        <Flex align="center" justify="space-between">
+          <Flex gap="4" align="center">
+            <Avatar name={props.driver} />
+            <Box textAlign="left">
+              <Text as="b" fontSize="xl">
+                {props.driver}
+              </Text>
+              <Text fontSize="xl">Driver</Text>
+            </Box>
+          </Flex>
+          <Text color="gold" fontSize="xl" mr="25%">
+            {rating ? getStarString(rating) : "(Unrated)"}
+          </Text>
         </Flex>
       </CardHeader>
       <CardBody>
@@ -58,10 +84,22 @@ export default function RideCard(props) {
               props.capacity +
               " Spots Available"}
           </Text>
-          {!capacityReached && !props.hideSignupButton && <RideSignupButton authUser={props.authUser} rideId={props.rideId} />}
+          {!capacityReached && !props.hideSignupButton && (
+            <RideSignupButton authUser={props.authUser} rideId={props.rideId} />
+          )}
         </VStack>
       </CardBody>
       <CardFooter>
+        {props.displayRatingButton && (
+          <Button onClick={onOpen} colorScheme="secondary">
+            Rate Driver
+          </Button>
+        )}
+        <RatingsModal
+          driverID={props.driverID}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
       </CardFooter>
     </Card>
   );

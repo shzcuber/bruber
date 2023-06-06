@@ -50,7 +50,7 @@ function Home() {
   };
 
   return (
-    <Box className="home-container" color="primary.500">
+    <Box className="home-container" color="primary.700">
       <Navbar />
       <Box mt="5%" ml="5%" className="home-heading">
         <Heading as="h1" size="4xl">
@@ -65,6 +65,7 @@ function Home() {
         p="25px"
         mt="25px"
         mx="5%"
+        boxShadow="md"
       >
         <Box p="10px">
           <Text mb="20px" fontSize="xl">

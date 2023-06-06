@@ -79,3 +79,11 @@ export function getCurrentTime() {
     String(today.getHours()).padStart(2, "0") + ":" + today.getMinutes();
   return date + "T" + time;
 }
+export function getStarString(rating) {
+  if (rating < 0.5) return "☆☆☆☆☆";
+  else if (rating < 1.5) return "★☆☆☆☆";
+  else if (rating < 2.5) return "★★☆☆☆";
+  else if (rating < 3.5) return "★★★☆☆";
+  else if (rating < 4.5) return "★★★★☆";
+  else return "★★★★★";
+}

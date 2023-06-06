@@ -18,6 +18,7 @@ import {
   signInWithPopup,
   sendEmailVerification,
 } from "firebase/auth"
+import { Link } from 'react-router-dom';
 
 function popUp() {
   const provider = new GoogleAuthProvider();
@@ -38,8 +39,8 @@ function LoginPage() {
           localStorage.setItem("user", userCred);
           console.log(userCred);
         } else {
-          alert("Please verify your email before logging in.");
           userSignOut();
+          alert("Please verify your email before logging in.");
         }
       })
       .catch((error) => {
@@ -48,8 +49,8 @@ function LoginPage() {
             .then((user) => {
               sendEmailVerification(user.user)
                 .then(() => {
-                  alert("Email verification sent. Please verify your email.");
                   userSignOut();
+                  alert("Email verification sent. Please verify your email.");
                 })
                 .catch((error) => {
                   console.log(error);
@@ -83,13 +84,15 @@ function LoginPage() {
               <Input value={password} onChange={(e) => { setPassword(e.target.value) }} bg="gray.100" id="password" type="password" />
               <HStack my="3" justify="space-between">
                 <Checkbox defaultChecked>Remember me</Checkbox>
-                <Button variant="link" colorScheme="blue" size="sm">
-                  Forgot password?
-                </Button>
+                <Link to={`/forgot-password?email=${encodeURIComponent(email)}`}>
+                  <Button variant="link" colorScheme="blue" size="sm">
+                    Forgot password?
+                  </Button>
+                </Link>
               </HStack>
               <Stack spacing="6" align="center">
-                <Button type='submit' width="100%">Sign in / Create Account</Button>
-                <Button onClick={popUp} width="100%" variant="outline"> Login with google </Button>
+                <Button type='submit' width="100%">Sign In / Create Account</Button>
+                <Button onClick={popUp} width="100%" variant="outline"> Login with Google </Button>
 
               </Stack>
             </form>

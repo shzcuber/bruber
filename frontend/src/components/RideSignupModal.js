@@ -7,6 +7,7 @@ import {
   ModalFooter,
   Button,
   ModalCloseButton,
+  Select,
 } from "@chakra-ui/react";
 
 export default function RideSignupModal(props) {

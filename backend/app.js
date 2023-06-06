@@ -17,6 +17,24 @@ app.get('/', async (req, res) => {
 })
 app.use(cors())
 
+app.post('/add_rating', async (req, res) => {
+  const docRef = doc(db, "users", req.body.userId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) 
+    res.status(400).send("No such user");
+
+  let user = docSnap.data();
+  const prevRatingCount = user['ratingCount'] ? user['ratingCount'] : 0;
+  const prevRating= user['rating'] ? user['rating'] : 0;
+  user['rating'] = (prevRating * prevRatingCount + parseInt(req.body.rating)) / (prevRatingCount+1);
+  user['ratingCount'] = prevRatingCount+1;
+
+  console.log(user)
+  await setDoc(docRef, user)
+  res.status(200).send("success");
+})
+
 app.get('/get_rides', async (req, res) => {
   const q = query(collection(db, "rides"));
   const querySnapshot = await getDocs(q);
@@ -110,8 +128,8 @@ app.post("/create_ride", async (req, res) => {
   try {
     console.log(req.body)
     const driverReference = doc(db, "users", req.body.driverID);
-    const fromReference = doc(db, "locations", req.body.from);
-    const toReference = doc(db, "locations", req.body.to);
+    // const fromReference = doc(db, "locations", req.body.from);
+    // const toReference = doc(db, "locations", req.body.to);
 
     const driver = await getDoc(driverReference);
     if(driver.exists())
@@ -131,8 +149,8 @@ app.post("/create_ride", async (req, res) => {
     
     const docRef = await addDoc(collection(db, "rides"), {
       // rideId: 1,  // May delete?
-      from: fromReference,
-      to: toReference,
+      from: req.body.from,
+      to: req.body.to,
       driverID: driverReference,
       driverFirstName: driver.data().firstName,
       driverLastName: driver.data().lastName,

@@ -1,23 +1,23 @@
-import { 
-    AccordionItem,
-    AccordionButton,
-    Flex,
-    Avatar,
-    Text,
-    Box,
-    UnorderedList,
-    Spacer,
-    AccordionIcon,
-    AccordionPanel,
-    Accordion
+import {
+  AccordionItem,
+  AccordionButton,
+  Flex,
+  Avatar,
+  Text,
+  Box,
+  UnorderedList,
+  Spacer,
+  AccordionIcon,
+  AccordionPanel,
+  Accordion,
 } from "@chakra-ui/react";
 
-import { parseTime } from "../utilities";
+import { parseTime, getStarString } from "../utilities";
 import { passengersToList } from "../utilities";
 import RideSignupButton from "./RideSignupButton";
 
 export default function RideCardAccordion(props) {
-  console.log(props.rides)
+  console.log(props.rides);
 
   const rideAccordionItems = props.rides.map((ride, index) => (
     <AccordionItem
@@ -31,14 +31,19 @@ export default function RideCardAccordion(props) {
         _expanded={{ bg: "primary.500", color: "white" }}
       >
         <Flex align="center">
-          <Flex gap="4" align="center">
-            <Avatar name={ride.driverFirstName} />
-            <Box textAlign="left">
-              <Text as="b" fontSize="xl">
-                {ride.driverFirstName}
-              </Text>
-              <Text fontSize="xl">Driver</Text>
-            </Box>
+          <Flex align="center" justify="space-between" minWidth="35%">
+            <Flex gap="4" align="center">
+              <Avatar name={ride.driverFirstName} />
+              <Box textAlign="left">
+                <Text as="b" fontSize="xl">
+                  {ride.driverFirstName}
+                </Text>
+                <Text fontSize="xl">Driver</Text>
+              </Box>
+            </Flex>
+            <Text color="gold" fontSize="xl" ml="20px">
+              {ride.rating ? getStarString(ride.rating) : "★★★☆☆"}
+            </Text>
           </Flex>
           <Spacer />
           <AccordionIcon />
@@ -70,7 +75,9 @@ export default function RideCardAccordion(props) {
               " Spots Available"}
           </Text>
           <Box margin="25px 15px">
-            {!(ride.capacity-ride.passengers.length == 0) && <RideSignupButton authUser={props.authUser} rideId={ride.id} />}
+            {!(ride.capacity - ride.passengers.length == 0) && (
+              <RideSignupButton authUser={props.authUser} rideId={ride.id} />
+            )}
           </Box>
         </Box>
       </AccordionPanel>
