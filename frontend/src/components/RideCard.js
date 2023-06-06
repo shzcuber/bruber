@@ -23,6 +23,7 @@ export default function RideCard(props) {
    */
   // console.log(props);
   const peopleList = passengersToList(props.names, props.capacity);
+  const capacityReached = (props.capacity - props.names.length) == 0;
   return (
     <Card variant="rideCard">
       <CardHeader>
@@ -57,11 +58,10 @@ export default function RideCard(props) {
               props.capacity +
               " Spots Available"}
           </Text>
-          {!props.hideSignupButton && <RideSignupButton authUser={props.authUser} rideId={props.rideId} />}
+          {!capacityReached && !props.hideSignupButton && <RideSignupButton authUser={props.authUser} rideId={props.rideId} />}
         </VStack>
       </CardBody>
       <CardFooter>
-        {!props.hideSignupButton && <RideSignupButton authUser={props.authUser} rideId={props.rideId} />}
       </CardFooter>
     </Card>
   );

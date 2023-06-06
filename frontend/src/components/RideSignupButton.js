@@ -8,7 +8,6 @@ export default function RideSignupButton(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const onClick = () => {
-        console.log("yo?", props.authUser)
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
