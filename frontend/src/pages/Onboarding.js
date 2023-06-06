@@ -17,7 +17,7 @@ const PLACEHOLDER_USER_ID = 'wOnGp3wuTOxjie6XR55f'
 function Onboarding(props)  {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('test');
   const [isNameValid, setIsNameValid] = useState(false);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
 
@@ -38,19 +38,19 @@ function Onboarding(props)  {
   }
 
   return (
-    <Box className='home-container'>
+    <Box className='home-container' color="primary.700">
       <Navbar />
       <Box mt="5%" mx="5%" className="home-heading">
-        <Heading as="h1" size="3xl">
+        <Heading as="h1" size="2xl">
           Add/Change Your Information
         </Heading>
       </Box>
 
-      <Box backgroundColor="white" borderRadius="30px" p="25px" mt="50px" mx="5%">
+      <Box backgroundColor="white" borderRadius="30px" p="25px" mt="50px" mx="5%" boxShadow="md">
         <Box maxW="lg" mx="auto" p={4}>
           <FormControl>
             <FormLabel fontSize="2xl">Email</FormLabel>
-            <Input value={email} isReadOnly bg="gray.200" />
+            <Input value={email} isDisabled bg="gray.200" />
           </FormControl>
 
           <FormControl mt="20px" isRequired>

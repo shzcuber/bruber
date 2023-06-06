@@ -136,13 +136,13 @@ function Rides(props) {
   return (
     <Box>
       <Navbar />
-      <Box padding="40px" backgroundColor="primary.150" color="primary.500">
+      <Box padding="40px" backgroundColor="primary.150" color="primary.700">
         <Flex align="center">
           <Heading as="h1" size="3xl">
             Rides
           </Heading>
           <Spacer />
-          <Box margin="0px 35px" height="50px" width="33%">
+          <Box height="50px" width="33%">
             <Link to="/create_ride">
               <Button width="100%">
                 <Text fontSize="xl"> Create a New Ride</Text>
@@ -172,6 +172,7 @@ function Rides(props) {
           backgroundColor="primary.100"
           padding="20px"
           borderRadius="20px"
+          boxShadow="md"
         >
           <RidesDisplay authUser={props.authUser} rides={rides} />
         </Box>

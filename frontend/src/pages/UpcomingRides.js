@@ -27,7 +27,7 @@ export default function UpcomingRides(props)
     }, [])
     return (<Box>
                 <Navbar />
-                <Box margin='30px'>
+                <Box margin='30px' color="primary.700">
                     <Text fontWeight='bold' m='40px 0' fontSize='5xl'>All Upcoming Rides</Text>
                     <Box
                     backgroundColor="primary.100"
