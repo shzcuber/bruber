@@ -5,6 +5,7 @@ import { initializeApp } from "firebase/app";
 import { useEffect, useState } from "react";
 import {signOut, getAuth, onAuthStateChanged } from "firebase/auth";
 import LoginPage from "./Login";
+import Onboarding from "./Onboarding";
 import { BrowserRouter as Router, Routes, Route, Outlet, Link, useNavigate } from "react-router-dom";
 import Home from './Home'
 import Rides from './Rides'
@@ -59,6 +60,7 @@ const AuthDetails = () => {
       <Routes>
         <Route exact path="/" element={<Home authUser={authUser} />}/>
         <Route exact path="/login" element={<LoginPage authUser={authUser} />}/>
+        <Route exact path="/onboarding" element={<Onboarding authUser={authUser} />}/>
         <Route exact path="/navbar" element={<Navbar authUser={authUser}/>}/>
         <Route exact path="/rides" element={<Rides authUser={authUser}/>}/>
         <Route path="/driver" element={<Driver authUser={authUser}/>} />
