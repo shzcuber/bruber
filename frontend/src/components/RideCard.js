@@ -9,9 +9,12 @@ import {
   UnorderedList,
   CardFooter,
   Text,
+  Button,
 } from "@chakra-ui/react";
 import RideSignupButton from "./RideSignupButton";
+import { useDisclosure } from "@chakra-ui/react";
 
+import RatingsModal from "./RatingsModal";
 import { passengersToList } from "../utilities";
 
 export default function RideCard(props) {
@@ -23,6 +26,7 @@ export default function RideCard(props) {
    */
   // console.log(props);
   const peopleList = passengersToList(props.names, props.capacity);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const capacityReached = (props.capacity - props.names.length) == 0;
   return (
     <Card variant="rideCard">
@@ -62,6 +66,10 @@ export default function RideCard(props) {
         </VStack>
       </CardBody>
       <CardFooter>
+        {props.displayRatingButton && <Button onClick={onOpen} colorScheme="secondary">
+          Rate Driver
+        </Button>}
+        <RatingsModal isOpen={isOpen} onClose={onClose}/>
       </CardFooter>
     </Card>
   );
