@@ -27,8 +27,8 @@ app.get('/get_rides', async (req, res) => {
   // console.log(req.query)
   res.send(rides.filter(ride => 
       ride.from == req.query.from &&
-      ride.to == req.query.to 
-      // ride.destination == query.destination 
+      ride.to == req.query.to &&
+      new Date(ride.startTime) > new Date(req.query.startTime)
       ))
 })
 

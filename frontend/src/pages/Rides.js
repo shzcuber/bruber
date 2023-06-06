@@ -188,7 +188,7 @@ function Rides() {
     const data = { 
       to: journey.destination,
       from: journey.start,
-      time: journey.time
+      startTime: journey.time
     }
 
     const searchParameters = (new URLSearchParams(data)).toString()
