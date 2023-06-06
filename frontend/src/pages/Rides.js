@@ -47,7 +47,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import RideCard from "../components/RideCard";
 
-import { passengersToList } from "../utilities";
+import { passengersToList, getCurrentTime } from "../utilities";
 import { parseTime } from "../utilities";
 import "./Rides.css";
 
@@ -175,13 +175,19 @@ function Rides() {
 
   const [searchParams] = useSearchParams();
   const [start, setStart] = useControllableState({
-    defaultValue: searchParams.get("start"),
+    defaultValue: searchParams.get("start")
+      ? searchParams.get("start")
+      : "UCLA",
   });
   const [destination, setDestination] = useControllableState({
-    defaultValue: searchParams.get("destination"),
+    defaultValue: searchParams.get("destination")
+      ? searchParams.get("destination")
+      : "LAX",
   });
   const [time, setTime] = useControllableState({
-    defaultValue: searchParams.get("time"),
+    defaultValue: searchParams.get("time")
+      ? searchParams.get("time")
+      : getCurrentTime(),
   });
   //const [rides, setRides] = useControllableState({ defaultValue: [] });
 
@@ -201,13 +207,13 @@ function Rides() {
       headers: { "Content-Type": "application/json" },
     };
 
-    const data = { 
+    const data = {
       to: journey.destination,
       from: journey.start,
-      startTime: journey.time
-    }
+      startTime: journey.time,
+    };
 
-    const searchParameters = (new URLSearchParams(data)).toString()
+    const searchParameters = new URLSearchParams(data).toString();
 
     fetch(`http://localhost:3000/get_rides?${searchParameters}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
