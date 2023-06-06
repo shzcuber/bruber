@@ -29,16 +29,15 @@ function CreateRide(props) {
       method: "POST",
       headers: { "Content-Type": "application/json"},
       body: JSON.stringify(formData)
-      // body: JSON.stringify({ title: "React POST Request Example" })
     };
 
     fetch("http://localhost:3000/create_ride", requestOptions)
     .then(res => res.json())  // Convert json to js object
     .then(data => {
       // console.log("Data received: " + data.status);
-      if (data.status === "success") {
-        // Display success msg (change state)
-        setSubmitted("success");
+      if (data.status === "success" || data.status === "error") {
+        // Display success msg (change state) Either error or success
+        setSubmitted(data.status);
         console.log("setSubmitted: ", submitted);
       }
     })
@@ -54,7 +53,8 @@ function CreateRide(props) {
       <Box>
         <Alert status={status}>
           <AlertIcon />
-          Ride successfully created!
+          {status === "success" ? "Ride successfully Created" :
+          "Error: Ride could not be created"}
         </Alert>
       </Box>
     );
