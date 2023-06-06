@@ -107,13 +107,11 @@ app.post('/create_user', async (req, res) => {
 })
 
 app.post("/create_ride", async (req, res) => {
-  // fetch
   try {
-    // console.log("res ", res.json())
     console.log(req.body)
     const driverReference = doc(db, "users", req.body.driverID);
-    // const fromReference = doc(db, "locations", req.body.from);
-    // const toReference = doc(db, "locations", req.body.to);
+    const fromReference = doc(db, "locations", req.body.from);
+    const toReference = doc(db, "locations", req.body.to);
 
     const driver = await getDoc(driverReference);
     if(driver.exists())
@@ -122,11 +120,12 @@ app.post("/create_ride", async (req, res) => {
     } else{
       console.log("")
     }
+    // Int(capacity)
     
     const docRef = await addDoc(collection(db, "rides"), {
       // rideId: 1,  // May delete?
-      from: req.body.from,  // reference to location
-      to: req.body.to,
+      from: fromReference,  // reference to location
+      to: toReference,
       driverID: driverReference,
       driverFirstName: driver.data().firstName,
       driverLastName: driver.data().lastName,
