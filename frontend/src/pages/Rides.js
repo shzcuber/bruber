@@ -36,6 +36,8 @@ import JourneyInputter from "../components/JourneyInputter";
 
 import RideSignupButton from '../components/RideSignupButton'
 
+import { getAuth } from "firebase/auth";
+
 import {
   AiOutlineSwap,
   AiOutlineSearch,
@@ -154,7 +156,7 @@ function RidesDisplay(props) {
   );
 }
 
-function Rides() {
+function Rides(props) {
   const [rides, setRides] = useState([]);
 
   const [searchParams] = useSearchParams();
@@ -198,6 +200,7 @@ function Rides() {
       .then((data) => {
         console.log("data: ", data);
         console.log("Data received: " + JSON.stringify(data));
+        console.log(props.authUser)
         setRides(data);
       })
       .catch((error) => console.log("Error: " + error));

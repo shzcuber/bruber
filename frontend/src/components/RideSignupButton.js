@@ -16,9 +16,7 @@ export default function RideSignupButton(props) {
 
         fetch("http://localhost:3000/ride_signup", requestOptions)
             .then(data => {
-                console.log("I AM SIGNED UP")
                 navigate('/profile')
-                console.log("navigated")
             })
             .catch(error => {
                 console.log("Error: " + error);

@@ -19,8 +19,6 @@ function popUp(){
   signInWithPopup(auth, provider).then(() => {}).catch((error) => {
     alert(error);
   })
-
-
 }
 
 function LoginPage(){
