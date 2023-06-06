@@ -35,6 +35,7 @@ import RideCardGrid from "../components/RideCardGrid";
 import JourneyInputter from "../components/JourneyInputter";
 
 import RideSignupButton from "../components/RideSignupButton";
+import Navbar from "../components/Navbar";
 
 import { getAuth } from "firebase/auth";
 
@@ -234,44 +235,47 @@ function Rides(props) {
   };
 
   return (
-    <Box padding="40px" backgroundColor="primary.150" color="primary.500">
-      <Flex align="center">
-        <Heading as="h1" size="3xl">
-          Rides
-        </Heading>
-        <Spacer />
-        <Box margin="0px 35px" height="50px" width="33%">
-          <Link to="/create_ride">
-            <Button width="100%">
-              <Text fontSize="xl"> Create a New Ride</Text>
-            </Button>
-          </Link>
+    <Box>
+      <Navbar />
+      <Box padding="40px" backgroundColor="primary.150" color="primary.500">
+        <Flex align="center">
+          <Heading as="h1" size="3xl">
+            Rides
+          </Heading>
+          <Spacer />
+          <Box margin="0px 35px" height="50px" width="33%">
+            <Link to="/create_ride">
+              <Button width="100%">
+                <Text fontSize="xl"> Create a New Ride</Text>
+              </Button>
+            </Link>
+          </Box>
+        </Flex>
+        <Flex align="end">
+          <Heading as="h2" size="md" margin="20px 0px">
+            {start + " to " + destination + ", departing on " + parseTime(time)}
+          </Heading>
+        </Flex>
+        <Box marginBottom="20px">
+          <JourneyInputter
+            locations={sampleLocations}
+            journey={journey}
+            onSearchClick={getRides}
+          />
         </Box>
-      </Flex>
-      <Flex align="end">
-        <Heading as="h2" size="md" margin="20px 0px">
-          {start + " to " + destination + ", departing on " + parseTime(time)}
-        </Heading>
-      </Flex>
-      <Box marginBottom="20px">
-        <JourneyInputter
-          locations={sampleLocations}
-          journey={journey}
-          onSearchClick={getRides}
+        <Divider
+          borderStyle="solid"
+          borderWidth="1px"
+          borderColor="secondary.500"
         />
-      </Box>
-      <Divider
-        borderStyle="solid"
-        borderWidth="1px"
-        borderColor="secondary.500"
-      />
-      <Box
-        margin="30px 0px"
-        backgroundColor="primary.100"
-        padding="20px"
-        borderRadius="20px"
-      >
-        <RidesDisplay authUser={props.authUser} rides={rides} />
+        <Box
+          margin="30px 0px"
+          backgroundColor="primary.100"
+          padding="20px"
+          borderRadius="20px"
+        >
+          <RidesDisplay authUser={props.authUser} rides={rides} />
+        </Box>
       </Box>
     </Box>
   );
