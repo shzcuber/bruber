@@ -1,18 +1,18 @@
-import { 
-    Card,
-    CardHeader,
-    Box,
-    Flex,
-    Avatar,
-    CardBody,
-    VStack,
-    UnorderedList,
-    CardFooter,
-    Text,
+import {
+  Card,
+  CardHeader,
+  Box,
+  Flex,
+  Avatar,
+  CardBody,
+  VStack,
+  UnorderedList,
+  CardFooter,
+  Text,
 } from "@chakra-ui/react";
 import RideSignupButton from "./RideSignupButton";
 
-import { passengersToList  } from "../utilities";
+import { passengersToList } from "../utilities";
 
 export default function RideCard(props) {
   /* props will have:
@@ -57,10 +57,11 @@ export default function RideCard(props) {
               props.capacity +
               " Spots Available"}
           </Text>
-          {!props.hideSignupButton && <RideSignupButton rideId={props.rideId} />}
         </VStack>
       </CardBody>
-      <CardFooter></CardFooter>
+      <CardFooter>
+        {!props.hideSignupButton && <RideSignupButton rideId={props.rideId} />}
+      </CardFooter>
     </Card>
   );
 }
