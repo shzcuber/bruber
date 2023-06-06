@@ -57,7 +57,7 @@ const AuthDetails = () => {
 
     return (
         <div>
-            <h1>{authUser ? (
+            <h1>{authUser && authUser.emailVerified ? (
             <Router>
             <Routes>
                 <Route exact path="/" element={<Home authUser={authUser} />}/>
@@ -69,14 +69,13 @@ const AuthDetails = () => {
                 <Route exact path="/create_ride" element={<CreateRide authUser={authUser}/>}/>
                 <Route exact path="/profile" element={<Profile authUser={authUser}/>}/>
                 <Route exact path="/upcoming_rides" element={<UpcomingRides authUser={authUser}/>}/>
-                <Route exact path="/forgot-password" element={<ForgotPassword authUser={authUser}/>}/>
             </Routes>
             </Router>
             ) : (
             <Router>
             <Routes>
-                <Route exact path="/" element={<LoginPage authUser={authUser} />}/>
                 <Route exact path="/forgot-password" element={<ForgotPassword/>}/>
+                <Route path="*" element={<LoginPage authUser={authUser} />}/>
             </Routes>
             </Router>
             )}</h1>
