@@ -95,7 +95,7 @@ function Profile(props)  {
       </Box>
       <Box backgroundColor="white" borderRadius="30px" p="25px" my="50px" mx="5%">
         <Text textAlign='center' fontWeight='b' fontSize='3xl'>Rides you signed up for: </Text>
-        {rides && <RideCardGrid hideSignupButton rides={rides} /> }
+        {rides && <RideCardGrid displayRatingButton hideSignupButton rides={rides} /> }
       </Box>
     </Box>
   );
