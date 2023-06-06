@@ -34,7 +34,7 @@ import RideCardGrid from "../components/RideCardGrid";
 
 import JourneyInputter from "../components/JourneyInputter";
 
-import RideSignupButton from '../components/RideSignupButton'
+import RideSignupButton from "../components/RideSignupButton";
 
 import {
   AiOutlineSwap,
@@ -47,8 +47,9 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import RideCard from "../components/RideCard";
 
-import { passengersToList  } from "../utilities";
+import { passengersToList } from "../utilities";
 import { parseTime } from "../utilities";
+import "./Rides.css";
 
 const sampleRideInfo = {
   driverName: "Joe Biden",
@@ -63,11 +64,14 @@ function RideCardAccordion(props) {
   const rideAccordionItems = props.rides.map((ride, index) => (
     <AccordionItem
       key={index}
-      borderRadius="7px"
-      background="primary.500"
-      color="text.onPrimary"
+      background="white"
+      color="primary.500"
+      borderColor="primary.500"
     >
-      <AccordionButton display="block">
+      <AccordionButton
+        display="block"
+        _expanded={{ bg: "primary.500", color: "white" }}
+      >
         <Flex align="center">
           <Flex gap="4" align="center">
             <Avatar name={ride.driverFirstName + " " + ride.driverLastName} />
@@ -82,29 +86,41 @@ function RideCardAccordion(props) {
           <AccordionIcon />
         </Flex>
       </AccordionButton>
-      <AccordionPanel background="primary.150" color="primary.500">
-        <Text p="10px" fontWeight="bold" fontSize="xl">{parseTime(ride.startTime)}</Text>
-        <Text p="10px" fontWeight="bold" fontSize="xl">From: {ride.from}</Text>
-        <Text p="10px" fontWeight="bold" fontSize="xl">To: {ride.to}</Text>
-        <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
-          {passengersToList(ride.passengers, ride.capacity)}
-        </UnorderedList>
-        <Text as="b" fontSize="2xl" paddingLeft="15px">
-          {ride.capacity -
-            ride.passengers.length +
-            "/" +
-            ride.capacity +
-            " Spots Available"}
-        </Text>
-        <Box>
-          <RideSignupButton rideId={ride.id}/>
+      <AccordionPanel
+        padding="0px"
+        background="primary.150"
+        color="primary.500"
+      >
+        <Box margin="15px">
+          <Text p="10px" fontWeight="bold" fontSize="xl">
+            {parseTime(ride.startTime)}
+          </Text>
+          <Text p="10px" fontWeight="bold" fontSize="xl">
+            From: {ride.from}
+          </Text>
+          <Text p="10px" fontWeight="bold" fontSize="xl">
+            To: {ride.to}
+          </Text>
+          <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
+            {passengersToList(ride.passengers, ride.capacity)}
+          </UnorderedList>
+          <Text as="b" fontSize="2xl" paddingLeft="15px">
+            {ride.capacity -
+              ride.passengers.length +
+              "/" +
+              ride.capacity +
+              " Spots Available"}
+          </Text>
+          <Box margin="25px 15px">
+            <RideSignupButton rideId={ride.id} />
+          </Box>
         </Box>
       </AccordionPanel>
     </AccordionItem>
   ));
 
   return (
-    <Accordion allowMultiple margin="10px 0px">
+    <Accordion allowMultiple margin="20px 0px">
       {rideAccordionItems}
     </Accordion>
   );
@@ -248,4 +264,3 @@ function Rides() {
 }
 
 export default Rides;
-
