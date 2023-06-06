@@ -44,14 +44,13 @@ const AuthDetails = () => {
         <div>
             <h1>{authUser ? (    <Router>
       <Routes>
-        <Route exact path="/" element={<Home/>}/>
-        <Route exact path="/login" element={<LoginPage/>}/>
-        //delete later
-        <Route exact path="/navbar" element={<Navbar/>}/>
-        <Route exact path="/rides" element={<Rides/>}/>
-        <Route path="/driver" element={<Driver />} />
-        <Route exact path="/create_ride" element={<CreateRide/>}/>
-        <Route exact path="/profile" element={<Profile/>}/>
+        <Route exact path="/" element={<Home authUser={authUser} />}/>
+        <Route exact path="/login" element={<LoginPage authUser={authUser} />}/>
+        <Route exact path="/navbar" element={<Navbar authUser={authUser}/>}/>
+        <Route exact path="/rides" element={<Rides authUser={authUser}/>}/>
+        <Route path="/driver" element={<Driver authUser={authUser}/>} />
+        <Route exact path="/create_ride" element={<CreateRide authUser={authUser}/>}/>
+        <Route exact path="/profile" element={<Profile authUser={authUser}/>}/>
       </Routes>
     </Router>) : <LoginPage/>}</h1>
         </div>
