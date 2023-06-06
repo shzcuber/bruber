@@ -24,7 +24,12 @@ app.get('/get_rides', async (req, res) => {
   querySnapshot.forEach((doc) => {
     rides.push({...doc.data(), id: doc.id});
   });
-  res.send(rides)
+  // console.log(req.query)
+  res.send(rides.filter(ride => 
+      ride.from == req.query.from &&
+      ride.to == req.query.to 
+      // ride.destination == query.destination 
+      ))
 })
 
 app.get('/user/:id', async (req, res) => {
@@ -32,11 +37,11 @@ app.get('/user/:id', async (req, res) => {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
+    // console.log("Document data:", docSnap.data());
     res.status(200).send(JSON.stringify(docSnap.data()));
   } else {
     // docSnap.data() will be undefined in this case
-    console.log("No such document!");
+    // console.log("No such document!");
     res.status(400).send("No such page");
   }
 })
@@ -92,7 +97,7 @@ app.post('/create_user', async (req, res) => {
       email: email,
       phoneNumber: phoneNumber,
     });
-    console.log("Document written with ID: ", docRef.id);
+    // console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     res.status(400).send("Bad Request");
   }

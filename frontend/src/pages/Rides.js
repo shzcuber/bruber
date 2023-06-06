@@ -178,13 +178,22 @@ function Rides() {
     setTime: setTime,
   };
 
-  function handleSearchClick() {
-    console.log("Search Button Clicked");
+  function handleSearchClick(e) {
+    console.log("Search Button Clicked", journey);
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    fetch("http://localhost:3000/get_rides", requestOptions)
+
+    const data = { 
+      to: journey.destination,
+      from: journey.start,
+      time: journey.time
+    }
+
+    const searchParameters = (new URLSearchParams(data)).toString()
+
+    fetch(`http://localhost:3000/get_rides?${searchParameters}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         console.log("data: ", data);
