@@ -36,6 +36,9 @@ import JourneyInputter from "../components/JourneyInputter";
 
 import RideSignupButton from "../components/RideSignupButton";
 import Navbar from "../components/Navbar";
+import RideCardAccordion from "../components/RideCardAccordian";
+import RidesDisplay from "./RidesDisplay";
+import { getCurrentTime } from "../utilities";
 
 import { getAuth } from "firebase/auth";
 
@@ -50,7 +53,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import RideCard from "../components/RideCard";
 
-import { passengersToList, getCurrentTime } from "../utilities";
+import { passengersToList} from "../utilities";
 import { parseTime } from "../utilities";
 import "./Rides.css";
 
@@ -62,116 +65,6 @@ const sampleRideInfo = {
 };
 
 const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
-
-function RideCardAccordion(props) {
-  const rideAccordionItems = props.rides.map((ride, index) => (
-    <AccordionItem
-      key={index}
-      background="white"
-      color="primary.500"
-      borderColor="primary.500"
-    >
-      <AccordionButton
-        display="block"
-        _expanded={{ bg: "primary.500", color: "white" }}
-      >
-        <Flex align="center">
-          <Flex gap="4" align="center">
-            <Avatar name={ride.driverFirstName} />
-            <Box textAlign="left">
-              <Text as="b" fontSize="xl">
-                {ride.driverFirstName}
-              </Text>
-              <Text fontSize="xl">Driver</Text>
-            </Box>
-          </Flex>
-          <Spacer />
-          <AccordionIcon />
-        </Flex>
-      </AccordionButton>
-      <AccordionPanel
-        padding="0px"
-        background="primary.150"
-        color="primary.500"
-      >
-        <Box margin="15px">
-          <Text p="10px" fontWeight="bold" fontSize="xl">
-            {parseTime(ride.startTime)}
-          </Text>
-          <Text p="10px" fontWeight="bold" fontSize="xl">
-            From: {ride.from}
-          </Text>
-          <Text p="10px" fontWeight="bold" fontSize="xl">
-            To: {ride.to}
-          </Text>
-          <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
-            {passengersToList(ride.passengers, ride.capacity)}
-          </UnorderedList>
-          <Text as="b" fontSize="2xl" paddingLeft="15px">
-            {ride.capacity -
-              ride.passengers.length +
-              "/" +
-              ride.capacity +
-              " Spots Available"}
-          </Text>
-          <Box margin="25px 15px">
-            <RideSignupButton authUser={props.authUser} rideId={ride.id} />
-          </Box>
-        </Box>
-      </AccordionPanel>
-    </AccordionItem>
-  ));
-
-  return (
-    <Accordion allowMultiple margin="20px 0px">
-      {rideAccordionItems}
-    </Accordion>
-  );
-}
-function RidesDisplay(props) {
-  const [viewAccordion, setViewAccordion] = useControllableState({
-    defaultValue: true,
-  });
-  const transitionProp = {
-    enter: { duration: 0.4 },
-    exit: { duration: 0 },
-  };
-
-  return (
-    <Box>
-      <ButtonGroup isAttached>
-        <IconButton
-          icon={<AiOutlineUnorderedList />}
-          onClick={() => setViewAccordion(true)}
-          backgroundColor={viewAccordion ? "primary.600" : "primary.500"}
-        />
-        <IconButton
-          icon={<BsGrid />}
-          onClick={() => setViewAccordion(false)}
-          backgroundColor={!viewAccordion ? "primary.600" : "primary.500"}
-        />
-      </ButtonGroup>
-      <SlideFade
-        in={viewAccordion}
-        direction="down"
-        offsetY="20px"
-        unmountOnExit={true}
-        transition={transitionProp}
-      >
-        <RideCardAccordion authUser={props.authUser} rides={props.rides} />
-      </SlideFade>
-      <SlideFade
-        in={!viewAccordion}
-        direction="down"
-        offsetY="20px"
-        unmountOnExit={true}
-        transition={transitionProp}
-      >
-        <RideCardGrid rides={props.rides} />
-      </SlideFade>
-    </Box>
-  );
-}
 
 function Rides(props) {
   const [rides, setRides] = useState([]);
