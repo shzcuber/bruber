@@ -58,7 +58,7 @@ export default function RideCard(props) {
             </Box>
           </Flex>
           <Text color="gold" fontSize="xl" mr="25%">
-            {rating ? getStarString(rating) : "(Unrated)"}
+            {props.rating ? getStarString(props.rating) : "(Unrated)"}
           </Text>
         </Flex>
       </CardHeader>

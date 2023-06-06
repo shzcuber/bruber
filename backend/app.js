@@ -63,9 +63,24 @@ app.get('/user/:id', async (req, res) => {
   const docRef = doc(db, "users", req.params.id);
   const docSnap = await getDoc(docRef);
 
+  let user = docSnap.data();
+
+  let rides = [];
+  if(user.rides)
+  {
+    for(const ride of user.rides)
+    {
+      console.log(ride.rideId)
+      const rideRef = doc(db, "rides", ride.rideId);
+      const rideSnap = await(getDoc(rideRef));
+      rides.push(rideSnap.data());
+    }
+  }
+
+  console.log(rides)
   if (docSnap.exists()) {
     // console.log("Document data:", docSnap.data());
-    res.status(200).send(JSON.stringify(docSnap.data()));
+    res.status(200).send(JSON.stringify({...docSnap.data(), rides}));
   } else {
     // docSnap.data() will be undefined in this case
     // console.log("No such document!");
@@ -96,7 +111,7 @@ app.post('/ride_signup', async (req, res) => {
     else
     {
       rideData['passengers'].push({...userData, userId})
-      const newRide = {'rideData': JSON.stringify(rideData), rideId};
+      const newRide = {rideId};
       if(userData['rides']) 
         userData['rides'].push(newRide);
       else 

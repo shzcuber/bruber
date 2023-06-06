@@ -17,6 +17,7 @@ export default function RideCardGrid(props) {
       capacity={ride.capacity}
       names={ride.passengers}
       rideId={ride.id}
+      rating={ride.rating}
       hideSignupButton={props.hideSignupButton}
       authUser={props.authUser}
       displayRatingButton={props.displayRatingButton}
