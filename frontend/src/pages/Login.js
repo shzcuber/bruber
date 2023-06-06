@@ -18,6 +18,7 @@ import {
   signInWithPopup,
   sendEmailVerification,
 } from "firebase/auth"
+import { Link } from 'react-router-dom';
 
 function popUp() {
   const provider = new GoogleAuthProvider();
@@ -83,9 +84,11 @@ function LoginPage() {
               <Input value={password} onChange={(e) => { setPassword(e.target.value) }} bg="gray.100" id="password" type="password" />
               <HStack my="3" justify="space-between">
                 <Checkbox defaultChecked>Remember me</Checkbox>
-                <Button variant="link" colorScheme="blue" size="sm">
-                  Forgot password?
-                </Button>
+                <Link to={`/forgot-password?email=${encodeURIComponent(email)}`}>
+                  <Button variant="link" colorScheme="blue" size="sm">
+                    Forgot password?
+                  </Button>
+                </Link>
               </HStack>
               <Stack spacing="6" align="center">
                 <Button type='submit' width="100%">Sign in / Create Account</Button>
