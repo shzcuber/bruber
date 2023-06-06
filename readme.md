@@ -92,6 +92,15 @@ We used:
 - It says "5% – Detailed README file that accurately and completely describes how to run the app locally.", so need to add more details
 - add hyperlinks
 
+## Site Stuff:
+- Favicons
+- Display
+- Meta Data update
+- App final testing
+- App robustness testing
+- Backend testing
+- .env setup for fe
+
 
 
 
