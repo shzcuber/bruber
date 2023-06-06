@@ -76,7 +76,7 @@ function Home() {
             onSearchClick={openRides}
           />
           <Flex mt="50px">
-            <Link as={RouterLink} to="/rides" w="45%">
+            <Link as={RouterLink} to="/upcoming_rides" w="45%">
               <Button w="100%">
                 <Text isTruncated>View all upcoming rides</Text>
               </Button>

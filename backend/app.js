@@ -25,10 +25,9 @@ app.get('/get_rides', async (req, res) => {
   querySnapshot.forEach((doc) => {
     rides.push({...doc.data(), id: doc.id});
   });
-  // console.log(req.query)
   res.send(rides.filter(ride => 
-      ride.from == req.query.from &&
-      ride.to == req.query.to &&
+      (!req.query.from || ride.from == req.query.from) &&
+      (!req.query.to || ride.to == req.query.to) &&
       new Date(ride.startTime) > new Date(req.query.startTime)
       ))
 })
