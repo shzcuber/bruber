@@ -15,6 +15,7 @@ export default function RideCardGrid(props) {
       rideId={ride.id}
       hideSignupButton={props.hideSignupButton}
       authUser={props.authUser}
+      displayRatingButton={props.displayRatingButton}
     />
   ));
   return (

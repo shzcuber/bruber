@@ -82,25 +82,6 @@ function Profile(props)  {
             <Input value={email} isReadOnly bg="gray.200"/>
           </FormControl>
 
-          {/* <FormControl mt="20px">
-            <FormLabel fontSize="2xl">Nickname</FormLabel>
-            <Stack direction="row" align="center">
-              <Input
-                value={nickname}
-                isReadOnly={!isNicknameEditing}
-                onChange={handleNicknameChange}
-                bg={isNicknameEditing ? "white" : "gray.200"}
-              />
-              {!isNicknameEditing ? (
-                <Button onClick={toggleNicknameButton}>Edit</Button>
-              ) : (
-                <Button onClick={toggleNicknameButton}>
-                  Save
-                </Button>
-              )}
-            </Stack>
-          </FormControl> */}
-
           <FormControl mt="20px">
             <FormLabel fontSize="2xl">Phone Number</FormLabel>
             <Stack direction="row" align="center">
@@ -124,7 +105,7 @@ function Profile(props)  {
       </Box>
       <Box backgroundColor="white" borderRadius="30px" p="25px" mt="50px" mx="5%">
         <Text textAlign='center' fontWeight='b' fontSize='3xl'>Rides you signed up for: </Text>
-        {rides && <RideCardGrid hideSignupButton rides={rides} /> }
+        {rides && <RideCardGrid displayRatingButton hideSignupButton rides={rides} /> }
       </Box>
     </Box>
   );
