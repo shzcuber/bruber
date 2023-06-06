@@ -129,8 +129,8 @@ app.post("/create_ride", async (req, res) => {
       from: req.body.from,  // reference to location
       to: req.body.to,
       driverID: driverReference,
-      driverFirstName: driver.data().first,
-      driverLastName: driver.data().last,
+      driverFirstName: driver.data().firstName,
+      driverLastName: driver.data().lastName,
       passengers: [],  // list of references
       startTime: req.body.datetime,
       capacity: req.body.capacity

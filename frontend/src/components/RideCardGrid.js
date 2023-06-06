@@ -6,7 +6,7 @@ export default function RideCardGrid(props) {
   const rideCardList = props.rides.map((ride, index) => (
     <RideCard
       key={index}
-      driver={ride.driverFirstName + " " + ride.driverLastName}
+      driver={ride.driverFirstName}
       time={parseTime(ride.startTime)}
       from={ride.from}
       to={ride.to}

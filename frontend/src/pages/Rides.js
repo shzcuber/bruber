@@ -72,10 +72,10 @@ function RideCardAccordion(props) {
       <AccordionButton display="block">
         <Flex align="center">
           <Flex gap="4" align="center">
-            <Avatar name={ride.driverFirstName + " " + ride.driverLastName} />
+            <Avatar name={ride.driverFirstName} />
             <Box textAlign="left">
               <Text as="b" fontSize="xl">
-                {ride.driverFirstName + " " + ride.driverLastName}
+                {ride.driverFirstName}
               </Text>
               <Text fontSize="xl">Driver</Text>
             </Box>

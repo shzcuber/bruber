@@ -25,7 +25,7 @@ function Profile(props)  {
       .then((data) => {
         setEmail(data.email);
         setPhoneNumber(data.phoneNumber);
-        setName(data.firstName + " " + data.lastName);
+        setName(data.firstName);
         let rides = []
         data.rides.forEach(ride => 
           // console.log('ride: ',JSON.parse(ride.rideData))
