@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 export default function Landing() {
 
   const handleClick = () => {
-    window.location.href = 'https://virajchhajed.com';
+    window.location.href = 'https://bruber-ur7f-git-main-shzcuber.vercel.app/';
   };
 
 
