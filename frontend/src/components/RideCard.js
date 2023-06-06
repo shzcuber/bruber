@@ -10,12 +10,14 @@ import {
   CardFooter,
   Text,
   Button,
+  useStatStyles,
 } from "@chakra-ui/react";
 import RideSignupButton from "./RideSignupButton";
 import { useDisclosure } from "@chakra-ui/react";
 
 import RatingsModal from "./RatingsModal";
 import { passengersToList, getStarString } from "../utilities";
+import { useEffect, useState } from "react";
 
 export default function RideCard(props) {
   /* props will have:
@@ -25,6 +27,21 @@ export default function RideCard(props) {
    * a carpool capacity (will fill any vacancies with "empty")
    */
   // console.log(props);
+  useEffect(() => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    fetch(`http://localhost:3000/user/${props.driverID}`, requestOptions)
+      .then((res) => res.json()) // Convert json to js object
+      .then((data) => {
+        setRating(data.rating);
+      })
+      .catch((error) => console.log("Error: " + error));
+  }, [])
+  
+  const [rating, setRating] = useState();
   const peopleList = passengersToList(props.names, props.capacity);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const capacityReached = props.capacity - props.names.length === 0;
@@ -42,7 +59,7 @@ export default function RideCard(props) {
             </Box>
           </Flex>
           <Text color="gold" fontSize="xl" mr="25%">
-            {props.rating ? getStarString(props.rating) : "★★★☆☆"}
+            {rating ? getStarString(rating) : "★★★☆☆"}
           </Text>
         </Flex>
       </CardHeader>
