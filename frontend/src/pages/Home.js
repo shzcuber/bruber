@@ -12,6 +12,7 @@ import JourneyInputter from "../components/JourneyInputter";
 import { sampleLocations } from "../utilities";
 
 import { Link as RouterLink } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 import {
   createSearchParams,
@@ -49,6 +50,7 @@ function Home() {
 
   return (
     <Box className="home-container" color="primary.500">
+      <Navbar />
       <Box mt="5%" ml="5%" className="home-heading">
         <Heading as="h1" size="4xl">
           Bruber

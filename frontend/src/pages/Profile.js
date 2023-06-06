@@ -10,6 +10,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import RideCardGrid from '../components/RideCardGrid';
+import Navbar from '../components/Navbar';
 
 const PLACEHOLDER_USER_ID = 'wOnGp3wuTOxjie6XR55f'
 
@@ -62,6 +63,7 @@ function Profile(props)  {
 
   return (
     <Box className='home-container'>
+      <Navbar />
       <Box mt="5%" mx="5%" className="home-heading">
           <Heading as="h1" size="4xl">
             Profile

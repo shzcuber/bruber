@@ -7,6 +7,7 @@ import { Button, Input, Box, Card, CardHeader, CardBody, Heading,
 import { useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { sampleLocations } from "../utilities";
+import Navbar from "../components/Navbar";
 
 
 function CreateRide(props) {
@@ -63,6 +64,7 @@ function CreateRide(props) {
   // }
   return (
     <Box>
+      <Navbar />
       {
       submitted ? displayAlert(submitted) : <Box></Box>
       }

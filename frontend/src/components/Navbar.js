@@ -14,7 +14,7 @@ import { userSignOut } from "../pages/auth"
  const Navbar = () => {
   const isDesktop = useBreakpointValue({ base: false, lg: true })
   return (
-    <Box as="section" pb={{ base: '12', md: '24' }}>
+    <Box as="section" m='0' p='0'>
       <Box as="nav" bg="bg-surface" boxShadow="sm">
         <Container py={{ base: '4', lg: '5' }}>
           <HStack spacing="10" justify="space-between">
