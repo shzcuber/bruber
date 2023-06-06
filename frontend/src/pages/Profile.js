@@ -13,14 +13,14 @@ import RideCardGrid from '../components/RideCardGrid';
 
 const PLACEHOLDER_USER_ID = 'wOnGp3wuTOxjie6XR55f'
 
-function Profile()  {
+function Profile(props)  {
   useEffect(() => {
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
 
-    fetch(`http://localhost:3000/user/${PLACEHOLDER_USER_ID}`, requestOptions)
+    fetch(`http://localhost:3000/user/${props.authUser.uid}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setEmail(data.email);

@@ -99,7 +99,7 @@ function RideCardAccordion(props) {
             " Spots Available"}
         </Text>
         <Box>
-          <RideSignupButton rideId={ride.id}/>
+          <RideSignupButton authUser={props.authUser} rideId={ride.id}/>
         </Box>
       </AccordionPanel>
     </AccordionItem>
@@ -141,7 +141,7 @@ function RidesDisplay(props) {
         unmountOnExit={true}
         transition={transitionProp}
       >
-        <RideCardAccordion rides={props.rides} />
+        <RideCardAccordion authUser={props.authUser} rides={props.rides} />
       </SlideFade>
       <SlideFade
         in={!viewAccordion}
@@ -253,7 +253,7 @@ function Rides(props) {
         padding="20px"
         borderRadius="20px"
       >
-        <RidesDisplay rides={rides} />
+        <RidesDisplay authUser={props.authUser} rides={rides} />
       </Box>
     </Box>
   );

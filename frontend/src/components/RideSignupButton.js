@@ -8,10 +8,11 @@ export default function RideSignupButton(props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const navigate = useNavigate()
     const onClick = () => {
+        console.log("yo?", props.authUser)
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({'rideId': props.rideId, 'userId': PLACEHOLDER_USER_ID})
+            body: JSON.stringify({'rideId': props.rideId, 'userId': props.authUser.uid})
         };
 
         fetch("http://localhost:3000/ride_signup", requestOptions)
