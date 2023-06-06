@@ -53,7 +53,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import RideCard from "../components/RideCard";
 
-import { passengersToList} from "../utilities";
+import { passengersToList } from "../utilities";
 import { parseTime } from "../utilities";
 import "./Rides.css";
 
@@ -68,6 +68,7 @@ const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
 
 function Rides(props) {
   const [rides, setRides] = useState([]);
+  console.log(rides);
   const [searchParams] = useSearchParams();
   const [start, setStart] = useControllableState({
     defaultValue: searchParams.get("start")
@@ -86,11 +87,10 @@ function Rides(props) {
   });
 
   useEffect(() => {
-    if(searchParams)
-    {
+    if (searchParams) {
       getRides();
     }
-  }, [searchParams])
+  }, [searchParams]);
   //const [rides, setRides] = useControllableState({ defaultValue: [] });
 
   const journey = {
