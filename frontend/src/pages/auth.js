@@ -13,6 +13,7 @@ import CreateRide from './CreateRide';
 import Profile from './Profile';
 import Navbar from "../components/Navbar"
 import { list } from "@chakra-ui/react";
+import UpcomingRides from "./UpcomingRides";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -63,6 +64,7 @@ const AuthDetails = () => {
         <Route path="/driver" element={<Driver authUser={authUser}/>} />
         <Route exact path="/create_ride" element={<CreateRide authUser={authUser}/>}/>
         <Route exact path="/profile" element={<Profile authUser={authUser}/>}/>
+        <Route exact path="/upcoming_rides" element={<UpcomingRides authUser={authUser}/>}/>
       </Routes>
     </Router>) : <LoginPage/>}</h1>
         </div>

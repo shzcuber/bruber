@@ -9,9 +9,10 @@ import {
   Link,
 } from "@chakra-ui/react";
 import JourneyInputter from "../components/JourneyInputter";
-import { sampleLocations, getCurrentTime } from "../utilities";
+import { sampleLocations} from "../utilities";
 
 import { Link as RouterLink } from "react-router-dom";
+import { getCurrentTime } from "../utilities";
 import Navbar from "../components/Navbar";
 
 import {
@@ -75,7 +76,7 @@ function Home() {
             onSearchClick={openRides}
           />
           <Flex mt="50px">
-            <Link as={RouterLink} to="/rides" w="45%">
+            <Link as={RouterLink} to="/upcoming_rides" w="45%">
               <Button w="100%">
                 <Text isTruncated>View all upcoming rides</Text>
               </Button>
@@ -90,3 +91,5 @@ function Home() {
 }
 
 export default Home;
+
+//utility
