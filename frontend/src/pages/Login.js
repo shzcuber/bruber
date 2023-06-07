@@ -47,7 +47,6 @@ function setupUser(user) {
 function popUp() {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider).then((result) => {
-    setupUser(result.user)
   }).catch((error) => {
     alert(error);
   })
