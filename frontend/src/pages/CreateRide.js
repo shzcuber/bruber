@@ -128,39 +128,28 @@ function CreateRide(props) {
                     <option>2</option>
                     <option>3</option>
                     <option>4</option>
-                  </Select>
-                </Box>
-                <Box>
-                  <FormLabel
-                    size="xs"
-                    marginBottom="2"
-                    textTransform="uppercase"
-                  >
-                    Leave Time:
-                  </FormLabel>
-                  <Flex>
-                    <Input
-                      type="datetime-local"
-                      size="sm"
-                      name="datetime"
-                      {...register("datetime", { required: true })}
-                    />
-                    <Button
-                      type="submit"
-                      size="s"
-                      fontSize="sm"
-                      padding="2"
-                      marginLeft="2"
-                      onClick={handleSubmit(onSubmit)}
-                    >
-                      Submit
-                    </Button>
-                  </Flex>
-                </Box>
-              </FormControl>
-            </Stack>
-          </CardBody>
-        </Card>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </Select>
+              </Box>
+              <Box>
+                <FormLabel size='xs' marginBottom="2" textTransform='uppercase'>
+                  Leave Time:
+                </FormLabel>
+                <Flex>
+                  <Input type="datetime-local" size="sm" name="datetime" {...register("datetime", {required: true})} />
+                  <Button type="submit" size="s" fontSize='sm' padding="2"
+                  marginLeft="2"
+                  onClick={ handleSubmit(onSubmit) }>
+                    Submit
+                  </Button>
+                </Flex>
+              </Box>
+            </FormControl>
+          </Stack>
+        </CardBody>
+      </Card>
       </Box>
     </Box>
   );
