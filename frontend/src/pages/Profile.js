@@ -23,7 +23,7 @@ function Profile(props)  {
       headers: { "Content-Type": "application/json" },
     };
 
-    fetch(`http://localhost:3000/user/${props.authUser.uid}`, requestOptions)
+    fetch(`https://bruber-production.up.railway.app/user/${props.authUser.uid}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setEmail(data.email);
