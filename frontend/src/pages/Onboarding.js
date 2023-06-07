@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { updateProfile } from "firebase/auth";
 import {
   Heading,
   Box,
@@ -10,31 +11,59 @@ import {
   InputLeftAddon
 } from '@chakra-ui/react';
 import Navbar from '../components/Navbar';
-
-const PLACEHOLDER_USER_ID = 'wOnGp3wuTOxjie6XR55f'
-
+import { useNavigate } from "react-router-dom";
 
 function Onboarding(props)  {
-  const [name, setName] = useState(props.authUser.displayName || '');
-  const [phoneNumber, setPhoneNumber] = useState(props.authUser.phoneNumber  || '');
+  const navigate = useNavigate();
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState(props.authUser.email || '');
-  const [isNameValid, setIsNameValid] = useState(false);
-  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
 
-  const handlePhoneNumberChange = (event) => {
-    const phoneNumberInput = event.target.value;
-    setPhoneNumber(phoneNumberInput);
-    setIsPhoneNumberValid(/^\d{10}$/.test(phoneNumberInput));
-  };
+  var isFirstNameValid = firstName.length > 1;
+  var isLastNameValid = lastName.length > 1;
+  var isPhoneNumberValid = /^\d{10}$/.test(phoneNumber);
 
-  const handleNameChange = (event) => {
-    const nameInput = event.target.value;
-    setName(nameInput);
-    setIsNameValid(nameInput.length > 2);
-  };
+  useEffect(() => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    fetch(`http://localhost:3000/user/${props.authUser.uid}`, requestOptions)
+      .then((res) => res.json()) // Convert json to js object
+      .then((data) => {
+        setPhoneNumber(data.phoneNumber || '');
+        setFirstName(data.firstName || '');
+        setLastName(data.lastName || '');
+      })
+      .catch((error) => console.log("Error: " + error));
+  }, [])
 
   const handleOnboardingSubmit = () => {
-    //send values to backend
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify({
+        'uid': props.authUser.uid,
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': props.authUser.email,
+        'phoneNumber': phoneNumber
+      })
+    };
+
+    fetch("http://localhost:3000/create_user", requestOptions)
+      .then(data => {
+      })
+      .catch(error => {
+          console.log("Error: " + error);
+      })
+    
+    // Refresh the router by navigating to the current location
+    // TODO somehow run refreshUserData in auth instead of this
+    window.location.reload();
   }
 
   return (
@@ -54,12 +83,22 @@ function Onboarding(props)  {
           </FormControl>
 
           <FormControl mt="20px" isRequired>
-            <FormLabel fontSize="2xl">Name</FormLabel>
+            <FormLabel fontSize="2xl">First Name</FormLabel>
             <Input
-              value={name}
-              onChange={handleNameChange}
+              value={firstName}
+              onChange={(event) => {setFirstName(event.target.value)}}
               bg="white"
-              borderColor={isNameValid ? "gray.300" : "red.500"}
+              borderColor={isFirstNameValid ? "gray.300" : "red.500"}
+            />
+          </FormControl>
+
+          <FormControl mt="20px" isRequired>
+            <FormLabel fontSize="2xl">Last Name</FormLabel>
+            <Input
+              value={lastName}
+              onChange={(event) => {setLastName(event.target.value)}}
+              bg="white"
+              borderColor={isLastNameValid ? "gray.300" : "red.500"}
             />
           </FormControl>
 
@@ -69,7 +108,7 @@ function Onboarding(props)  {
               <InputLeftAddon children="+1" />
               <Input
                 value={phoneNumber}
-                onChange={handlePhoneNumberChange}
+                onChange={(event) => {setPhoneNumber(event.target.value)}}
                 bg="white"
                 type="tel"
                 maxLength={10}
@@ -82,7 +121,7 @@ function Onboarding(props)  {
             type='continue'
             mt="50px"
             width="100%"
-            isDisabled={!isNameValid || !isPhoneNumberValid}
+            isDisabled={!(isFirstNameValid) || !isLastNameValid || !isPhoneNumberValid}
             onClick={handleOnboardingSubmit}
           >
             Continue to Site
