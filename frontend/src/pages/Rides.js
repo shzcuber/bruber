@@ -149,7 +149,7 @@ function Rides(props) {
         unmountOnExit={true}
         transition={transitionProp}
       >
-        <Box padding="40px" backgroundColor="primary.150" color="primary.700">
+        <Box mx="5%" my="40px" backgroundColor="primary.150" color="primary.700">
           <Flex align="center">
             <Heading as="h1" size="3xl">
               Rides

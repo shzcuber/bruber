@@ -73,7 +73,7 @@ function Onboarding(props)  {
   return (
     <Box className='home-container' color="primary.700">
       <Navbar authUser={props.authUser}/>
-      <Box mt="5%" mx="5%" className="home-heading">
+      <Box mx="5%" my="40px" className="home-heading">
         <Heading as="h1" size="2xl">
           Add/Change Your Information
         </Heading>

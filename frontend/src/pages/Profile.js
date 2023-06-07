@@ -92,7 +92,7 @@ function Profile(props) {
         unmountOnExit={true}
         transition={transitionProp}
       >
-        <Box margin="40px">
+        <Box mx="5%">
           <Box className="home-heading">
             <Heading fontWeight="bold" m="40px 0" size="3xl" as="h1">
               Profile

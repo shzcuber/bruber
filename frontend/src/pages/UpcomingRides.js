@@ -39,7 +39,7 @@ export default function UpcomingRides(props)
         unmountOnExit={true}
         transition={transitionProp}
       >
-        <Box margin="40px" color="primary.700">
+        <Box mx="5%" my="40px" color="primary.700">
           <Heading fontWeight="bold" m="40px 0" size="3xl" as="h1">
             All Upcoming Rides
           </Heading>
