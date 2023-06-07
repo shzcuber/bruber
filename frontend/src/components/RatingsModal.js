@@ -21,7 +21,7 @@ export default function RatingsModal(props) {
     };
     console.log(props)
 
-    fetch(`{process.env.REACT_APP_BACKEND}/add_rating`, requestOptions)
+    fetch(`${process.env.REACT_APP_BACKEND}/add_rating`, requestOptions)
       .then((data) => {
         window.location.reload();
       })

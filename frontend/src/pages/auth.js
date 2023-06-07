@@ -48,7 +48,7 @@ const AuthDetails = () => {
             headers: { "Content-Type": "application/json" },
           };
       
-          fetch(`{process.env.REACT_APP_BACKEND}/user/${uid}`, requestOptions)
+          fetch(`${process.env.REACT_APP_BACKEND}/user/${uid}`, requestOptions)
             .then((res) => res.json()) // Convert json to js object
             .then((data) => {
                 setFirstName(data.firstName);

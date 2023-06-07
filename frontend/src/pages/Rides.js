@@ -117,7 +117,7 @@ function Rides(props) {
 
     const searchParameters = new URLSearchParams(data).toString();
 
-    fetch(`{process.env.REACT_APP_BACKEND}/get_rides?${searchParameters}`, requestOptions)
+    fetch(`${process.env.REACT_APP_BACKEND}/get_rides?${searchParameters}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setRides(data);
