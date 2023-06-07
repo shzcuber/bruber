@@ -37,6 +37,7 @@ function setupUser(user) {
 
   fetch(`${process.env.REACT_APP_BACKEND}/create_user`, requestOptions)
     .then(data => {
+      console.log(process.env.REACT_APP_BACKEND)
     })
     .catch(error => {
         console.log("Error: " + error);
