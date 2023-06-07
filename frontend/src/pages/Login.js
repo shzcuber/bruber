@@ -34,7 +34,7 @@ function setupUser(user) {
     })
   };
 
-  fetch("http://localhost:3000/create_user", requestOptions)
+  fetch("https://bruber-production.up.railway.app/create_user", requestOptions)
     .then(data => {
     })
     .catch(error => {
