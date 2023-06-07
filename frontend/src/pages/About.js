@@ -48,10 +48,10 @@ import {
               <ListItem>Complete the ride and leave feedback for your fellow Bruins to help maintain a reliable community.</ListItem>
             </UnorderedList>
   
-            <Text>
+            <Text mt={8}>
               Bruber is committed to enhancing the transportation experience for UCLA students by 
               fostering a strong community of Bruins who can rely on each other for ridesharing 
-              needs. Start using Bruber today and make your daily commute easier and more enjoyable!
+              needs. Start using Bruber today and make your commute easier and more enjoyable!
             </Text>
           </Box>
         </Box>

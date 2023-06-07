@@ -60,7 +60,7 @@ const Navbar = () => {
             Upcoming
           </Button>
           <Button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/about")}
             color="white"
             _active={{ transform: "scale(0.98)", color: "grey" }}
             fontSize="xl"
