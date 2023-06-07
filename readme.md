@@ -69,6 +69,7 @@ npm start
 ![Assets/create-ride.png](Assets/create-ride.png)
 
 
+
 ## Technology Stack and Acknowledgements
 We used:
 - React.js as frontend library
@@ -85,6 +86,20 @@ We used:
 - Peter Ngyuen
 - Jimmy Fang
 
+## to do:
+- Add ratings images
+- describe the app better
+- It says "5% – Detailed README file that accurately and completely describes how to run the app locally.", so need to add more details
+- add hyperlinks
+
+## Site Stuff:
+- Favicons
+- Display
+- Meta Data update
+- App final testing
+- App robustness testing
+- Backend testing
+- .env setup for fe
 
 
 

@@ -66,13 +66,14 @@ app.get('/user/:id', async (req, res) => {
   let user = docSnap.data();
 
   let rides = [];
-  if(user.rides)
+  if(user && user.rides)
   {
     for(const ride of user.rides)
     {
       console.log(ride.rideId)
       const rideRef = doc(db, "rides", ride.rideId);
       const rideSnap = await(getDoc(rideRef));
+      console.log(rideSnap.data())
       rides.push(rideSnap.data());
     }
   }

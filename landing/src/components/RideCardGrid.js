@@ -3,7 +3,7 @@ import { SimpleGrid } from "@chakra-ui/react";
 import { parseTime } from "../utilities";
 
 export default function RideCardGrid(props) {
-  console.log(props.rides[0])
+  console.log(props.rides)
   const rideCardList = props.rides.map((ride, index) => (
     <RideCard
       key={index}
