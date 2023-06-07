@@ -1,4 +1,4 @@
-import { Text, Box, Heading } from "@chakra-ui/react";
+import { Text, SlideFade, Box, Heading } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import RidesDisplay from "./RidesDisplay";
 import { useEffect, useState } from "react";
@@ -24,17 +24,29 @@ export default function UpcomingRides(props) {
       })
       .catch((error) => console.log("Error: " + error));
   }, []);
+  const transitionProp = {
+    enter: { duration: 0.4 },
+    exit: { duration: 0 },
+  };
   return (
     <Box>
       <Navbar />
-      <Box margin="40px" color="primary.700">
-        <Heading fontWeight="bold" m="40px 0" size="3xl" as="h1">
-          All Upcoming Rides
-        </Heading>
-        <Box backgroundColor="primary.100" padding="20px" borderRadius="20px">
-          <RidesDisplay authUser={props.authUser} rides={rides} />
+      <SlideFade
+        in={true}
+        direction="down"
+        offsetY="20px"
+        unmountOnExit={true}
+        transition={transitionProp}
+      >
+        <Box margin="40px" color="primary.700">
+          <Heading fontWeight="bold" m="40px 0" size="3xl" as="h1">
+            All Upcoming Rides
+          </Heading>
+          <Box backgroundColor="primary.100" padding="20px" borderRadius="20px">
+            <RidesDisplay authUser={props.authUser} rides={rides} />
+          </Box>
         </Box>
-      </Box>
+      </SlideFade>
     </Box>
   );
 }
