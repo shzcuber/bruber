@@ -16,8 +16,9 @@ export default function RatingsModal(props) {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({userId: props.driverID, rating})
+      body: JSON.stringify({rideId: props.rideId, rating})
     };
+    console.log(props)
 
     fetch(`https://bruber-production.up.railway.app/add_rating`, requestOptions)
       .then((data) => {

@@ -28,13 +28,16 @@ function Profile(props)  {
       .then((data) => {
         setEmail(data.email);
         setPhoneNumber(data.phoneNumber);
-        setName(data.firstName + " " + data.lastName);
-        let rides = []
-        data.rides.forEach(ride => 
-          // console.log('ride: ',JSON.parse(ride.rideData))
-          rides.push(JSON.parse(ride.rideData))
-        );
-        setRides(rides);
+        setName(data.firstName);
+        setRides(data.rides);
+        console.log("from profile",data.rides)
+        // let rides = []
+        // data.rides.forEach(ride => 
+        //   // console.log('ride: ',JSON.parse(ride.rideData))
+        //   rides.push(JSON.parse(ride.rideData))
+        // );
+        // setRides(rides);
+        // console.log('rides', rides)
       })
       .catch((error) => console.log("Error: " + error));
   }, [])
