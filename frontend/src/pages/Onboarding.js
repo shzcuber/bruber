@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 
 
 function Onboarding(props)  {
-  console.log(process.env.REACT_APP_TEST)
 
   const navigate = useNavigate();
 
