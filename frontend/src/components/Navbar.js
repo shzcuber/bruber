@@ -49,7 +49,23 @@ const Navbar = () => {
             _active={{ transform: "scale(0.98)", color: "grey" }}
             fontSize="xl"
           >
-            Rides
+            Search
+          </Button>
+          <Button
+            onClick={() => navigate("/upcoming_rides")}
+            color="white"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
+            fontSize="xl"
+          >
+            Upcoming
+          </Button>
+          <Button
+            onClick={() => navigate("/")}
+            color="white"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
+            fontSize="xl"
+          >
+            About Us
           </Button>
         </ButtonGroup>
         <Spacer />
