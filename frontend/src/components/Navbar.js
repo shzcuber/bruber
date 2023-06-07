@@ -31,38 +31,53 @@ const Navbar = (props) => {
       px={4}
     >
       <Flex justify="space-between" flex="1" mx="5%">
-        <Box display={{ base: "block", lg: "none" }} >
+        <Box display={{ base: "block", lg: "none" }}>
           <Menu>
             {({ isOpen }) => (
               <>
-                <MenuButton 
+                <MenuButton
                   as={IconButton}
                   icon={<FiMenu />}
                   variant="ghost"
                   color={isOpen ? "primary.700" : "white"}
-                  aria-label="Menu" />
+                  aria-label="Menu"
+                />
                 <MenuList>
                   <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
-                  <MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>
+                  <MenuItem onClick={() => navigate("/profile")}>
+                    Profile
+                  </MenuItem>
                   <MenuItem onClick={() => navigate("/rides")}>Search</MenuItem>
-                  <MenuItem onClick={() => navigate("/upcoming_rides")}>Upcoming</MenuItem>
-                  <MenuItem onClick={() => navigate("/about")}>About Us</MenuItem>
+                  <MenuItem onClick={() => navigate("/upcoming_rides")}>
+                    Upcoming
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/about")}>
+                    About Us
+                  </MenuItem>
                   <MenuDivider />
                   {props.authUser ? (
                     <MenuItem onClick={userSignOut}>Log Out</MenuItem>
                   ) : (
-                    <MenuItem onClick={() => navigate("/login")}>Log In</MenuItem>
+                    <MenuItem onClick={() => navigate("/login")}>
+                      Log In
+                    </MenuItem>
                   )}
                 </MenuList>
               </>
             )}
           </Menu>
         </Box>
-        <ButtonGroup variant="link" spacing="8" my="auto" display={{ base: "none", lg: "block" }}>
+        <ButtonGroup
+          variant="link"
+          spacing="8"
+          my="auto"
+          display={{ base: "none", lg: "block" }}
+        >
           <Button
             onClick={() => navigate("/")}
             color="white"
             fontSize="xl"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
           >
             Home
           </Button>
@@ -70,6 +85,7 @@ const Navbar = (props) => {
             onClick={() => navigate("/profile")}
             color="white"
             fontSize="xl"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
           >
             Profile
           </Button>
@@ -77,6 +93,7 @@ const Navbar = (props) => {
             onClick={() => navigate("/rides")}
             color="white"
             fontSize="xl"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
           >
             Search
           </Button>
@@ -84,6 +101,7 @@ const Navbar = (props) => {
             onClick={() => navigate("/upcoming_rides")}
             color="white"
             fontSize="xl"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
           >
             Upcoming
           </Button>
@@ -91,6 +109,7 @@ const Navbar = (props) => {
             onClick={() => navigate("/about")}
             color="white"
             fontSize="xl"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
           >
             About Us
           </Button>
@@ -102,7 +121,11 @@ const Navbar = (props) => {
               Log Out
             </Button>
           ) : (
-            <Button onClick={() => navigate("/login")} bg={"white"} variant="ghost">
+            <Button
+              onClick={() => navigate("/login")}
+              bg={"white"}
+              variant="ghost"
+            >
               Log In
             </Button>
           )}
