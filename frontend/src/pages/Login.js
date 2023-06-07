@@ -10,7 +10,7 @@ import {
   Stack,
   SlideFade,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { auth, userSignOut } from "./auth"
 import {
   signInWithEmailAndPassword,
@@ -20,7 +20,7 @@ import {
   sendEmailVerification,
   getAdditionalUserInfo,
 } from "firebase/auth"
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Navbar from "../components/Navbar";
 
 
@@ -61,6 +61,14 @@ function LoginPage(props) {
   console.log(process.env.REACT_APP_BACKEND)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showSlideFade, setShowSlideFade] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Reset the state of SlideFade when the path changes
+    setShowSlideFade(false);
+    setTimeout(() => setShowSlideFade(true), 0);
+  }, [location.pathname]);
 
   const signIn = (e) => {
     e.preventDefault();
@@ -107,7 +115,7 @@ function LoginPage(props) {
     <Box color="primary.700">
       <Navbar authUser={props.authUser}/>
       <SlideFade
-          in={true}
+          in={showSlideFade}
           direction="down"
           offsetY="20px"
           unmountOnExit={true}
