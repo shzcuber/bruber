@@ -31,34 +31,47 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
+
 const AuthDetails = () => {
     const [authUser, setAuthUser] = useState(null);
+    const [firstName, setFirstName] = useState(null);
+    const [lastName, setLastName] = useState(null);
+    const [phoneNumber, setPhoneNumber] = useState(null);
 
-    onAuthStateChanged(auth, user => {
-        if(user){
-            setAuthUser(user);
-            console.log(user)
-            const requestOptions = {
-                method: "POST",
-                headers: { "Content-Type": "application/json"},
-                body: JSON.stringify({'uid': user.uid, 'firstName': user.displayName, 'lastName': user.displayName, 'email': user.email, 'phoneNumber': user.phoneNumber})
-            };
 
-            fetch("http://localhost:3000/create_user", requestOptions)
-                .then(data => {
-                })
-                .catch(error => {
-                    console.log("Error: " + error);
-                })
-        } else {
-            setAuthUser(null);
-        }
+    const refreshUserData = (uid) => {
+        const requestOptions = {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          };
+      
+          fetch(`http://localhost:3000/user/${uid}`, requestOptions)
+            .then((res) => res.json()) // Convert json to js object
+            .then((data) => {
+                setFirstName(data.firstName);
+                setLastName(data.lastName);
+                setPhoneNumber(data.phoneNumber);
             })
+            .catch((error) => console.log("Error: " + error));
+    }
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setAuthUser(user);
+                refreshUserData(user.uid)
+                console.log(user)
+            } else {
+                setAuthUser(null);
+            }
+        });
+    }, [])
+
 
     return (
         <div>
             <h1>{authUser && authUser.emailVerified ? (
-                authUser.displayName && authUser.phoneNumber ? (
+                firstName && lastName && phoneNumber ? (
                 <Router>
                 <Routes>
                     <Route exact path="/" element={<Home authUser={authUser} />}/>
