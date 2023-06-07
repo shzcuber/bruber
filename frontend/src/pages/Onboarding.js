@@ -56,7 +56,7 @@ function Onboarding(props)  {
       })
     };
 
-    fetch("{process.env.REACT_APP_BACKEND}/create_user", requestOptions)
+    fetch(`${process.env.REACT_APP_BACKEND}/create_user`, requestOptions)
       .then(data => {
       })
       .catch(error => {

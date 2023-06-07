@@ -32,7 +32,7 @@ function CreateRide(props) {
       body: JSON.stringify(formData)
     };
 
-    fetch("{process.env.REACT_APP_BACKEND}/create_ride", requestOptions)
+    fetch(`${process.env.REACT_APP_BACKEND}/create_ride`, requestOptions)
     .then(res => res.json())  // Convert json to js object
     .then(data => {
       // console.log("Data received: " + data.status);
