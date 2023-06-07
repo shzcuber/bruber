@@ -45,7 +45,7 @@ const AuthDetails = () => {
             headers: { "Content-Type": "application/json" },
           };
       
-          fetch(`http://localhost:3000/user/${uid}`, requestOptions)
+          fetch(`https://bruber-production.up.railway.app/user/${uid}`, requestOptions)
             .then((res) => res.json()) // Convert json to js object
             .then((data) => {
                 setFirstName(data.firstName);

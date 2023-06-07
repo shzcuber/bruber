@@ -19,7 +19,7 @@ export default function RatingsModal(props) {
       body: JSON.stringify({userId: props.driverID, rating})
     };
 
-    fetch(`http://localhost:3000/add_rating`, requestOptions)
+    fetch(`https://bruber-production.up.railway.app/add_rating`, requestOptions)
       .then((data) => {
         window.location.reload();
       })

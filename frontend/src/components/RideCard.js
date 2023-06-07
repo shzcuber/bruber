@@ -33,7 +33,7 @@ export default function RideCard(props) {
       headers: { "Content-Type": "application/json" },
     };
 
-    fetch(`http://localhost:3000/user/${props.driverID}`, requestOptions)
+    fetch(`https://bruber-production.up.railway.app/user/${props.driverID}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setRating(data.rating);
