@@ -31,7 +31,7 @@ export default function UpcomingRides(props)
   };
   return (
     <Box>
-      <Navbar />
+      <Navbar authUser={props.authUser}/>
       <SlideFade
         in={true}
         direction="down"

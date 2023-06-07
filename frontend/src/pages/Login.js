@@ -3,7 +3,7 @@ import {
   Button,
   Checkbox,
   Container,
-  FormControl,
+  Heading,
   FormLabel,
   HStack,
   Input,
@@ -19,7 +19,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth"
 import { Link } from 'react-router-dom';
-
+import Navbar from "../components/Navbar";
 
 
 function setupUser(user) {
@@ -47,13 +47,12 @@ function setupUser(user) {
 function popUp() {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider).then((result) => {
-    setupUser(result.user)
   }).catch((error) => {
     alert(error);
   })
 }
 
-function LoginPage() {
+function LoginPage(props) {
   console.log(process.env.REACT_APP_BACKEND)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -95,40 +94,47 @@ function LoginPage() {
   }
 
   return (
-    <Container maxW="lg" py={{ base: '12', md: '24' }} px={{ base: '0', sm: '8' }}>
-      <Box
-        py={{ base: '0', sm: '8' }}
-        px={{ base: '4', sm: '10' }}
-        bg={{ base: 'transparent', sm: 'bg-surface' }}
-        boxShadow={{ base: 'none', sm: 'md' }}
-        borderRadius={{ base: 'none', sm: 'xl' }}
-        backgroundColor="white"
-      >
-        <Stack spacing="6">
-          <Stack spacing="5">
-            <form onSubmit={signIn}>
-              <FormLabel htmlFor="email">Email</FormLabel>
-              <Input value={email} onChange={(e) => { setEmail(e.target.value) }} bg="gray.100" id="email" type="email" />
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <Input value={password} onChange={(e) => { setPassword(e.target.value) }} bg="gray.100" id="password" type="password" />
-              <HStack my="3" justify="space-between">
-                <Checkbox defaultChecked>Remember me</Checkbox>
-                <Link to={`/forgot-password?email=${encodeURIComponent(email)}`}>
-                  <Button variant="link" colorScheme="blue" size="sm">
-                    Forgot password?
-                  </Button>
-                </Link>
-              </HStack>
-              <Stack spacing="6" align="center">
-                <Button type='submit' width="100%">Sign In / Create Account</Button>
-                <Button onClick={popUp} width="100%" variant="outline"> Login with Google </Button>
+    <Box color="primary.700">
+      <Navbar authUser={props.authUser}/>
+      <Container maxW="lg" py={{ base: '6', md: '12' }} px={{ base: '0', sm: '8' }}>
+        <Heading as="h1" size="2xl">
+          Login
+        </Heading>
+        <Box
+          mt="5%"
+          py={{ base: '0', sm: '8' }}
+          px={{ base: '4', sm: '10' }}
+          bg={{ base: 'transparent', sm: 'bg-surface' }}
+          boxShadow={{ base: 'none', sm: 'md' }}
+          borderRadius={{ base: 'none', sm: 'xl' }}
+          backgroundColor="white"
+        >
+          <Stack spacing="6">
+            <Stack spacing="5">
+              <form onSubmit={signIn}>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <Input value={email} onChange={(e) => { setEmail(e.target.value) }} bg="gray.100" id="email" type="email" />
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <Input value={password} onChange={(e) => { setPassword(e.target.value) }} bg="gray.100" id="password" type="password" />
+                <HStack my="3" justify="space-between">
+                  <Checkbox defaultChecked>Remember me</Checkbox>
+                  <Link to={`/forgot-password?email=${encodeURIComponent(email)}`}>
+                    <Button variant="link" colorScheme="blue" size="sm">
+                      Forgot password?
+                    </Button>
+                  </Link>
+                </HStack>
+                <Stack spacing="6" align="center">
+                  <Button type='submit' width="100%">Sign In / Create Account</Button>
+                  <Button onClick={popUp} width="100%" variant="outline"> Login with Google </Button>
 
-              </Stack>
-            </form>
+                </Stack>
+              </form>
+            </Stack>
           </Stack>
-        </Stack>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+    </Box>
   )
 }
 

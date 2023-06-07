@@ -30,14 +30,16 @@ function Profile(props) {
       .then((data) => {
         setEmail(data.email);
         setPhoneNumber(data.phoneNumber);
-        setName(data.firstName);
+        setFirstName(data.firstName);
+        setLastName(data.lastName);
         setRides(data.rides);
         setRating(data.rating ? getStarString(data.rating) : "unrated");
       })
       .catch((error) => console.log("Error: " + error));
   }, []);
 
-  const [name, setName] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
   const [rides, setRides] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("1234567890");
   const [email, setEmail] = useState("");
@@ -51,7 +53,28 @@ function Profile(props) {
     setIsPhoneNumberValid(/^\d{10}$/.test(phoneNumberInput));
   };
 
-  const togglePhoneNumberButton = () => {
+  const handlePhoneNumberButton = () => {
+    if (isPhoneNumberEditing) {
+      //Save button was pressed
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({
+          'uid': props.authUser.uid,
+          'firstName': firstName,
+          'lastName': lastName,
+          'email': props.authUser.email,
+          'phoneNumber': phoneNumber
+        })
+      };
+  
+      fetch(`${process.env.REACT_APP_BACKEND}/create_user`, requestOptions)
+        .then(data => {
+        })
+        .catch(error => {
+            console.log("Error: " + error);
+        })
+    }
     setIsPhoneNumberEditing(!isPhoneNumberEditing);
   };
 
@@ -61,7 +84,7 @@ function Profile(props) {
   };
   return (
     <Box className="home-container" color="primary.700">
-      <Navbar />
+      <Navbar authUser={props.authUser}/>
       <SlideFade
         in={true}
         direction="down"
@@ -87,7 +110,7 @@ function Profile(props) {
             <Box maxW="lg" mx="auto" p={4}>
               <FormControl>
                 <FormLabel fontSize="2xl">Name</FormLabel>
-                <Input value={name} isDisabled bg="gray.200" />
+                <Input value={firstName + " " + lastName} isDisabled bg="gray.200" />
               </FormControl>
 
               <FormControl mt="20px">
@@ -111,9 +134,11 @@ function Profile(props) {
                     />
                   </InputGroup>
                   {!isPhoneNumberEditing ? (
-                    <Button onClick={togglePhoneNumberButton}>Edit</Button>
+                    <Button onClick={handlePhoneNumberButton}>Edit</Button>
                   ) : (
-                    <Button onClick={togglePhoneNumberButton}>Save</Button>
+                    <Button onClick={handlePhoneNumberButton} isDisabled={!isPhoneNumberValid}>
+                      Save
+                    </Button>
                   )}
                 </Stack>
               </FormControl>

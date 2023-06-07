@@ -22,7 +22,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-function Home() {
+function Home(props) {
   const transitionProp = {
     enter: { duration: 0.4 },
     exit: { duration: 0 },
@@ -56,7 +56,7 @@ function Home() {
 
   return (
     <Box className="home-container" color="primary.700">
-      <Navbar />
+      <Navbar authUser={props.authUser}/>
       <SlideFade
         in={true}
         direction="down"

@@ -97,9 +97,10 @@ const AuthDetails = () => {
             ) : (
             <Router>
             <Routes>
-                <Route exact path="/forgot-password" element={<ForgotPassword/>}/>
+                <Route exact path="/" element={<Home authUser={authUser}/>}/>
+                <Route exact path="/forgot-password" element={<ForgotPassword authUser={authUser}/>}/>
                 <Route exact path="/about" element={<About authUser={authUser}/>}/>
-                <Route path="*" element={<LoginPage authUser={authUser} />}/>
+                <Route path="*" element={<LoginPage authUser={authUser}/>}/>
             </Routes>
             </Router>
             )}</h1>
