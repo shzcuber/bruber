@@ -8,6 +8,7 @@ import {
   HStack,
   Input,
   Stack,
+  SlideFade,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { auth, userSignOut } from "./auth"
@@ -97,45 +98,58 @@ function LoginPage(props) {
       });
   }
 
+  const transitionProp = {
+    enter: { duration: 0.4 },
+    exit: { duration: 0 },
+  };
+
   return (
     <Box color="primary.700">
       <Navbar authUser={props.authUser}/>
-      <Container maxW="lg" p="5%">
-        <Heading as="h1" size="2xl">
-          Login
-        </Heading>
-        <Box
-          backgroundColor="white"
-          borderRadius="xl"
-          my="5%"
-          padding="20px"
-          boxShadow="md"
-        >
-          <Stack spacing="6">
-            <Stack spacing="5">
-              <form onSubmit={signIn}>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Input value={email} onChange={(e) => { setEmail(e.target.value) }} bg="gray.100" id="email" type="email" />
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <Input value={password} onChange={(e) => { setPassword(e.target.value) }} bg="gray.100" id="password" type="password" />
-                <HStack my="3" justify="space-between">
-                  <Checkbox defaultChecked>Remember me</Checkbox>
-                  <Link to={`/forgot-password?email=${encodeURIComponent(email)}`}>
-                    <Button variant="link" colorScheme="blue" size="sm">
-                      Forgot password?
-                    </Button>
-                  </Link>
-                </HStack>
-                <Stack spacing="6" align="center">
-                  <Button type='submit' width="100%">Sign In / Create Account</Button>
-                  <Button onClick={popUp} width="100%" variant="outline"> Login with Google </Button>
+      <SlideFade
+          in={true}
+          direction="down"
+          offsetY="20px"
+          unmountOnExit={true}
+          transition={transitionProp}
+      >
+        <Container maxW="lg" p="5%">
+          <Heading as="h1" size="2xl">
+            Login
+          </Heading>
+          <Box
+            backgroundColor="white"
+            borderRadius="xl"
+            my="5%"
+            padding="20px"
+            boxShadow="md"
+          >
+            <Stack spacing="6">
+              <Stack spacing="5">
+                <form onSubmit={signIn}>
+                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <Input value={email} onChange={(e) => { setEmail(e.target.value) }} bg="gray.100" id="email" type="email" />
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <Input value={password} onChange={(e) => { setPassword(e.target.value) }} bg="gray.100" id="password" type="password" />
+                  <HStack my="3" justify="space-between">
+                    <Checkbox defaultChecked>Remember me</Checkbox>
+                    <Link to={`/forgot-password?email=${encodeURIComponent(email)}`}>
+                      <Button variant="link" colorScheme="blue" size="sm">
+                        Forgot password?
+                      </Button>
+                    </Link>
+                  </HStack>
+                  <Stack spacing="6" align="center">
+                    <Button type='submit' width="100%">Sign In / Create Account</Button>
+                    <Button onClick={popUp} width="100%" variant="outline"> Login with Google </Button>
 
-                </Stack>
-              </form>
+                  </Stack>
+                </form>
+              </Stack>
             </Stack>
-          </Stack>
-        </Box>
-      </Container>
+          </Box>
+        </Container>
+      </SlideFade>
     </Box>
   )
 }
