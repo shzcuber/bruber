@@ -120,6 +120,7 @@ function CreateRide(props) {
                 <FormLabel size='xs' textTransform='uppercase'>
                   Capacity
                 </FormLabel>
+                <p > Don't count yourself. Just list total empty seats.</p>
                 <Select {...register("capacity", {required: true})}>
                     <option>1</option>
                     <option>2</option>
