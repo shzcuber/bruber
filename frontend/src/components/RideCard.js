@@ -26,7 +26,6 @@ export default function RideCard(props) {
    * a list of names that are part of the carpool group,
    * a carpool capacity (will fill any vacancies with "empty")
    */
-  // console.log(props);
   useEffect(() => {
     const requestOptions = {
       method: "GET",
@@ -59,7 +58,7 @@ export default function RideCard(props) {
             </Box>
           </Flex>
           <Text color="gold" fontSize="xl" mr="25%">
-            {rating ? getStarString(rating) : "(Unrated)"}
+            {props.rating ? getStarString(props.rating) : "(Unrated)"}
           </Text>
         </Flex>
       </CardHeader>
@@ -96,7 +95,8 @@ export default function RideCard(props) {
           </Button>
         )}
         <RatingsModal
-          driverID={props.driverID}
+          // driverID={props.driverID}
+          rideId={props.rideId}
           isOpen={isOpen}
           onClose={onClose}
         />
