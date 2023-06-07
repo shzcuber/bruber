@@ -53,6 +53,7 @@ function popUp() {
 }
 
 function LoginPage() {
+  console.log(process.env.REACT_APP_BACKEND)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -66,6 +67,7 @@ function LoginPage() {
         } else {
           userSignOut();
           alert("Please verify your email before logging in.");
+
         }
       })
       .catch((error) => {
