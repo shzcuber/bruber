@@ -33,7 +33,7 @@ function Onboarding(props)  {
       headers: { "Content-Type": "application/json" },
     };
 
-    fetch(`{process.env.REACT_APP_BACKEND}/user/${props.authUser.uid}`, requestOptions)
+    fetch(`${process.env.REACT_APP_BACKEND}/user/${props.authUser.uid}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setPhoneNumber(data.phoneNumber || '');
