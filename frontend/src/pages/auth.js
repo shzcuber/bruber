@@ -13,6 +13,7 @@ import Rides from './Rides'
 import Driver from "./Driver";
 import CreateRide from './CreateRide';
 import Profile from './Profile';
+import About from './About';
 import Navbar from "../components/Navbar"
 import { list } from "@chakra-ui/react";
 import UpcomingRides from "./UpcomingRides";
@@ -85,6 +86,7 @@ const AuthDetails = () => {
                     <Route exact path="/create_ride" element={<CreateRide authUser={authUser}/>}/>
                     <Route exact path="/profile" element={<Profile authUser={authUser}/>}/>
                     <Route exact path="/upcoming_rides" element={<UpcomingRides authUser={authUser}/>}/>
+                    <Route exact path="/about" element={<About authUser={authUser}/>}/>
                 </Routes>
                 </Router>
                 ) : (
@@ -96,6 +98,7 @@ const AuthDetails = () => {
             <Router>
             <Routes>
                 <Route exact path="/forgot-password" element={<ForgotPassword/>}/>
+                <Route exact path="/about" element={<About authUser={authUser}/>}/>
                 <Route path="*" element={<LoginPage authUser={authUser} />}/>
             </Routes>
             </Router>
