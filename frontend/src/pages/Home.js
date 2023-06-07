@@ -95,7 +95,11 @@ function Home() {
                 </Button>
               </Link>
               <Spacer />
-              <Button w="45%">About Bruber</Button>
+              <Link as={RouterLink} to="/about" w="45%">
+                <Button w="100%">
+                  <Text isTruncated>About Bruber</Text>
+                </Button>
+              </Link>
             </Flex>
           </Box>
         </Box>
