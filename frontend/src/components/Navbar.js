@@ -106,6 +106,14 @@ const Navbar = (props) => {
             Upcoming
           </Button>
           <Button
+            onClick={() => navigate("/create_ride")}
+            color="white"
+            fontSize="xl"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
+          >
+            Create
+          </Button>
+          <Button
             onClick={() => navigate("/about")}
             color="white"
             fontSize="xl"
