@@ -17,7 +17,7 @@ export default function RideSignupButton(props) {
       }),
     };
 
-        fetch("https://bruber-production.up.railway.app/ride_signup", requestOptions)
+        fetch("{process.env.REACT_APP_BACKEND}/ride_signup", requestOptions)
             .then(data => {
                 navigate('/profile')
             })

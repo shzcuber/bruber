@@ -10,6 +10,7 @@ import { sampleLocations } from "../utilities";
 import Navbar from "../components/Navbar";
 
 
+
 function CreateRide(props) {
   const [submitted, setSubmitted] = useState(false);
 
@@ -31,7 +32,7 @@ function CreateRide(props) {
       body: JSON.stringify(formData)
     };
 
-    fetch("https://bruber-production.up.railway.app/create_ride", requestOptions)
+    fetch("{process.env.REACT_APP_BACKEND}/create_ride", requestOptions)
     .then(res => res.json())  // Convert json to js object
     .then(data => {
       // console.log("Data received: " + data.status);

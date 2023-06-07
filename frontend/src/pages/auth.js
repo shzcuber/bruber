@@ -17,6 +17,8 @@ import Navbar from "../components/Navbar"
 import { list } from "@chakra-ui/react";
 import UpcomingRides from "./UpcomingRides";
 
+
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBBXKNbip86Utdj3oqoMo7ZtIMjjQffbUI",
@@ -45,7 +47,7 @@ const AuthDetails = () => {
             headers: { "Content-Type": "application/json" },
           };
       
-          fetch(`https://bruber-production.up.railway.app/user/${uid}`, requestOptions)
+          fetch(`{process.env.REACT_APP_BACKEND}/user/${uid}`, requestOptions)
             .then((res) => res.json()) // Convert json to js object
             .then((data) => {
                 setFirstName(data.firstName);
