@@ -23,6 +23,11 @@ function CreateRide(props) {
   function onSubmit(formData) {
     // console.log("handleButtonClick() called in CreateRide.js");
     // CHANGE LATER ONCE WE HAVE AUTH
+    if(formData.to === formData.from){
+      alert("can't create ride to and from same place!")
+      return;
+    }
+
     formData["driverID"] = props.authUser.uid;
     console.log(props.authUser.uid)
     console.log(formData)
