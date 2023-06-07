@@ -37,9 +37,10 @@ export const auth = getAuth(app);
 
 const AuthDetails = () => {
     const [authUser, setAuthUser] = useState(null);
-    const [firstName, setFirstName] = useState(null);
-    const [lastName, setLastName] = useState(null);
-    const [phoneNumber, setPhoneNumber] = useState(null);
+    //initialize states to true to reduce glitchiness
+    const [firstName, setFirstName] = useState(true);
+    const [lastName, setLastName] = useState(true);
+    const [phoneNumber, setPhoneNumber] = useState(true);
 
 
     const refreshUserData = (uid) => {
