@@ -17,6 +17,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendEmailVerification,
+  getAdditionalUserInfo,
 } from "firebase/auth"
 import { Link } from 'react-router-dom';
 import Navbar from "../components/Navbar";
@@ -47,6 +48,9 @@ function setupUser(user) {
 function popUp() {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider).then((result) => {
+    if (getAdditionalUserInfo(result).isNewUser) {
+      setupUser(result.user)
+    }
   }).catch((error) => {
     alert(error);
   })
