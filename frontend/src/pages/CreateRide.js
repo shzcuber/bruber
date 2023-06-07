@@ -31,7 +31,7 @@ function CreateRide(props) {
       body: JSON.stringify(formData)
     };
 
-    fetch("http://localhost:3000/create_ride", requestOptions)
+    fetch("https://bruber-production.up.railway.app/create_ride", requestOptions)
     .then(res => res.json())  // Convert json to js object
     .then(data => {
       // console.log("Data received: " + data.status);

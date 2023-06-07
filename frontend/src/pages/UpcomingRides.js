@@ -18,7 +18,7 @@ export default function UpcomingRides(props)
 
         const searchParameters = new URLSearchParams(data).toString();
 
-        fetch(`http://localhost:3000/get_rides?${searchParameters}`, requestOptions)
+        fetch(`https://bruber-production.up.railway.app/get_rides?${searchParameters}`, requestOptions)
             .then((res) => res.json()) // Convert json to js object
             .then((data) => {
                 setRides(data);

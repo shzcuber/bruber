@@ -7,7 +7,7 @@ import "firebase/auth"
 
 const app = express();
 const db = getFirestore(firebaseApp);
-const port = 3000
+const port = process.env.PORT || 4000;
 app.use(express.json())
 
 app.use(bodyParser.json())
@@ -18,20 +18,29 @@ app.get('/', async (req, res) => {
 app.use(cors())
 
 app.post('/add_rating', async (req, res) => {
-  const docRef = doc(db, "users", req.body.userId);
-  const docSnap = await getDoc(docRef);
+  const ridesDocRef = doc(db, "rides", req.body.rideId);
+  const ridesDoc = await getDoc(ridesDocRef);
+
+  let rides = ridesDoc.data();
+  rides['rating'] = req.body.rating;
+  const userRef = rides.driverID;
+  const docSnap = await getDoc(userRef);
+
+  // console.log(userRef.id)
 
   if (!docSnap.exists()) 
     res.status(400).send("No such user");
 
   let user = docSnap.data();
+  // console.log(user)
   const prevRatingCount = user['ratingCount'] ? user['ratingCount'] : 0;
   const prevRating= user['rating'] ? user['rating'] : 0;
   user['rating'] = (prevRating * prevRatingCount + parseInt(req.body.rating)) / (prevRatingCount+1);
   user['ratingCount'] = prevRatingCount+1;
 
-  console.log(user)
-  await setDoc(docRef, user)
+  await setDoc(userRef, user)
+  await setDoc(ridesDocRef, rides)
+
   res.status(200).send("success");
 })
 
@@ -54,9 +63,25 @@ app.get('/user/:id', async (req, res) => {
   const docRef = doc(db, "users", req.params.id);
   const docSnap = await getDoc(docRef);
 
+  let user = docSnap.data();
+
+  let rides = [];
+  if(user && user.rides)
+  {
+    for(const ride of user.rides)
+    {
+      console.log(ride.rideId)
+      const rideRef = doc(db, "rides", ride.rideId);
+      const rideSnap = await(getDoc(rideRef));
+      console.log(rideSnap.data())
+      rides.push(rideSnap.data());
+    }
+  }
+
+  console.log(rides)
   if (docSnap.exists()) {
     // console.log("Document data:", docSnap.data());
-    res.status(200).send(JSON.stringify(docSnap.data()));
+    res.status(200).send(JSON.stringify({...docSnap.data(), rides}));
   } else {
     // docSnap.data() will be undefined in this case
     // console.log("No such document!");
@@ -87,7 +112,7 @@ app.post('/ride_signup', async (req, res) => {
     else
     {
       rideData['passengers'].push({...userData, userId})
-      const newRide = {'rideData': JSON.stringify(rideData), rideId};
+      const newRide = {rideId};
       if(userData['rides']) 
         userData['rides'].push(newRide);
       else 
@@ -162,6 +187,7 @@ app.post("/create_ride", async (req, res) => {
       capacity: capacityInt
     });
     console.log("Ride written with ID: ", docRef.id);
+    await setDoc(docRef, {id: docRef.id}, {merge: true})
     res.send(JSON.stringify({"status":"success"}));
   } catch (e) {
     console.error("Error adding document: ", e);
