@@ -55,9 +55,11 @@ function Onboarding(props)  {
         'phoneNumber': phoneNumber
       })
     };
+    // console.log(process.env.REACT_APP_BACKEND)
 
     fetch(`${process.env.REACT_APP_BACKEND}/create_user`, requestOptions)
       .then(data => {
+        console.log(data)
       })
       .catch(error => {
           console.log("Error: " + error);

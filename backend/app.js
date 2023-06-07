@@ -125,6 +125,7 @@ app.post('/ride_signup', async (req, res) => {
 
   } catch (e) {
     // console.error("Error adding document: ", e);
+
     res.status(400).send("Bad Request");
     console.error(e)
   }
@@ -133,6 +134,7 @@ app.post('/ride_signup', async (req, res) => {
 // Executes when we get a get request to / url
 app.post('/create_user', async (req, res) => {
   try {
+    console.log(req.body)
     const { firstName, lastName, email, phoneNumber, uid } = req.body;
     // console.log(uid)
     await setDoc(doc(db, "users", uid), {
