@@ -57,6 +57,7 @@ import { passengersToList } from "../utilities";
 import { parseTime } from "../utilities";
 import "./Rides.css";
 
+
 const sampleRideInfo = {
   driverName: "Joe Biden",
   startTime: "2023-06-03T13:30",
@@ -116,7 +117,7 @@ function Rides(props) {
 
     const searchParameters = new URLSearchParams(data).toString();
 
-    fetch(`https://bruber-production.up.railway.app/get_rides?${searchParameters}`, requestOptions)
+    fetch(`{process.env.REACT_APP_BACKEND}/get_rides?${searchParameters}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setRides(data);

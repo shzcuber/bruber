@@ -14,6 +14,7 @@ import {
 import RideCardGrid from '../components/RideCardGrid';
 import Navbar from '../components/Navbar';
 
+
 const PLACEHOLDER_USER_ID = 'wOnGp3wuTOxjie6XR55f'
 
 function Profile(props)  {
@@ -23,7 +24,7 @@ function Profile(props)  {
       headers: { "Content-Type": "application/json" },
     };
 
-    fetch(`https://bruber-production.up.railway.app/user/${props.authUser.uid}`, requestOptions)
+    fetch(`{process.env.REACT_APP_BACKEND}/user/${props.authUser.uid}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setEmail(data.email);

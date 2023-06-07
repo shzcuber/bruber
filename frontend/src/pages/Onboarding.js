@@ -13,7 +13,10 @@ import {
 import Navbar from '../components/Navbar';
 import { useNavigate } from "react-router-dom";
 
+
 function Onboarding(props)  {
+  console.log(process.env.REACT_APP_TEST)
+
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
@@ -31,7 +34,7 @@ function Onboarding(props)  {
       headers: { "Content-Type": "application/json" },
     };
 
-    fetch(`https://bruber-production.up.railway.app/user/${props.authUser.uid}`, requestOptions)
+    fetch(`{process.env.REACT_APP_BACKEND}/user/${props.authUser.uid}`, requestOptions)
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setPhoneNumber(data.phoneNumber || '');
@@ -54,7 +57,7 @@ function Onboarding(props)  {
       })
     };
 
-    fetch("https://bruber-production.up.railway.app/create_user", requestOptions)
+    fetch("{process.env.REACT_APP_BACKEND}/create_user", requestOptions)
       .then(data => {
       })
       .catch(error => {

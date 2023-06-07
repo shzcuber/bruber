@@ -21,6 +21,7 @@ import {
 import { Link } from 'react-router-dom';
 
 
+
 function setupUser(user) {
   const requestOptions = {
     method: "POST",
@@ -34,7 +35,7 @@ function setupUser(user) {
     })
   };
 
-  fetch("https://bruber-production.up.railway.app/create_user", requestOptions)
+  fetch("{process.env.REACT_APP_BACKEND}/create_user", requestOptions)
     .then(data => {
     })
     .catch(error => {

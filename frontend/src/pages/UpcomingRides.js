@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 import RidesDisplay from "./RidesDisplay"
 import { useEffect, useState } from "react"
 
+
 export default function UpcomingRides(props)
 {
     const [rides, setRides] = useState([]);
@@ -18,7 +19,7 @@ export default function UpcomingRides(props)
 
         const searchParameters = new URLSearchParams(data).toString();
 
-        fetch(`https://bruber-production.up.railway.app/get_rides?${searchParameters}`, requestOptions)
+        fetch(`{process.env.REACT_APP_BACKEND}/get_rides?${searchParameters}`, requestOptions)
             .then((res) => res.json()) // Convert json to js object
             .then((data) => {
                 setRides(data);
