@@ -42,18 +42,16 @@ function ForgotPassword(props) {
   return (
     <Box color="primary.700">
       <Navbar authUser={props.authUser}/>
-      <Container maxW="lg" py={{ base: '6', md: '12' }} px={{ base: '0', sm: '8' }}>
+      <Container maxW="lg" p="5%">
         <Heading as="h1" size="xl">
           Forgot Password
         </Heading>
         <Box
-          py={{ base: '0', sm: '8' }}
-          px={{ base: '4', sm: '10' }}
-          bg={{ base: 'transparent', sm: 'bg-surface' }}
-          boxShadow={{ base: 'none', sm: 'md' }}
-          borderRadius={{ base: 'none', sm: 'xl' }}
           backgroundColor="white"
-          mt="5%"
+          borderRadius="xl"
+          my="5%"
+          padding="20px"
+          boxShadow="md"
         >
           <Stack spacing="6">
             <Stack spacing="5">
