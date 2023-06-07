@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Heading,
   Box,
+  Center,
   FormControl,
   FormLabel,
   Button,
@@ -10,13 +11,14 @@ import {
   InputLeftAddon,
   Text,
   Stack,
-} from '@chakra-ui/react';
-import RideCardGrid from '../components/RideCardGrid';
-import Navbar from '../components/Navbar';
+} from "@chakra-ui/react";
+import RideCardGrid from "../components/RideCardGrid";
+import Navbar from "../components/Navbar";
+import { getStarString } from "../utilities";
 
-const PLACEHOLDER_USER_ID = 'wOnGp3wuTOxjie6XR55f'
+const PLACEHOLDER_USER_ID = "wOnGp3wuTOxjie6XR55f";
 
-function Profile(props)  {
+function Profile(props) {
   useEffect(() => {
     const requestOptions = {
       method: "GET",
@@ -29,20 +31,22 @@ function Profile(props)  {
         setEmail(data.email);
         setPhoneNumber(data.phoneNumber);
         setName(data.firstName + " " + data.lastName);
-        let rides = []
-        data.rides.forEach(ride => 
+        setRating(data.rating ? getStarString(data.rating) : "unrated");
+        let rides = [];
+        data.rides.forEach((ride) =>
           // console.log('ride: ',JSON.parse(ride.rideData))
           rides.push(JSON.parse(ride.rideData))
         );
         setRides(rides);
       })
       .catch((error) => console.log("Error: " + error));
-  }, [])
+  }, []);
 
   const [name, setName] = useState();
   const [rides, setRides] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState('1234567890');
-  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("1234567890");
+  const [email, setEmail] = useState("");
+  const [rating, setRating] = useState("(unrated)");
   const [isPhoneNumberEditing, setIsPhoneNumberEditing] = useState(false);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(true);
 
@@ -57,24 +61,31 @@ function Profile(props)  {
   };
 
   return (
-    <Box className='home-container' color="primary.700">
+    <Box className="home-container" color="primary.700">
       <Navbar />
       <Box mt="5%" mx="5%" className="home-heading">
-          <Heading as="h1" size="2xl">
-            Profile
-          </Heading>
+        <Heading as="h1" size="2xl">
+          Profile
+        </Heading>
       </Box>
 
-      <Box backgroundColor="white" borderRadius="30px" p="25px" mt="50px" mx="5%" boxShadow="md">
+      <Box
+        backgroundColor="white"
+        borderRadius="30px"
+        p="25px"
+        mt="50px"
+        mx="5%"
+        boxShadow="md"
+      >
         <Box maxW="lg" mx="auto" p={4}>
           <FormControl>
             <FormLabel fontSize="2xl">Name</FormLabel>
-            <Input value={name} isDisabled bg="gray.200"/>
+            <Input value={name} isDisabled bg="gray.200" />
           </FormControl>
 
           <FormControl mt="20px">
             <FormLabel fontSize="2xl">Email</FormLabel>
-            <Input value={email} isDisabled bg="gray.200"/>
+            <Input value={email} isDisabled bg="gray.200" />
           </FormControl>
 
           <FormControl mt="20px">
@@ -95,21 +106,35 @@ function Profile(props)  {
               {!isPhoneNumberEditing ? (
                 <Button onClick={togglePhoneNumberButton}>Edit</Button>
               ) : (
-                <Button onClick={togglePhoneNumberButton}>
-                  Save
-                </Button>
+                <Button onClick={togglePhoneNumberButton}>Save</Button>
               )}
             </Stack>
           </FormControl>
+          <Center mt="40px" display="block">
+            <FormLabel fontSize="2xl">Rating:</FormLabel>
+            <Text textAlign="center" color="secondary.400" fontSize="4xl">
+              {rating}
+            </Text>
+          </Center>
         </Box>
       </Box>
-      <Box backgroundColor="white" borderRadius="30px" p="25px" my="50px" mx="5%" boxShadow="md">
-        <Text textAlign='center' fontWeight='b' fontSize='3xl'>Rides you signed up for: </Text>
-        {rides && <RideCardGrid displayRatingButton hideSignupButton rides={rides} /> }
+      <Box
+        backgroundColor="white"
+        borderRadius="30px"
+        p="25px"
+        my="50px"
+        mx="5%"
+        boxShadow="md"
+      >
+        <Text textAlign="center" fontWeight="b" fontSize="3xl">
+          Rides you signed up for:{" "}
+        </Text>
+        {rides && (
+          <RideCardGrid displayRatingButton hideSignupButton rides={rides} />
+        )}
       </Box>
     </Box>
   );
 }
-
 
 export default Profile;
