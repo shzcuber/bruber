@@ -1,4 +1,5 @@
 import {
+  Box,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -20,27 +21,29 @@ export default function RatingsModal(props) {
     };
     console.log(props)
 
-    fetch(`{process.env.REACT_APP_BACKEND}/add_rating`, requestOptions)
+    fetch(`${process.env.REACT_APP_BACKEND}/add_rating`, requestOptions)
       .then((data) => {
         window.location.reload();
       })
       .catch((error) => console.log("Error: " + error));
-  }
+  };
 
-  const [rating, setRating] = useState(3)
+  const [rating, setRating] = useState(3);
 
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Rate this driver</ModalHeader>
-        <Select defaultValue={3} onChange={(e) => setRating(e.target.value)}>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </Select>
+        <ModalHeader color="primary.700">Rate this driver</ModalHeader>
+        <Box padding="0px 20px">
+          <Select defaultValue={3} onChange={(e) => setRating(e.target.value)}>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </Select>
+        </Box>
         <ModalCloseButton />
         <ModalFooter>
           <Button colorScheme="primary" mr={3} onClick={props.onClose}>

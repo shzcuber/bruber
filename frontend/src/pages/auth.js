@@ -7,12 +7,13 @@ import {signOut, getAuth, onAuthStateChanged } from "firebase/auth";
 import LoginPage from "./Login";
 import Onboarding from "./Onboarding";
 import ForgotPassword from "./ForgotPassword";
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Home from './Home'
 import Rides from './Rides'
 import Driver from "./Driver";
 import CreateRide from './CreateRide';
 import Profile from './Profile';
+import About from './About';
 import Navbar from "../components/Navbar"
 import { list } from "@chakra-ui/react";
 import UpcomingRides from "./UpcomingRides";
@@ -36,9 +37,10 @@ export const auth = getAuth(app);
 
 const AuthDetails = () => {
     const [authUser, setAuthUser] = useState(null);
-    const [firstName, setFirstName] = useState(null);
-    const [lastName, setLastName] = useState(null);
-    const [phoneNumber, setPhoneNumber] = useState(null);
+    //initialize states to true to reduce glitchiness
+    const [firstName, setFirstName] = useState(true);
+    const [lastName, setLastName] = useState(true);
+    const [phoneNumber, setPhoneNumber] = useState(true);
 
 
     const refreshUserData = (uid) => {
@@ -47,7 +49,7 @@ const AuthDetails = () => {
             headers: { "Content-Type": "application/json" },
           };
       
-          fetch(`{process.env.REACT_APP_BACKEND}/user/${uid}`, requestOptions)
+          fetch(`${process.env.REACT_APP_BACKEND}/user/${uid}`, requestOptions)
             .then((res) => res.json()) // Convert json to js object
             .then((data) => {
                 setFirstName(data.firstName);
@@ -77,7 +79,6 @@ const AuthDetails = () => {
                 <Router>
                 <Routes>
                     <Route exact path="/" element={<Home authUser={authUser} />}/>
-                    <Route exact path="/login" element={<LoginPage authUser={authUser} />}/>
                     <Route exact path="/onboarding" element={<Onboarding authUser={authUser} />}/>
                     <Route exact path="/navbar" element={<Navbar authUser={authUser}/>}/>
                     <Route exact path="/rides" element={<Rides authUser={authUser}/>}/>
@@ -85,6 +86,8 @@ const AuthDetails = () => {
                     <Route exact path="/create_ride" element={<CreateRide authUser={authUser}/>}/>
                     <Route exact path="/profile" element={<Profile authUser={authUser}/>}/>
                     <Route exact path="/upcoming_rides" element={<UpcomingRides authUser={authUser}/>}/>
+                    <Route exact path="/about" element={<About authUser={authUser}/>}/>
+                    <Route path="*" element={<Navigate to="/" replace />}/>
                 </Routes>
                 </Router>
                 ) : (
@@ -95,8 +98,10 @@ const AuthDetails = () => {
             ) : (
             <Router>
             <Routes>
-                <Route exact path="/forgot-password" element={<ForgotPassword/>}/>
-                <Route path="*" element={<LoginPage authUser={authUser} />}/>
+                <Route exact path="/" element={<Home authUser={authUser}/>}/>
+                <Route exact path="/forgot-password" element={<ForgotPassword authUser={authUser}/>}/>
+                <Route exact path="/about" element={<About authUser={authUser}/>}/>
+                <Route path="*" element={<LoginPage authUser={authUser}/>}/>
             </Routes>
             </Router>
             )}</h1>
