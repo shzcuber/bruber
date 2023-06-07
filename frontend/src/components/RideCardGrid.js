@@ -25,7 +25,7 @@ export default function RideCardGrid(props) {
     );
   });
   return (
-    <SimpleGrid spacingX="40px" spacingY="20px" margin="2% 4%" columns={2}>
+    <SimpleGrid spacingX="40px" spacingY="20px" margin="2% 4%" columns={{ base: "1", lg: "2" }}>
       {rideCardList}
     </SimpleGrid>
   );
