@@ -13,7 +13,7 @@ import { FiMenu } from "react-icons/fi";
 import { userSignOut } from "../pages/auth";
 import { useNavigate } from "react-router";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const navigate = useNavigate();
   const isDesktop = useBreakpointValue({ base: false, lg: true });
   return (
@@ -70,9 +70,16 @@ const Navbar = () => {
         </ButtonGroup>
         <Spacer />
         <HStack spacing="3">
-          <Button onClick={userSignOut} bg={"white"} variant="ghost">
-            Log Out
-          </Button>
+           {props.authUser ? (
+            <Button onClick={userSignOut} bg={"white"} variant="ghost">
+              Log Out
+            </Button>
+          ) : (
+            <Button onClick={() => navigate("/login")} bg={"white"} variant="ghost">
+              Log In
+            </Button>
+          )}
+          
         </HStack>
       </Flex>
     </HStack>
