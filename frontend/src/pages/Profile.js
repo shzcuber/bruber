@@ -92,9 +92,9 @@ function Profile(props) {
         unmountOnExit={true}
         transition={transitionProp}
       >
-        <Box padding="40px">
+        <Box margin="40px">
           <Box className="home-heading">
-            <Heading as="h1" size="3xl">
+            <Heading fontWeight="bold" m="40px 0" size="3xl" as="h1">
               Profile
             </Heading>
           </Box>
@@ -102,9 +102,7 @@ function Profile(props) {
           <Box
             backgroundColor="white"
             borderRadius="30px"
-            p="25px"
-            mt="50px"
-            mx="5%"
+            padding="20px"
             boxShadow="md"
           >
             <Box maxW="lg" mx="auto" p={4}>
@@ -153,9 +151,8 @@ function Profile(props) {
           <Box
             backgroundColor="white"
             borderRadius="30px"
-            p="25px"
             my="50px"
-            mx="5%"
+            padding="20px"
             boxShadow="md"
           >
             <Text textAlign="center" fontWeight="bold" fontSize="3xl">
