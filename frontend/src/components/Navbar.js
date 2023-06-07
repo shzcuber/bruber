@@ -27,12 +27,18 @@ const Navbar = () => {
     >
       <Flex justify="space-between" flex="1" width="100hh" padding="0px 40px">
         <ButtonGroup variant="link" spacing="8">
-          <Button onClick={() => navigate("/")} color="white" fontSize="xl">
+          <Button
+            onClick={() => navigate("/")}
+            color="white"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
+            fontSize="xl"
+          >
             Home
           </Button>
           <Button
             onClick={() => navigate("/profile")}
             color="white"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
             fontSize="xl"
           >
             Profile
@@ -40,6 +46,7 @@ const Navbar = () => {
           <Button
             onClick={() => navigate("/rides")}
             color="white"
+            _active={{ transform: "scale(0.98)", color: "grey" }}
             fontSize="xl"
           >
             Rides

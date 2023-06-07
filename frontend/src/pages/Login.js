@@ -20,9 +20,33 @@ import {
 } from "firebase/auth"
 import { Link } from 'react-router-dom';
 
+
+function setupUser(user) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+      'uid': user.uid,
+      'firstName': null,
+      'lastName': null,
+      'email': user.email,
+      'phoneNumber': null
+    })
+  };
+
+  fetch("http://localhost:3000/create_user", requestOptions)
+    .then(data => {
+    })
+    .catch(error => {
+        console.log("Error: " + error);
+    })
+}
+
 function popUp() {
   const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider).then(() => {}).catch((error) => {
+  signInWithPopup(auth, provider).then((result) => {
+    setupUser(result.user)
+  }).catch((error) => {
     alert(error);
   })
 }
@@ -46,8 +70,9 @@ function LoginPage() {
       .catch((error) => {
         if (error.code === "auth/user-not-found") {
           createUserWithEmailAndPassword(auth, email, password)
-            .then((user) => {
-              sendEmailVerification(user.user)
+            .then((userCredential) => {
+              setupUser(userCredential.user)
+              sendEmailVerification(userCredential.user)
                 .then(() => {
                   userSignOut();
                   alert("Email verification sent. Please verify your email.");
