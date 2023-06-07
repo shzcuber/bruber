@@ -25,10 +25,9 @@ export default function RideCardGrid(props) {
   )});
   return (
     <SimpleGrid
-      minChildWidth="350px"
       spacingX="40px"
       spacingY="20px"
-      margin="10px 35px"
+      margin="2% 4%"
     >
       {rideCardList}
     </SimpleGrid>

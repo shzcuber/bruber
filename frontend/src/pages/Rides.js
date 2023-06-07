@@ -158,7 +158,7 @@ function Rides(props) {
             <Box height="50px" width="33%">
               <Link to="/create_ride">
                 <Button width="100%">
-                  <Text fontSize="xl"> Create a New Ride</Text>
+                  <Text isTruncated fontSize="xl"> Create a New Ride</Text>
                 </Button>
               </Link>
             </Box>
