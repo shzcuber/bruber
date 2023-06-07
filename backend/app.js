@@ -173,9 +173,12 @@ app.post("/create_ride", async (req, res) => {
       res.send({ status: "error" });
       return
     }
-    
+    if (req.body.from === req.body.to) {
+      console.log("Error: From and To location are the same", req.body.capacity);
+      res.send({ status: "error" });
+      return
+    }
     const docRef = await addDoc(collection(db, "rides"), {
-      // rideId: 1,  // May delete?
       from: req.body.from,
       to: req.body.to,
       driverID: driverReference,
