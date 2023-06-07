@@ -61,7 +61,7 @@ function Profile(props) {
   };
   return (
     <Box className="home-container" color="primary.700">
-      <Navbar />
+      <Navbar authUser={props.authUser}/>
       <SlideFade
         in={true}
         direction="down"

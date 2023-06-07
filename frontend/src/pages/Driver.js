@@ -12,10 +12,10 @@ import {
 } from '@chakra-ui/react';
 import Navbar from '../components/Navbar';
 
-export default function Driver() {
+export default function Driver(props) {
   return (
     <Box>
-      <Navbar />
+      <Navbar authUser={props.authUser}/>
       <Center py={160}>
         <Box
           

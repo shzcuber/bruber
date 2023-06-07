@@ -65,7 +65,7 @@ function CreateRide(props) {
   // }
   return (
     <Box>
-      <Navbar />
+      <Navbar authUser={props.authUser}/>
       {
       submitted ? displayAlert(submitted) : <Box></Box>
       }

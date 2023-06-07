@@ -5,7 +5,7 @@ import {
   Container,
   FormControl,
   FormLabel,
-  HStack,
+  Heading,
   Input,
   Stack,
 } from '@chakra-ui/react'
@@ -13,8 +13,9 @@ import { useState, useEffect } from 'react'
 import { auth } from './auth';
 import { useLocation } from 'react-router-dom';
 import { sendPasswordResetEmail } from "firebase/auth"
+import Navbar from "../components/Navbar";
 
-function ForgotPassword() {
+function ForgotPassword(props) {
     const location = useLocation();
     const [email, setEmail] = useState('');
     const [resetPasswordStatus, setResetPasswordStatus] = useState(null);
@@ -39,33 +40,40 @@ function ForgotPassword() {
     };
 
   return (
-    <Container maxW="lg" py={{ base: '12', md: '24' }} px={{ base: '0', sm: '8' }}>
-      <Box
-        py={{ base: '0', sm: '8' }}
-        px={{ base: '4', sm: '10' }}
-        bg={{ base: 'transparent', sm: 'bg-surface' }}
-        boxShadow={{ base: 'none', sm: 'md' }}
-        borderRadius={{ base: 'none', sm: 'xl' }}
-        backgroundColor="white"
-      >
-        <Stack spacing="6">
-          <Stack spacing="5">
-            <form onSubmit={resetPassword}>
-              <FormLabel htmlFor="email">Email</FormLabel>
-              <Input value={email} onChange={(e) => setEmail(e.target.value)} bg="gray.100" id="email" type="email" />
-              <Button type="submit" mt="50px" width="100%">
-                Send Password Reset Email
-              </Button>
-              {resetPasswordStatus && (
-                <Box mt="2" color={resetPasswordStatus.includes('Error') ? 'red.500' : 'green.500'}>
-                  {resetPasswordStatus}
-                </Box>
-              )}
-            </form>
+    <Box color="primary.700">
+      <Navbar authUser={props.authUser}/>
+      <Container maxW="lg" py={{ base: '6', md: '12' }} px={{ base: '0', sm: '8' }}>
+        <Heading as="h1" size="xl">
+          Forgot Password
+        </Heading>
+        <Box
+          py={{ base: '0', sm: '8' }}
+          px={{ base: '4', sm: '10' }}
+          bg={{ base: 'transparent', sm: 'bg-surface' }}
+          boxShadow={{ base: 'none', sm: 'md' }}
+          borderRadius={{ base: 'none', sm: 'xl' }}
+          backgroundColor="white"
+          mt="5%"
+        >
+          <Stack spacing="6">
+            <Stack spacing="5">
+              <form onSubmit={resetPassword}>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <Input value={email} onChange={(e) => setEmail(e.target.value)} bg="gray.100" id="email" type="email" />
+                <Button type="submit" mt="50px" width="100%">
+                  Send Password Reset Email
+                </Button>
+                {resetPasswordStatus && (
+                  <Box mt="2" color={resetPasswordStatus.includes('Error') ? 'red.500' : 'green.500'}>
+                    {resetPasswordStatus}
+                  </Box>
+                )}
+              </form>
+            </Stack>
           </Stack>
-        </Stack>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+    </Box>
   );
 }
 

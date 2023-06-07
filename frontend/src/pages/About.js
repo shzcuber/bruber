@@ -10,7 +10,7 @@ import {
   function About(props)  {
     return (
       <Box className='home-container' color="primary.700">
-        <Navbar />
+        <Navbar authUser={props.authUser}/>
         <Box mt="5%" mx="5%" className="home-heading">
           <Heading as="h1" size="2xl">
             About
