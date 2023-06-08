@@ -63,7 +63,7 @@ export default function RideCardAccordion(props) {
           <Text p="10px" fontWeight="bold" fontSize="xl">
             To: {ride.to}
           </Text>
-          <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
+          <UnorderedList paddingLeft="25px" height="200px" overflow="hidden">
             {passengersToList(ride.passengers, ride.capacity)}
           </UnorderedList>
           <Text as="b" fontSize="2xl" paddingLeft="15px">

@@ -51,32 +51,32 @@ export default function RideCard(props) {
           <Flex gap="4" align="center">
             <Avatar name={props.driver} />
             <Box textAlign="left">
-              <Text as="b" fontSize="xl">
+              <Text as="b" fontSize="lg">
                 {props.driver}
               </Text>
-              <Text fontSize="xl">Driver</Text>
+              <Text fontSize="lg">Driver</Text>
             </Box>
           </Flex>
-          <Text color="gold" fontSize="xl" mr="25%">
+          <Text color="gold" fontSize="lg" mr="25%">
             {props.rating ? getStarString(props.rating) : "(Unrated)"}
           </Text>
         </Flex>
       </CardHeader>
       <CardBody>
         <VStack spacing={4} align="left">
-          <Text as="b" fontSize="3xl">
+          <Text as="b" fontSize="2xl">
             {props.time}
           </Text>
-          <Text as="b" fontSize="xl">
+          <Text as="b" fontSize="lg">
             From: {props.from}
           </Text>
-          <Text as="b" fontSize="xl">
+          <Text as="b" fontSize="lg">
             To: {props.to}
           </Text>
-          <UnorderedList paddingLeft="25px" height="150px" overflow="hidden">
+          <UnorderedList paddingLeft="25px" height="200px" overflow="hidden">
             {peopleList}
           </UnorderedList>
-          <Text as="b" fontSize="2xl">
+          <Text as="b" fontSize="xl">
             {props.capacity -
               props.names.length +
               "/" +

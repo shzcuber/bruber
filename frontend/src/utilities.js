@@ -5,7 +5,7 @@ export function passengersToList(passengers, capacity, displayAdditonalInfo) {
   const peopleList = [...passengers, ...emptyList].map((passenger, index) => {
     return (
       <ListItem key={index} paddingLeft="15px">
-        <Text fontSize="2xl">
+        <Text fontSize="lg">
           {
             passenger.firstName 
             ? passenger.firstName
