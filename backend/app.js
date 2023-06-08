@@ -59,7 +59,8 @@ app.get('/get_rides', async (req, res) => {
         ? new Date(ride.startTime).toLocaleDateString("en-US", {timeZone: 'UTC'}) === new Date(req.query.startTime).toLocaleDateString("en-US", {timeZone: 'UTC'})
         : new Date(ride.startTime) > new Date(req.query.startTime) 
       )
-    ))
+    ).sort((a, b) => new Date(a.startTime) - new Date(b.startTime))
+  )
 })
 
 app.get('/user/:id', async (req, res) => {
