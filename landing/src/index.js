@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import theme from './theme';
 import { ChakraProvider } from '@chakra-ui/react'
 
-console.log(`${process.env.REACT_APP_BACKEND}`)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
