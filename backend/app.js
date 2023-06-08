@@ -8,9 +8,9 @@ import "firebase/auth"
 const app = express();
 const db = getFirestore(firebaseApp);
 const port = process.env.PORT || 4000;
-app.use(express.json())
+app.use(express.json());
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.get('/', async (req, res) => {
   res.status(201).send("ur mom");
@@ -38,8 +38,8 @@ app.post('/add_rating', async (req, res) => {
   user['rating'] = (prevRating * prevRatingCount + parseInt(req.body.rating)) / (prevRatingCount+1);
   user['ratingCount'] = prevRatingCount+1;
 
-  await setDoc(userRef, user)
-  await setDoc(ridesDocRef, rides)
+  await setDoc(userRef, user);
+  await setDoc(ridesDocRef, rides);
 
   res.status(200).send("success");
 })
@@ -73,7 +73,7 @@ app.get('/user/:id', async (req, res) => {
       console.log(ride.rideId)
       const rideRef = doc(db, "rides", ride.rideId);
       const rideSnap = await(getDoc(rideRef));
-      console.log(rideSnap.data())
+      console.log(rideSnap.data());
       rides.push(rideSnap.data());
     }
   }
@@ -92,8 +92,8 @@ app.get('/user/:id', async (req, res) => {
 app.post('/ride_signup', async (req, res) => {
   try {
     const { rideId, userId } = req.body;
-    const ridesRef = doc(db, 'rides', rideId)
-    const usersRef = doc(db, 'users', userId)
+    const ridesRef = doc(db, 'rides', rideId);
+    const usersRef = doc(db, 'users', userId);
 
     const ride = await getDoc(ridesRef);
     const user = await getDoc(usersRef);
@@ -103,11 +103,11 @@ app.post('/ride_signup', async (req, res) => {
 
     if(rideData.capacity == rideData['passengers'].length)
     {
-      res.status(400).send("Passenger capacity reached")
+      res.status(400).send("Passenger capacity reached");
     }
     else if(rideData.passengers.map(passenger => passenger.userId).includes(userId))
     {
-      res.status(400).send("You can't sign up for a ride twice")
+      res.status(400).send("You can't sign up for a ride twice");
     }
     else
     {
@@ -118,8 +118,8 @@ app.post('/ride_signup', async (req, res) => {
       else 
         userData['rides'] = [newRide];
 
-      await setDoc(ridesRef, rideData)
-      await setDoc(usersRef, userData)
+      await setDoc(ridesRef, rideData);
+      await setDoc(usersRef, userData);
       res.status(201).send("success");
     }
 
@@ -127,7 +127,7 @@ app.post('/ride_signup', async (req, res) => {
     // console.error("Error adding document: ", e);
 
     res.status(400).send("Bad Request");
-    console.error(e)
+    console.error(e);
   }
 })
 
@@ -161,9 +161,9 @@ app.post("/create_ride", async (req, res) => {
     const driver = await getDoc(driverReference);
     if(driver.exists())
     {
-      console.log("Document Data: ", driver.data())
+      console.log("Document Data: ", driver.data());
     } else{
-      console.log("")
+      console.log("DRIVER NOT FOUND");
     }
     // Ensure capacity was an int
     let capacityInt = parseInt(req.body.capacity);
@@ -184,12 +184,20 @@ app.post("/create_ride", async (req, res) => {
       driverID: driverReference,
       driverFirstName: driver.data().firstName,
       driverLastName: driver.data().lastName,
-      passengers: [],  // list of references
+      passengers: [driver.data()],  // list of references
       startTime: req.body.datetime,
       capacity: capacityInt
     });
     console.log("Ride written with ID: ", docRef.id);
-    await setDoc(docRef, {id: docRef.id}, {merge: true})
+    await setDoc(docRef, {id: docRef.id}, {merge: true});
+    // Add ride to the user's rides list
+    let driverData = driver.data();
+    driverData["rides"].push({"rideId":docRef.id});
+    console.log("NEW DRIVER DATA", driverData);
+    // ['passengers'].push({...userData, userId})
+    // userData['rides'].push(newRide);
+    await setDoc(driverReference, driverData);
+
     res.send(JSON.stringify({"status":"success"}));
   } catch (e) {
     console.error("Error adding document: ", e);
