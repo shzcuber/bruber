@@ -125,11 +125,11 @@ function Rides(props) {
       .then((data) => {
         setRides(data);
         setAlertTime(true)
-      if(rides.length == 0 && alertTime == true){
-        setRideStatus("No Rides Found!")
-      } else {
-        setRideStatus("")
-      }
+        if(data.length == 0 && alertTime == true){
+          setRideStatus("No Rides Found!")
+        } else {
+          setRideStatus("")
+        }
       })
       .catch((error) => console.log("Error: " + error));
   }
