@@ -57,7 +57,6 @@ import { passengersToList } from "../utilities";
 import { parseTime } from "../utilities";
 import "./Rides.css";
 
-
 const sampleRideInfo = {
   driverName: "Joe Biden",
   startTime: "2023-06-03T13:30",
@@ -86,9 +85,8 @@ function Rides(props) {
       ? searchParams.get("time")
       : getCurrentTime().substring(0, 10),
   });
-  const[alertTime, setAlertTime] = useState(false)
-  const [rideStatus, setRideStatus] = useState('');
-
+  const [alertTime, setAlertTime] = useState(false);
+  const [rideStatus, setRideStatus] = useState("");
 
   useEffect(() => {
     if (searchParams) {
@@ -120,15 +118,18 @@ function Rides(props) {
 
     const searchParameters = new URLSearchParams(data).toString();
 
-    fetch(`${process.env.REACT_APP_BACKEND}/get_rides?${searchParameters}`, requestOptions)
+    fetch(
+      `${process.env.REACT_APP_BACKEND}/get_rides?${searchParameters}`,
+      requestOptions
+    )
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setRides(data);
-        setAlertTime(true)
-        if(data.length == 0 && alertTime == true){
-          setRideStatus("No Rides Found!")
+        setAlertTime(true);
+        if (data.length == 0 && alertTime == true) {
+          setRideStatus("No Rides Found!");
         } else {
-          setRideStatus("")
+          setRideStatus("");
         }
       })
       .catch((error) => console.log("Error: " + error));
@@ -150,7 +151,7 @@ function Rides(props) {
 
   return (
     <Box>
-      <Navbar authUser={props.authUser}/>
+      <Navbar authUser={props.authUser} />
       <SlideFade
         in={true}
         direction="down"
@@ -158,7 +159,12 @@ function Rides(props) {
         unmountOnExit={true}
         transition={transitionProp}
       >
-        <Box mx="5%" my="40px" backgroundColor="primary.150" color="primary.700">
+        <Box
+          mx="5%"
+          my="40px"
+          backgroundColor="primary.150"
+          color="primary.700"
+        >
           <Flex align="center">
             <Heading as="h1" size="3xl">
               Rides
@@ -167,7 +173,10 @@ function Rides(props) {
             <Box height="50px" width="33%">
               <Link to="/create_ride">
                 <Button width="100%">
-                  <Text isTruncated fontSize="xl"> Create a New Ride</Text>
+                  <Text isTruncated fontSize="xl">
+                    {" "}
+                    Create a New Ride
+                  </Text>
                 </Button>
               </Link>
             </Box>
@@ -183,7 +192,7 @@ function Rides(props) {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
-                  timeZone: 'UTC',
+                  timeZone: "UTC",
                 })}
             </Heading>
           </Flex>

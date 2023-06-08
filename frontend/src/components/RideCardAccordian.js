@@ -26,25 +26,28 @@ export default function RideCardAccordion(props) {
       color="primary.500"
       borderColor="primary.500"
     >
-      <AccordionButton display="block" _expanded={{ bg: "primary.500", color: "white" }}>
+      <AccordionButton
+        display="block"
+        _expanded={{ bg: "primary.500", color: "white" }}
+      >
         <Flex align="center">
-            <Text fontWeight="bold" fontSize="xl">
+          <Text fontWeight="bold" fontSize="xl">
             {parseTime(ride.startTime)}
-            </Text>
-            <Spacer />
-            <Flex align="center" justify="left" minWidth="35%">
-              <Flex gap="4" align="center">
-                <Avatar name={ride.driverFirstName + " " + ride.driverLastName} />
-                <Box textAlign="left">
-                  <Text as="b" fontSize="xl">
+          </Text>
+          <Spacer />
+          <Flex align="center" justify="left" minWidth="35%">
+            <Flex gap="4" align="center">
+              <Avatar name={ride.driverFirstName + " " + ride.driverLastName} />
+              <Box textAlign="left">
+                <Text as="b" fontSize="xl">
                   {ride.driverFirstName + " " + ride.driverLastName}
-                  </Text>
-                  <Text color="gold" fontSize="xl">
-                    {ride.rating ? getStarString(ride.rating) : "★★★☆☆"}
-                  </Text>
-                </Box>
-              </Flex>
+                </Text>
+                <Text color="gold" fontSize="xl">
+                  {ride.rating ? getStarString(ride.rating) : "(unrated)"}
+                </Text>
+              </Box>
             </Flex>
+          </Flex>
           <AccordionIcon />
         </Flex>
       </AccordionButton>
