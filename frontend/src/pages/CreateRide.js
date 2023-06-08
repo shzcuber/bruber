@@ -35,9 +35,6 @@ function isDateInPast(dateString) {
   return false;
 }
 
-
-
-
 function CreateRide(props) {
   const [submitted, setSubmitted] = useState(false);
 
@@ -50,12 +47,12 @@ function CreateRide(props) {
   function onSubmit(formData) {
     // console.log("handleButtonClick() called in CreateRide.js");
     // CHANGE LATER ONCE WE HAVE AUTH
-    if (isDateInPast(formData.datetime)){
-      alert("you cannot create a ride in past! please select a future date!")
+    if (isDateInPast(formData.datetime)) {
+      alert("You cannot create a ride in past! Please select a future date!");
       return;
     }
-    if(formData.to === formData.from){
-      alert("can't create ride to and from same place!")
+    if (formData.to === formData.from) {
+      alert("Can't create ride to and from same place!");
       return;
     }
 
@@ -152,25 +149,39 @@ function CreateRide(props) {
                     <option>5</option>
                     <option>6</option>
                     <option>7</option>
-                </Select>
-              </Box>
-              <Box>
-                <FormLabel size='xs' marginBottom="2" textTransform='uppercase'>
-                  Leave Time:
-                </FormLabel>
-                <Flex>
-                  <Input type="datetime-local" size="sm" name="datetime" {...register("datetime", {required: true})} />
-                  <Button type="submit" size="s" fontSize='sm' padding="2"
-                  marginLeft="2"
-                  onClick={ handleSubmit(onSubmit) }>
-                    Submit
-                  </Button>
-                </Flex>
-              </Box>
-            </FormControl>
-          </Stack>
-        </CardBody>
-      </Card>
+                  </Select>
+                </Box>
+                <Box>
+                  <FormLabel
+                    size="xs"
+                    marginBottom="2"
+                    textTransform="uppercase"
+                  >
+                    Leave Time:
+                  </FormLabel>
+                  <Flex>
+                    <Input
+                      type="datetime-local"
+                      size="sm"
+                      name="datetime"
+                      {...register("datetime", { required: true })}
+                    />
+                    <Button
+                      type="submit"
+                      size="s"
+                      fontSize="sm"
+                      padding="2"
+                      marginLeft="2"
+                      onClick={handleSubmit(onSubmit)}
+                    >
+                      Submit
+                    </Button>
+                  </Flex>
+                </Box>
+              </FormControl>
+            </Stack>
+          </CardBody>
+        </Card>
       </Box>
     </Box>
   );
