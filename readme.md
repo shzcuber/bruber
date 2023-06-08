@@ -19,63 +19,45 @@ Flexible scheduling: Bruins can schedule rides in advance or find immediate ride
 - Create an account with an email/password combination or your Google account.
 - Set up your profile with your name and phone number.
 - Explore available rides or create a new ride listing as a driver.
- - When you find a suitable ride or a passenger, coordinate the details with your fellow Bruberers through the given contact information.
+- When you find a suitable ride or a passenger, coordinate the details with your fellow Bruberers through the given contact information.
 - Complete the ride and leave feedback for your fellow Bruins to help maintain a reliable community.
 
 ## Interact:
-You can checkout and interact with the project here: [Bruber](https://bruber-git-main-shzcuber.vercel.app/)
+Live/hosted version of our website: https://bruber.vercel.app/
 
 ## Run Locally:
 To Run this project Locally:
 
- *NOTE: We have environment variables, that you will have to replace to be able use this properly, please be mindful of that!*
+***IMPORTANT***: *We have environment variables that you will have to replace to be able use properly. Please be mindful of that!*
 
- We recommend interacting with the App, using the deployed links, but if you want to test locally please create .env files in both frontend and backend folders and update according to your preference.
+We recommend interacting with the App, using the deployed links, but if you want to test locally please create .env files in both frontend and backend folders and update according to your preference.
 
-
-```
-git clone https://github.com/shzcuber/bruber
-```
 
 ```
-cd backend
+$ git clone https://github.com/shzcuber/bruber
 ```
-
+To start the backend:
 ```
-npm i
-```
-
-```
-node app.js
+$ cd backend
+$ npm i
+$ node app.js
 ```
 
 then, to start the frontend
 
 ```
-cd frontend
-```
-
-```
-npm i
-```
-
-```
-npm start
+$ cd frontend
+$ npm i
+$ npm start
 ```
 
 Optional:
-You can also activate the Landing page by:
+You can also activate the Landing page with the following:
 
 ```
-cd landing
-```
-
-```
-npm i
-```
-
-```
-npm start
+$ cd landing
+$ npm i
+$ npm start
 ```
 
 ## How it works
@@ -83,7 +65,7 @@ npm start
 ![Assets/login-page.png](Assets/login-page.png)
 - Search Rides using the home page
 ![Assets/home.png](Assets/home.png)
-- Which redirects you to the rides page, where you can see rides details and sign up for it
+- This redirects you to the rides page, where you can see rides details and sign up for it
 ![Assets/rides.png](Assets/rides.png)
 - Creates ride using create ride option
 ![Assets/create-ride.png](Assets/create-ride.png)
@@ -94,10 +76,11 @@ npm start
 We used:
 - [React.js](https://react.dev/) as frontend library
 - [Node.js](https://nodejs.org/en) and [Express.js](https://expressjs.com/) for backend
-- [ChakraUI](https://chakra-ui.com/) for modelling UI elements
-- [CharkarUI](https://chakra-ui.com/docs/components) Library for components
+- [ChakraUI](https://chakra-ui.com/) for styling UI elements and for components
 - [Firebase Firestore](https://firebase.google.com/) as database
 - [Firebase Auth](https://firebase.google.com/) as authentication service
+- [Vercel](https://vercel.com/) for frontend hosting 
+- [Railway](https://railway.app/) for backend hosting
 
 # Creators
 - Kevin Xia
