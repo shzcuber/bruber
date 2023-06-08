@@ -5,6 +5,11 @@ import { parseTime } from "../utilities";
 export default function RideCardGrid(props) {
   // console.log(props.rides[1].driverID)
   const rideCardList = props.rides.map((ride, index) => {
+    const rideDriverID = ride.driverID._key.path.segments[6];
+    let displayRatingButton = true;
+    if (props.authUser.uid === rideDriverID){
+      displayRatingButton = false;
+    }
     console.log(ride, props.rides);
     return (
       <RideCard
@@ -20,7 +25,7 @@ export default function RideCardGrid(props) {
         rating={ride.rating}
         hideSignupButton={props.hideSignupButton}
         authUser={props.authUser}
-        displayRatingButton={props.displayRatingButton}
+        displayRatingButton={displayRatingButton}
       />
     );
   });

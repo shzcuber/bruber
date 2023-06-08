@@ -164,6 +164,7 @@ function Profile(props) {
                   displayRatingButton
                   hideSignupButton
                   rides={rides}
+                  authUser={props.authUser}
                 />
               )}
             </Box>
