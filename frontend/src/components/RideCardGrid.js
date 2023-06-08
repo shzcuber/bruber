@@ -26,6 +26,7 @@ export default function RideCardGrid(props) {
         hideSignupButton={props.hideSignupButton}
         authUser={props.authUser}
         displayRatingButton={displayRatingButton}
+        displayAdditonalInfo={props.displayAdditonalInfo}
       />
     );
   });

@@ -1,17 +1,35 @@
 import { ListItem, Text } from "@chakra-ui/react";
 
-export function passengersToList(passengers, capacity) {
+export function passengersToList(passengers, capacity, displayAdditonalInfo) {
   let emptyList = Array(capacity - passengers.length).fill("Empty");
   const peopleList = [...passengers, ...emptyList].map((passenger, index) => {
     return (
       <ListItem key={index} paddingLeft="15px">
         <Text fontSize="2xl">
-          {passenger.firstName ? passenger.firstName : "Empty"}
+          {
+            passenger.firstName 
+            ? passenger.firstName
+              + (displayAdditonalInfo ? (
+                (passenger.lastName ? " " + passenger.lastName : "")
+                + " - " 
+                + (passenger.phoneNumber ? " " + parsePhoneNumber(passenger.phoneNumber) : "")
+                ) : "")
+            : "Empty"
+          }
         </Text>
       </ListItem>
     );
   });
   return peopleList;
+}
+
+function parsePhoneNumber(str) {
+  const areaCode = str.slice(0, 3);
+  const prefix = str.slice(3, 6);
+  const lineNumber = str.slice(6);
+  
+  const phoneNumber = `(${areaCode}) ${prefix}-${lineNumber}`;
+  return phoneNumber;
 }
 
 export const sampleLocations = [

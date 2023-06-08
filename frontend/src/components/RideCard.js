@@ -41,7 +41,7 @@ export default function RideCard(props) {
   }, [])
   
   const [rating, setRating] = useState();
-  const peopleList = passengersToList(props.names, props.capacity);
+  const peopleList = passengersToList(props.names, props.capacity, props.displayAdditonalInfo);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const capacityReached = props.capacity - props.names.length === 0;
   return (
