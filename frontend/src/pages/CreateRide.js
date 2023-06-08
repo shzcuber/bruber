@@ -26,6 +26,18 @@ import { useForm } from "react-hook-form";
 import { sampleLocations } from "../utilities";
 import Navbar from "../components/Navbar";
 
+function isDateInPast(dateString) {
+  const date = new Date(dateString);
+  const currentDate = new Date();
+  if (date < currentDate) {
+    return true;
+  }
+  return false;
+}
+
+
+
+
 function CreateRide(props) {
   const [submitted, setSubmitted] = useState(false);
 
@@ -38,6 +50,15 @@ function CreateRide(props) {
   function onSubmit(formData) {
     // console.log("handleButtonClick() called in CreateRide.js");
     // CHANGE LATER ONCE WE HAVE AUTH
+    if (isDateInPast(formData.datetime)){
+      alert("you cannot create a ride in past! please select a future date!")
+      return;
+    }
+    if(formData.to === formData.from){
+      alert("can't create ride to and from same place!")
+      return;
+    }
+
     formData["driverID"] = props.authUser.uid;
     console.log(props.authUser.uid);
     console.log(formData);
