@@ -86,6 +86,9 @@ function Rides(props) {
       ? searchParams.get("time")
       : getCurrentTime(),
   });
+  const[alertTime, setAlertTime] = useState(false)
+  const [rideStatus, setRideStatus] = useState('');
+
 
   useEffect(() => {
     if (searchParams) {
@@ -121,6 +124,12 @@ function Rides(props) {
       .then((res) => res.json()) // Convert json to js object
       .then((data) => {
         setRides(data);
+        setAlertTime(true)
+        if(data.length == 0 && alertTime == true){
+          setRideStatus("No Rides Found!")
+        } else {
+          setRideStatus("")
+        }
       })
       .catch((error) => console.log("Error: " + error));
   }
@@ -192,6 +201,7 @@ function Rides(props) {
             boxShadow="md"
           >
             <RidesDisplay authUser={props.authUser} rides={rides} />
+            <p>{rideStatus}</p>
           </Box>
         </Box>
       </SlideFade>
