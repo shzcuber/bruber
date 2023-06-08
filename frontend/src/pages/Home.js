@@ -32,7 +32,7 @@ function Home(props) {
     defaultValue: "LAX",
   });
   const [time, setTime] = useControllableState({
-    defaultValue: getCurrentTime(),
+    defaultValue: getCurrentTime().substring(0, 10),
   });
   const journey = {
     start: start,

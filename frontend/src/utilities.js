@@ -86,16 +86,7 @@ export function parseTime(time) {
   );
 }
 export function getCurrentTime() {
-  var today = new Date();
-  var date =
-    today.getFullYear() +
-    "-" +
-    String(today.getMonth() + 1).padStart(2, "0") +
-    "-" +
-    String(today.getDate()).padStart(2, "0");
-  var time =
-    String(today.getHours()).padStart(2, "0") + ":" + today.getMinutes();
-  return date + "T" + time;
+  return new Date().toISOString()
 }
 export function getStarString(rating) {
   if (rating < 0.5) return "☆☆☆☆☆";

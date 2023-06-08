@@ -84,7 +84,7 @@ function Rides(props) {
   const [time, setTime] = useControllableState({
     defaultValue: searchParams.get("time")
       ? searchParams.get("time")
-      : getCurrentTime(),
+      : getCurrentTime().substring(0, 10),
   });
   const[alertTime, setAlertTime] = useState(false)
   const [rideStatus, setRideStatus] = useState('');
@@ -178,7 +178,13 @@ function Rides(props) {
                 " to " +
                 destination +
                 ", departing on " +
-                parseTime(time)}
+                new Date(time).toLocaleString("en-US", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  timeZone: 'UTC',
+                })}
             </Heading>
           </Flex>
           <Box marginBottom="20px">
