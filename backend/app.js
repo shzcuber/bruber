@@ -185,7 +185,7 @@ app.post("/create_ride", async (req, res) => {
       driverID: driverReference,
       driverFirstName: driver.data().firstName,
       driverLastName: driver.data().lastName,
-      passengers: [driver.data()],  // list of references
+      passengers: [{...driver.data(), userId: req.body.driverID}],  // list of references
       startTime: req.body.datetime,
       capacity: capacityInt
     });
