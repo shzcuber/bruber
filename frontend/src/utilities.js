@@ -6,16 +6,16 @@ export function passengersToList(passengers, capacity, displayAdditonalInfo) {
     return (
       <ListItem key={index} paddingLeft="15px">
         <Text fontSize="lg">
-          {
-            passenger.firstName 
-            ? passenger.firstName
-              + (displayAdditonalInfo ? (
-                (passenger.lastName ? " " + passenger.lastName : "")
-                + " - " 
-                + (passenger.phoneNumber ? " " + parsePhoneNumber(passenger.phoneNumber) : "")
-                ) : "")
-            : "Empty"
-          }
+          {passenger.firstName
+            ? passenger.firstName +
+              (displayAdditonalInfo
+                ? (passenger.lastName ? " " + passenger.lastName : "") +
+                  " - " +
+                  (passenger.phoneNumber
+                    ? " " + parsePhoneNumber(passenger.phoneNumber)
+                    : "")
+                : "")
+            : "Empty"}
         </Text>
       </ListItem>
     );
@@ -27,19 +27,23 @@ function parsePhoneNumber(str) {
   const areaCode = str.slice(0, 3);
   const prefix = str.slice(3, 6);
   const lineNumber = str.slice(6);
-  
+
   const phoneNumber = `(${areaCode}) ${prefix}-${lineNumber}`;
   return phoneNumber;
 }
 
 export const sampleLocations = [
+  "UCLA",
   "LAX",
+  "Union Station",
+  "Long Beach Airport",
   "UCSD",
   "UCI",
   "UCR",
   "UCB",
   "UCSB",
-  "UCLA",
+  "UCSC",
+  "University of Spoiled Children",
 ];
 
 export function parseTime(time) {
@@ -86,7 +90,7 @@ export function parseTime(time) {
   );
 }
 export function getCurrentTime() {
-  return new Date().toISOString()
+  return new Date().toISOString();
 }
 export function getStarString(rating) {
   if (rating < 0.5) return "☆☆☆☆☆";
