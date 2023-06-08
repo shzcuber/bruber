@@ -142,6 +142,7 @@ app.post('/create_user', async (req, res) => {
       lastName: lastName,
       email: email,
       phoneNumber: phoneNumber,
+      rides: []
     }, { merge: true });
     res.status(201).send("TEST");
     // console.log("Document written with ID: ", docRef.id);
@@ -192,10 +193,12 @@ app.post("/create_ride", async (req, res) => {
     await setDoc(docRef, {id: docRef.id}, {merge: true});
     // Add ride to the user's rides list
     let driverData = driver.data();
-    driverData["rides"].push({"rideId":docRef.id});
+    if(driverData["rides"]) 
+      driverData["rides"].push({"rideId":docRef.id});
+    else 
+      driverData["rides"] = [{"rideId":docRef.id}];
+    
     console.log("NEW DRIVER DATA", driverData);
-    // ['passengers'].push({...userData, userId})
-    // userData['rides'].push(newRide);
     await setDoc(driverReference, driverData);
 
     res.send(JSON.stringify({"status":"success"}));
