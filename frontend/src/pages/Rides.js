@@ -1,60 +1,27 @@
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Avatar,
   Box,
   Button,
-  ButtonGroup,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
   Divider,
   Flex,
   Heading,
-  HStack,
-  Icon,
-  IconButton,
-  Input,
-  ListItem,
-  Select,
-  SimpleGrid,
   SlideFade,
   Spacer,
   Text,
-  UnorderedList,
   useControllableState,
-  VStack,
 } from "@chakra-ui/react";
-
-import RideCardGrid from "../components/RideCardGrid";
 
 import JourneyInputter from "../components/JourneyInputter";
 
-import RideSignupButton from "../components/RideSignupButton";
 import Navbar from "../components/Navbar";
-import RideCardAccordion from "../components/RideCardAccordian";
 import RidesDisplay from "./RidesDisplay";
 import { getCurrentTime } from "../utilities";
 
 import { getAuth } from "firebase/auth";
 
-import {
-  AiOutlineSwap,
-  AiOutlineSearch,
-  AiOutlineUnorderedList,
-} from "react-icons/ai";
-import { BsGrid } from "react-icons/bs";
-import { FiMapPin } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import RideCard from "../components/RideCard";
 
-import { passengersToList } from "../utilities";
-import { parseTime } from "../utilities";
+import { sampleLocations } from "../utilities";
 import "./Rides.css";
 
 const sampleRideInfo = {
@@ -64,7 +31,7 @@ const sampleRideInfo = {
   passengers: ["Barack Obama", "Donald Trump", "Drake"],
 };
 
-const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
+// const sampleLocations = ["LAX", "UCSD", "UCI", "UCR", "UCB", "UCSB", "UCLA"];
 
 function Rides(props) {
   const [rides, setRides] = useState([]);
