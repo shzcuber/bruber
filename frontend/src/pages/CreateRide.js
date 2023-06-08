@@ -139,10 +139,9 @@ function CreateRide(props) {
                 </Box>
                 <Box>
                   <FormLabel size="xs" textTransform="uppercase">
-                    Capacity
+                    Capacity (Including Driver)
                   </FormLabel>
                   <Select {...register("capacity", { required: true })}>
-                    <option>1</option>
                     <option>2</option>
                     <option>3</option>
                     <option>4</option>
