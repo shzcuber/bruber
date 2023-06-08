@@ -4,14 +4,34 @@ CS35L Project
 
 ![Assets/Bruber-Logo.png](Assets/Bruber-Logo.png)
 
+## What is Bruber?
+Bruber is a ridesharing coordination app designed specifically for UCLA students (Go Bruins!). It aims to provide a convenient platform for Bruins to coordinate and share rides to and from campus or other locations such as LAX or other campuses.
+
 ## Inspiration:
 After observing numerous UCLA students seeking ride sharing options on Snapchat, we decided to build a transportation web app service for students to conveniently ride share - Bruber.
+
+## Features
+Easy ride coordination: Bruber allows users to easily coordinate and schedule rides with fellow Bruins.
+Flexible scheduling: Bruins can schedule rides in advance or find immediate rides based on their preferences and availability.
+
+## How to Use Bruber?
+- Go to the Bruber website
+- Create an account with an email/password combination or your Google account.
+- Set up your profile with your name and phone number.
+- Explore available rides or create a new ride listing as a driver.
+ - When you find a suitable ride or a passenger, coordinate the details with your fellow Bruberers through the given contact information.
+- Complete the ride and leave feedback for your fellow Bruins to help maintain a reliable community.
 
 ## Interact:
 You can checkout and interact with the project here: [Bruber](https://bruber-git-main-shzcuber.vercel.app/)
 
 ## Run Locally:
 To Run this project Locally:
+
+ *NOTE: We have environment variables, that you will have to replace to be able use this properly, please be mindful of that!*
+
+ We recommend interacting with the App, using the deployed links, but if you want to test locally please create .env files in both frontend and backend folders and update according to your preference.
+
 
 ```
 git clone https://github.com/shzcuber/bruber
@@ -72,12 +92,12 @@ npm start
 
 ## Technology Stack and Acknowledgements
 We used:
-- React.js as frontend library
-- Node.js and Express.js for backend
-- ChakraUI for modelling UI elements
-- CharkarUI Library for components
-- Firebase as database
-- Firebase Auth as authentication service
+- [React.js](https://react.dev/) as frontend library
+- [Node.js](https://nodejs.org/en) and [Express.js](https://expressjs.com/) for backend
+- [ChakraUI](https://chakra-ui.com/) for modelling UI elements
+- [CharkarUI](https://chakra-ui.com/docs/components) Library for components
+- [Firebase Firestore](https://firebase.google.com/) as database
+- [Firebase Auth](https://firebase.google.com/) as authentication service
 
 # Creators
 - Kevin Xia
@@ -85,21 +105,6 @@ We used:
 - Viraj Chhajed
 - Peter Ngyuen
 - Jimmy Fang
-
-## to do:
-- Add ratings images
-- describe the app better
-- It says "5% – Detailed README file that accurately and completely describes how to run the app locally.", so need to add more details
-- add hyperlinks
-
-## Site Stuff:
-- Favicons
-- Display
-- Meta Data update
-- App final testing
-- App robustness testing
-- Backend testing
-- .env setup for fe
 
 
 
