@@ -6,9 +6,9 @@ export default function RideCardGrid(props) {
   // console.log(props.rides[1].driverID)
   const rideCardList = props.rides.map((ride, index) => {
     const rideDriverID = ride.driverID._key.path.segments[6];
-    let displayRatingButton = true;
-    if (props.authUser.uid === rideDriverID){
-      displayRatingButton = false;
+    let displayRatingButton = false;
+    if (props.displayAdditonalInfo && props.authUser.uid !== rideDriverID){
+      displayRatingButton = true;
     }
     console.log(ride, props.rides);
     return (
