@@ -74,15 +74,15 @@ app.get('/user/:id', async (req, res) => {
   {
     for(const ride of user.rides)
     {
-      console.log(ride.rideId)
+      // console.log(ride.rideId)
       const rideRef = doc(db, "rides", ride.rideId);
       const rideSnap = await(getDoc(rideRef));
-      console.log(rideSnap.data());
+      // console.log(rideSnap.data());
       rides.push(rideSnap.data());
     }
   }
 
-  console.log(rides)
+  // console.log(rides)
   if (docSnap.exists()) {
     // console.log("Document data:", docSnap.data());
     res.status(200).send(JSON.stringify({...docSnap.data(), rides}));
@@ -138,7 +138,7 @@ app.post('/ride_signup', async (req, res) => {
 // Executes when we get a get request to / url
 app.post('/create_user', async (req, res) => {
   try {
-    console.log(req.body)
+    // console.log("CREATE_USER", req.body);
     const { firstName, lastName, email, phoneNumber, uid } = req.body;
     // console.log(uid)
     await setDoc(doc(db, "users", uid), {
@@ -146,7 +146,7 @@ app.post('/create_user', async (req, res) => {
       lastName: lastName,
       email: email,
       phoneNumber: phoneNumber,
-      rides: []
+      rides: []  // Initialize empty rides array
     }, { merge: true });
     res.status(201).send("TEST");
     // console.log("Document written with ID: ", docRef.id);
@@ -156,23 +156,40 @@ app.post('/create_user', async (req, res) => {
   }
 })
 
+app.post('/modify_user', async (req, res) => {
+  console.log("Modifying user");
+  try {
+    const { firstName, lastName, email, phoneNumber, uid } = req.body;
+    // console.log(uid)
+    await setDoc(doc(db, "users", uid), {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+    }, { merge: true });
+    res.status(201).send("TEST");
+  } catch (e) {
+    console.log(e)
+    res.status(400).send("Bad Request");
+  }
+})
+
 app.post("/create_ride", async (req, res) => {
   try {
-    console.log(req.body)
+    // console.log(req.body)
     const driverReference = doc(db, "users", req.body.driverID);
     // const fromReference = doc(db, "locations", req.body.from);
     // const toReference = doc(db, "locations", req.body.to);
 
     const driver = await getDoc(driverReference);
-    if(driver.exists())
-    {
-      console.log("Document Data: ", driver.data());
-    } else{
-      console.log("DRIVER NOT FOUND");
-    }
+    // if(driver.exists())
+    // {
+    //   console.log("Document Data: ", driver.data());
+    // } else{
+    //   console.log("DRIVER NOT FOUND");
+    // }
     // Ensure capacity was an int
     let capacityInt = parseInt(req.body.capacity);
-    console.log("parseInt:", capacityInt);
     if (isNaN(capacityInt)) {
       console.log("Error: Capacity was not an int", req.body.capacity);
       res.send({ status: "error" });
@@ -202,7 +219,7 @@ app.post("/create_ride", async (req, res) => {
     else 
       driverData["rides"] = [{"rideId":docRef.id}];
     
-    console.log("NEW DRIVER DATA", driverData);
+    // console.log("NEW DRIVER DATA", driverData);
     await setDoc(driverReference, driverData);
 
     res.send(JSON.stringify({"status":"success"}));

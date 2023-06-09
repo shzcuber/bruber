@@ -55,7 +55,6 @@ function Profile(props) {
 
   const handlePhoneNumberButton = () => {
     if (isPhoneNumberEditing) {
-      //Save button was pressed
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json"},
@@ -67,14 +66,15 @@ function Profile(props) {
           'phoneNumber': phoneNumber
         })
       };
-  
-      fetch(`${process.env.REACT_APP_BACKEND}/create_user`, requestOptions)
-        .then(data => {
-        })
-        .catch(error => {
-            console.log("Error: " + error);
-        })
+      console.log("Changing Phone Number");
+      fetch(`${process.env.REACT_APP_BACKEND}/modify_user`, requestOptions)
+      .then(data => {
+      })
+      .catch(error => {
+        console.log("Error: " + error);
+      })
     }
+    //Save button was pressed
     setIsPhoneNumberEditing(!isPhoneNumberEditing);
   };
 
