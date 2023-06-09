@@ -19,7 +19,19 @@ import RideSignupButton from "./RideSignupButton";
 export default function RideCardAccordion(props) {
   console.log(props.rides);
 
-  const rideAccordionItems = props.rides.map((ride, index) => (
+  const rideAccordionItems = props.rides.map((ride, index) => {
+    // Check if the user is already a passenger in the ride
+    let userAlreadyPassenger = false;
+    let passengerId = "";
+    for (let passenger = 0; passenger < ride.passengers.length; passenger++) {
+      passengerId = ride.passengers[passenger]["userId"];
+      if (props.authUser.uid === passengerId) {
+        console.log("ALREADY A PASSENGER", ride.passengers[passenger]["userId"]);
+        userAlreadyPassenger = true;
+        break;
+      }
+    }
+    return (
     <AccordionItem
       key={index}
       background="white"
@@ -74,14 +86,14 @@ export default function RideCardAccordion(props) {
               " Spots Available"}
           </Text>
           <Box margin="25px 15px">
-            {!(ride.capacity - ride.passengers.length == 0) && (
+            {!userAlreadyPassenger && !(ride.capacity - ride.passengers.length == 0) && (
               <RideSignupButton authUser={props.authUser} rideId={ride.id} />
             )}
           </Box>
         </Box>
       </AccordionPanel>
     </AccordionItem>
-  ));
+  )});
 
   return (
     <Accordion allowMultiple margin="20px 0px">
