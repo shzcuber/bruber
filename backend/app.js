@@ -55,8 +55,12 @@ app.get('/get_rides', async (req, res) => {
   res.send(rides.filter(ride => 
       (!req.query.from || ride.from == req.query.from) &&
       (!req.query.to || ride.to == req.query.to) &&
-      new Date(ride.startTime) > new Date(req.query.startTime)
-      ))
+      (!req.query.allUpcoming
+        ? new Date(ride.startTime).toLocaleDateString("en-US", {timeZone: 'UTC'}) === new Date(req.query.startTime).toLocaleDateString("en-US", {timeZone: 'UTC'})
+        : new Date(ride.startTime) > new Date(req.query.startTime) 
+      )
+    ).sort((a, b) => new Date(a.startTime) - new Date(b.startTime))
+  )
 })
 
 app.get('/user/:id', async (req, res) => {

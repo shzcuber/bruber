@@ -85,7 +85,7 @@ export default function JourneyInputter(props) {
         borderRadius="7px"
       >
         <Input
-          type="datetime-local"
+          type="date"
           backgroundColor="gray.100"
           variant="unstyled"
           height="40px"

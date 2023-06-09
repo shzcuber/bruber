@@ -14,6 +14,7 @@ export default function UpcomingRides(props)
 
     const data = {
       startTime: new Date(),
+      allUpcoming: true,
     };
 
     const searchParameters = new URLSearchParams(data).toString();
