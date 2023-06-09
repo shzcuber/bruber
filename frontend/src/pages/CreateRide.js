@@ -19,6 +19,7 @@ import {
   FormControl,
   FormLabel,
   Select,
+  SlideFade,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
@@ -97,91 +98,103 @@ function CreateRide(props) {
   // if (submitted !== false) {  // REMOVE !
   //   // else if error status="error"
   // }
+  const transitionProp = {
+    enter: { duration: 0.4 },
+    exit: { duration: 0 },
+  };
   return (
     <Box>
       <Navbar authUser={props.authUser} />
       {submitted ? displayAlert(submitted) : <Box></Box>}
-      <Box display="flex" justifyContent="center" height="100vh">
-        <Card
-          size="lg"
-          color="primary.700"
-          borderRadius="20px"
-          margin="40px"
-          maxHeight="70vh"
-        >
-          <CardHeader paddingBottom="0px">
-            <Heading size="md">Create a New Ride</Heading>
-          </CardHeader>
-          <CardBody>
-            <Stack divider={<StackDivider />} spacing="1">
-              <FormControl isRequired>
-                <Box>
-                  <FormLabel size="xs" textTransform="uppercase">
-                    From:
-                  </FormLabel>
-                  <Select {...register("from", { required: true })}>
-                    {sampleLocations &&
-                      sampleLocations.map((location) => (
-                        <option>{location}</option>
-                      ))}
-                  </Select>
-                </Box>
-                <Box>
-                  <FormLabel size="xs" textTransform="uppercase">
-                    To:
-                  </FormLabel>
-                  <Select {...register("to", { required: true })}>
-                    {sampleLocations &&
-                      sampleLocations.map((location) => (
-                        <option>{location}</option>
-                      ))}
-                  </Select>
-                </Box>
-                <Box>
-                  <FormLabel size="xs" textTransform="uppercase">
-                    Capacity (Including Driver)
-                  </FormLabel>
-                  <Select {...register("capacity", { required: true })}>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                  </Select>
-                </Box>
-                <Box>
-                  <FormLabel
-                    size="xs"
-                    marginBottom="2"
-                    textTransform="uppercase"
-                  >
-                    Leave Time:
-                  </FormLabel>
-                  <Flex>
-                    <Input
-                      type="datetime-local"
-                      size="sm"
-                      name="datetime"
-                      {...register("datetime", { required: true })}
-                    />
-                    <Button
-                      type="submit"
-                      size="s"
-                      fontSize="sm"
-                      padding="2"
-                      marginLeft="2"
-                      onClick={handleSubmit(onSubmit)}
+      <SlideFade
+        in={true}
+        direction="down"
+        offsetY="20px"
+        unmountOnExit={true}
+        transition={transitionProp}
+      >
+        <Box display="flex" justifyContent="center" height="100vh">
+          <Card
+            size="lg"
+            color="primary.700"
+            borderRadius="20px"
+            margin="40px"
+            maxHeight="70vh"
+          >
+            <CardHeader paddingBottom="0px">
+              <Heading size="md">Create a New Ride</Heading>
+            </CardHeader>
+            <CardBody>
+              <Stack divider={<StackDivider />} spacing="1">
+                <FormControl isRequired>
+                  <Box>
+                    <FormLabel size="xs" textTransform="uppercase">
+                      From:
+                    </FormLabel>
+                    <Select {...register("from", { required: true })}>
+                      {sampleLocations &&
+                        sampleLocations.map((location) => (
+                          <option>{location}</option>
+                        ))}
+                    </Select>
+                  </Box>
+                  <Box>
+                    <FormLabel size="xs" textTransform="uppercase">
+                      To:
+                    </FormLabel>
+                    <Select {...register("to", { required: true })}>
+                      {sampleLocations &&
+                        sampleLocations.map((location) => (
+                          <option>{location}</option>
+                        ))}
+                    </Select>
+                  </Box>
+                  <Box>
+                    <FormLabel size="xs" textTransform="uppercase">
+                      Capacity (Including Driver)
+                    </FormLabel>
+                    <Select {...register("capacity", { required: true })}>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                    </Select>
+                  </Box>
+                  <Box>
+                    <FormLabel
+                      size="xs"
+                      marginBottom="2"
+                      textTransform="uppercase"
                     >
-                      Submit
-                    </Button>
-                  </Flex>
-                </Box>
-              </FormControl>
-            </Stack>
-          </CardBody>
-        </Card>
-      </Box>
+                      Leave Time:
+                    </FormLabel>
+                    <Flex>
+                      <Input
+                        type="datetime-local"
+                        size="sm"
+                        name="datetime"
+                        {...register("datetime", { required: true })}
+                      />
+                      <Button
+                        type="submit"
+                        size="s"
+                        fontSize="sm"
+                        padding="2"
+                        marginLeft="2"
+                        onClick={handleSubmit(onSubmit)}
+                      >
+                        Submit
+                      </Button>
+                    </Flex>
+                  </Box>
+                </FormControl>
+              </Stack>
+            </CardBody>
+          </Card>
+        </Box>
+      </SlideFade>
     </Box>
   );
 }
