@@ -61,14 +61,11 @@ function Onboarding(props)  {
     fetch(`${process.env.REACT_APP_BACKEND}/create_user`, requestOptions)
       .then(data => {
         console.log(data)
+        window.location.reload();
       })
       .catch(error => {
           console.log("Error: " + error);
       })
-    
-    // Refresh the router by navigating to the current location
-    // TODO somehow run refreshUserData in auth instead of this
-    window.location.reload();
   }
 
   const transitionProp = {
