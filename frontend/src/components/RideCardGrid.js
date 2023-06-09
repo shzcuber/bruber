@@ -10,6 +10,19 @@ export default function RideCardGrid(props) {
     if (props.displayAdditonalInfo && props.authUser.uid !== rideDriverID){
       displayRatingButton = true;
     }
+    // Check if the user is already a passenger in the ride
+    let userAlreadyPassenger = false;
+    let passengerId = "";
+    for (let passenger = 0; passenger < ride.passengers.length; passenger++) {
+      passengerId = ride.passengers[passenger]["userId"];
+      if (props.authUser.uid === passengerId) {
+        userAlreadyPassenger = true;
+        break;
+      }
+    }
+    if (props.authUser.uid === rideDriverID) {
+      userAlreadyPassenger = true;
+    }
     console.log(ride, props.rides);
     return (
       <RideCard
@@ -23,7 +36,7 @@ export default function RideCardGrid(props) {
         names={ride.passengers}
         rideId={ride.id}
         rating={ride.rating}
-        hideSignupButton={props.hideSignupButton}
+        userAlreadyPassenger={userAlreadyPassenger}
         authUser={props.authUser}
         displayRatingButton={displayRatingButton}
         displayAdditonalInfo={props.displayAdditonalInfo}

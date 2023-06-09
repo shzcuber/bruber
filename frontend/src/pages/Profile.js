@@ -162,7 +162,6 @@ function Profile(props) {
               {rides && (
                 <RideCardGrid
                   displayRatingButton
-                  hideSignupButton
                   rides={rides}
                   authUser={props.authUser}
                   displayAdditonalInfo
