@@ -5,6 +5,7 @@ import {
   Container,
   Flex,
   HStack,
+  Image,
   IconButton,
   Menu,
   MenuButton,
@@ -18,19 +19,22 @@ import {
 import { FiMenu } from "react-icons/fi";
 import { userSignOut } from "../pages/auth";
 import { useNavigate } from "react-router";
+import logo from "./component_assets/navbar-icon.png";
 
 const Navbar = (props) => {
   const navigate = useNavigate();
+  const navbarHeight = 70; //px
+  const iconHeight = 50; //px
   return (
     <Flex
       py={{ base: "4", lg: "5" }}
       align="center"
       justifyContent="space-between"
       backgroundColor="primary.700"
-      height="70px"
+      height={navbarHeight}
       px={4}
     >
-      <Flex justify="space-between" flex="1" mx="5%">
+      <Flex align="center" justify="space-between" flex="1" mx="5%">
         <Box display={{ base: "block", lg: "none" }}>
           <Menu>
             {({ isOpen }) => (
@@ -51,6 +55,9 @@ const Navbar = (props) => {
                   <MenuItem onClick={() => navigate("/upcoming_rides")}>
                     Upcoming
                   </MenuItem>
+                  <MenuItem onClick={() => navigate("/create_ride")}>
+                    Create
+                  </MenuItem>
                   <MenuItem onClick={() => navigate("/about")}>
                     About Us
                   </MenuItem>
@@ -67,6 +74,16 @@ const Navbar = (props) => {
             )}
           </Menu>
         </Box>
+        <Image
+          src={logo}
+          alt="Bruber Logo"
+          objectFit="scale-down"
+          maxH={iconHeight}
+          onClick={() => navigate("/")}
+          cursor="pointer"
+          mr="30px"
+          _active={{ transform: "scale(0.95)" }}
+        ></Image>
         <ButtonGroup
           variant="link"
           spacing="8"
