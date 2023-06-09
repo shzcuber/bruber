@@ -61,14 +61,16 @@ $ npm start
 ```
 
 ## How it works
-- First you need to Signup/Login:
-![Assets/login-page.png](Assets/login-page.png)
-- Search Rides using the home page
-![Assets/home.png](Assets/home.png)
-- This redirects you to the rides page, where you can see rides details and sign up for it
-![Assets/rides.png](Assets/rides.png)
-- Creates ride using create ride option
-![Assets/create-ride.png](Assets/create-ride.png)
+
+![Assets/4.png](Assets/4.png)
+![Assets/5.png](Assets/5.png)
+![Assets/6.png](Assets/6.png)
+![Assets/7.png](Assets/7.png)
+![Assets/8.png](Assets/8.png)
+![Assets/9.png](Assets/9.png)
+![Assets/10.png](Assets/10.png)
+![Assets/11.png](Assets/11.png)
+
 
 
 
